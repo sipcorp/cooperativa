@@ -74,16 +74,17 @@
                                 <div class="span5">
                                     <h4 class="welcome"><small><i class="fontello-icon-user-4"></i>Sign in </small></h4>
                                     <% if (message.length > 0) { %>
-                                        <div class="alert alert-danger alert-dismissable">
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                            <strong><%= message %> </strong> 
-                                        </div>
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert"
+                                            aria-hidden="true">×</button>
+                                        <strong><%= message %> </strong>
+                                    </div>
                                     <% } %>
                                     <form role="form" method="POST" action="/login">
 
                                         <fieldset>
                                             <div class="controls">
-                                                <input class="span5" type="text" name="userCode" ng-model="form.loginID"
+                                                <input class="span5" type="text" name="name" ng-model="form.loginID"
                                                     placeholder="your ID or email" />
                                             </div>
 
