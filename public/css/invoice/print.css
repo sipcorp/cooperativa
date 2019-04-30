@@ -1,0 +1,15 @@
+
+@media print {
+  @page {
+      margin: 0;
+  }
+  body {
+      margin: 30px 55px;
+  }
+  .logo-row {
+      margin-top: 0;
+  }
+  html, body {
+      zoom: 100%;
+  }
+}

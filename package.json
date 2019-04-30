@@ -1,0 +1,27 @@
+{
+  "name": "cooperativa",
+  "version": "1.0.0",
+  "description": "software cooperativa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sipcorp/cooperativa.git"
+  },
+  "author": "Pofi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sipcorp/cooperativa/issues"
+  },
+  "homepage": "https://github.com/sipcorp/cooperativa#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "mongoose": "^5.5.4"
+  }
+}

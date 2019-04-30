@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<% include ./partial/head %>
+<link id="linkCss" href="css/bitacora/bitacora.css" rel="stylesheet">
+
+<body class="header-sticky sidebar-hidden" ng-app="startAPP" class="ng-cloak">
+   <% include ./partial/header %>
+   <!--CONTENIDO-->
+   <div id="main-container" ng-controller="bitacoraController" class="ng-cloak">
+      <div id="main-content" class="main-content container-fluid">
+         <div class="filler"></div>
+         <div id="page-content" class="page-content">
+            <nav>
+               <ul class="btn-toolbar page-nav margin-btn">
+                  <li>
+                     <h2 class="page-title heading-icon">
+                        <p class="btn btn-well btn-glyph">
+                           <i class="fontello-icon-user f20"></i>
+                        </p>
+                        Bienvenido <small>Jose Alberto Reyes</small>
+                     </h2>
+                  </li>
+               </ul>
+               <hr class="margin-0x">
+            </nav>
+            <section>
+               <div class="card card-fix" style="height: 590px;">
+                  <div class="card card7 card-left">
+                     <div class="card-header card-header-style">
+                        <ul class="btn-toolbar page-nav margin-btn btn-toolbar-fix">
+                           <li><a class="btn btn-well btn-glyph" href="widgets-remember.html" style="width: 80px"><i
+                                    class="fontello-icon-check f18"></i><span class="block">REMEMBER</span></a></li>
+                           <li><a class="btn btn-well btn-glyph" href="widgets-users.html" style="width: 80px"><i
+                                    class="fontello-icon-user f18"></i><span class="block">USER</span></a></li>
+                           <li><a class="btn btn-well btn-glyph" href="widgets-post.html" style="width: 80px"><i
+                                    class="fontello-icon-feather f18"></i><span class="block">POST</span></a></li>
+                           <li><a class="btn btn-well btn-glyph" href="contact-list.html" style="width: 80px"><i
+                                    class="fontello-icon-vcard f18"></i><span class="block">CONTACTS</span></a></li>
+                           <li><a class="btn btn-well btn-glyph" href="#updateModal" style="width: 80px"
+                                 data-toggle="modal"><i class="fontello-icon-edit f18"></i><span
+                                    class="block">ARTICLE</span></a></li>
+                           <li><a class="btn btn-well btn-glyph" href="#updateModal" style="width: 80px"
+                                 data-toggle="modal"><i class="fontello-icon-comment-4 f18"></i><span
+                                    class="block">COMMENTS</span></a></li>
+                           <li><a class="btn btn-well btn-glyph" href="#updateModal" style="width: 80px"
+                                 data-toggle="modal"><i class="fontello-icon-back-in-time f18"></i><span
+                                    class="block">ACTIVITY</span></a></li>
+                        </ul>
+                     </div>
+                     <div class="card-body">
+                        <table class="table table-bordered table-condensed table-hover bg-white75"
+                           data-provides="rowlink">
+                           <thead>
+                              <tr>
+                                 <th scope="col">ID</th>
+                                 <th scope="col">Nombre</th>
+                                 <th scope="col">Direccion</th>
+                                 <th scope="col">Telefono</th>
+                                 <th scope="col">Progreso</th>
+                                 <th scope="col" class="action">Action</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr class="rowlink" ng-repeat="customer in user">
+                                 <td ng-click="show($event)"> {{$index}} </td>
+                                 <td ng-click="show($event)"> {{customer.name}}</td>
+                                 <td ng-click="show($event)"> {{customer.address}} </td>
+                                 <td ng-click="show($event)">
+                                    {{customer.phone}}
+                                 </td>
+                                 <td ng-click="show($event)">
+                                    <div class="progress">
+                                       <div class="progress-bar progress-bar-danger" role="progressbar"
+                                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                                          style="width:10%">
+                                          <strong class="progress-bar-tittle"> {{customer.progress}}% </strong>
+                                       </div>
+                                    </div>
+                                 </td>
+                                 <td class="action" ng-click="show($event)">
+                                    <a class="icon"></a>
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div class="card card3 card-right">
+                     <div class="span4">
+                        <div class="well well-box well-nice well-left">
+                           <!-- // navbar -->
+                           <div class="section-content item">
+                              <ul class="btn-toolbar page-nav margin-btn">
+                                 <li>
+                                    <a class="btn btn-well btn-glyph">
+                                       <span class="block">BITACORA </span>
+                                    </a>
+
+
+                                 </li>
+                                 <li>
+                                    <a class="btn btn-well-s btn-glyph">
+                                       <span><strong style="color: white"> {{userSelect}} </strong></span>
+                                    </a>
+
+
+                                 </li>
+                              </ul>
+                           </div>
+                           <!-- // content item -->
+                           <div class="span5 span-fix">
+
+                              <div class="widget" ng-if="showItem === false">
+                                 <div class="widget-header">
+                                    <h4><i class="fontello-icon-window"></i>No record found</h4>
+                                 </div>
+                              </div>
+                              <!-- // Widget -->
+
+                              <div class="widget widget-simple widget-collapsible" ng-repeat="task in list"
+                                 ng-if="showItem === true">
+                                 <div class="widget-header">
+                                    <div class="details">
+                                       <p class='tittle'>{{task.name}}</p>
+
+                                       <small>Start Date: {{task.startDate}}</small>
+                                       <div class="split"></div>
+                                       <small>End Date: {{task.endDate}}</small>
+                                    </div>
+                                    <div class="widget-tool"><a
+                                          class="btn btn-glyph btn-link widget-toggle fontello-icon-publish"
+                                          data-toggle="collapse" data-target="#{{$index}}"
+                                          href="javascript:void(0);"></a></div>
+                                 </div>
+                                 <div id="{{$index}}" class="widget-content collapse" style="height: none;">
+                                    <div class="widget-body">
+                                       <div class="widget widget-simple widget-collapsible step-style"
+                                          ng-repeat="steps in task.step">
+                                          <div class="widget-header">
+                                             <div class="details">
+                                                <p class='tittle'>{{steps.name}} </p>
+                                                <small>Start Date: {{steps.startDate}} </small>
+                                                <div class="split"></div>
+                                                <small>End Date: {{steps.endDate}}</small>
+                                             </div>
+                                             <div class="widget-tool">
+                                                <a style="color:white"
+                                                   class="btn btn-glyph btn-link widget-toggle fontello-icon-publish"
+                                                   data-toggle="collapse" data-target="#{{steps.$$hash}}"
+                                                   href="javascript:void(0);"></a>
+                                             </div>
+                                          </div>
+                                          <div id="{{steps.$$hash}}" class="widget-content collapse"
+                                             style="height: none;">
+                                             <div class="widget-body">
+                                                <div class="span4">
+                                                   <div class="widget widget-recent ws recent">
+                                                      <div class="widget-header">
+                                                         <h4><i class="fontello-icon-article-alt-1"></i>Ultimo
+                                                            Comentario</h4>
+                                                      </div>
+                                                      <div class="widget-content">
+                                                         <div class="widget-body">
+                                                            <ul class="widget-list wlf">
+                                                               <li class="media media-overflow"
+                                                                  ng-repeat="comments in steps.comments">
+                                                                  <div class="media-right">
+                                                                     <div class="quick-menu">
+                                                                        <div class="btn-group">
+                                                                           <a class="btn btn-mini btn-primary"
+                                                                              href="javascript:void(0);">Approve</a> <a
+                                                                              data-toggle="dropdown"
+                                                                              class="btn btn-mini dropdown-toggle">or&nbsp;
+                                                                              <span class="caret"></span></a>
+                                                                           <ul class="dropdown-menu pull-right">
+                                                                              <li><a href="javascript:void(0);"><i
+                                                                                       class="icon-pencil"></i><span
+                                                                                       class="divider-text"></span>Edit</a>
+                                                                              </li>
+                                                                              <li class="divider"></li>
+                                                                              <li><a href="javascript:void(0);"><i
+                                                                                       class="icon-trash"></i><span
+                                                                                       class="divider-text"></span>Delete</a>
+                                                                              </li>
+                                                                           </ul>
+                                                                        </div>
+                                                                     </div>
+                                                                  </div>
+                                                                  <div class="media-body">
+                                                                     <ul class="data inline">
+                                                                        <li><i class="fontello-icon-feather"></i>By: <a
+                                                                              href="#"><strong>J.Reyes</strong></a></li>
+                                                                        <li class="divider-vertical"></li>
+                                                                        <li><strong> {{comments.postDate}} </strong>,
+                                                                           09:27 AM</li>
+                                                                        <li class="divider-vertical"></li>
+                                                                        <li>updated: <strong>6:25 PM</strong> (5 hours
+                                                                           ago)</li>
+                                                                     </ul>
+                                                                     <!-- <h4 class="media-heading"><a href="javascript:void(0);">Aliquam facilisis enim et elit tincidunt Suspendisse</a></h4> -->
+                                                                     <p class="data"> {{comments.comment}} </p>
+                                                                  </div>
+                                                               </li>
+                                                            </ul>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                   <!-- // Widget -->
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                 </div>
+                              </div>
+                              <!-- // Widget -->
+
+                           </div>
+                           <!-- // table-content -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+         </div>
+         <!-- // page content -->
+      </div>
+      <!-- // main-content -->
+   </div>
+   <!--CONTENIDO-->
+   <!-- You can put your modal definitions here but it is not required -->
+   <div id="myModal" class="modal hide fade" tabindex="-1">
+      <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h4><i class="fontello-icon-mail-4"></i>New Message</h4>
+      </div>
+      <div class="modal-body">
+         <div class="row-fluid">
+            <form id="formNotes" class="span12 form-dark">
+               <fieldset>
+                  <label for="mailTo" class="control-label">To</label>
+                  <input id="mailTo" class="input-block-level" type="text" value="Colin Nixon - semper@diamSeddiam.edu">
+                  <label for="mailSubject" class="control-label">Subjest</label>
+                  <input id="mailSubject" class="input-block-level" type="text">
+                  <label for="mailMessage">Note Text:</label>
+                  <textarea id="mailMessage" class="input-block-level auto" rows="5"
+                     style="min-height: 130px"></textarea>
+               </fieldset>
+               <!-- // fieldset Input -->
+            </form>
+         </div>
+      </div>
+      <div class="modal-footer">
+         <button type="button" data-dismiss="modal" class="btn btn-boo">Cancel</button>
+         <button type="button" class="btn btn-green">Send message</button>
+      </div>
+   </div>
+   <!-- // sample modal - custom manager  -->
+   <% include ./partial/script %>
+   <script src="plugin/bootstrap-jasny/js/bootstrap-rowlink.js"></script>
+   <script src="controller/bitacoraController.js"></script>
+   <!-- <script src="plugin/pl-table/datatables/js/jquery.dataTables.js"></script>
+         <script src="plugin/pl-table/datatables/js/jquery.dataTables.plugins.js"></script>
+         <script src="plugin/pl-table/datatables/js/jquery.dataTables.columnFilter.js"></script> -->
+</body>
+
+</html>

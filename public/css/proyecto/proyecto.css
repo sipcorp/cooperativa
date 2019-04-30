@@ -1,0 +1,211 @@
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    color: #ffffff;
+    background-color: #009999;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.8);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.35), 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-shadow: none;
+}
+.fix-top{
+    margin-top: -82px;
+}
+.setup-content{
+    display: none;
+}
+.nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
+    color: #ffffff;
+    background-color: #009999;
+}
+.card-default {
+    color: #333;
+    background: linear-gradient(#fff,#ebebeb) repeat scroll 0 0 transparent;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+#form {
+    background-color: #F9F9F9;
+  }
+  
+  .blue {
+      color: #2CAFFD;
+  }
+  
+  #inputDado {
+      border-radius: 30px;
+      border: 1px solid #000;
+  }
+  .thumbnail {
+    padding: 5px;
+    background: whitesmoke;
+    border-color: #c8cbd0;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+[class*="span"] {
+    margin-left: 23px;
+}
+.form-horizontal .form-actions {
+    padding-left: 8px;
+}
+.input-datapicker{
+    width: 250px;
+}
+.disabled{
+    pointer-events:none;
+    opacity:0.7;
+}
+#alert2{
+    padding: 2px 0px 0px 11px;
+    margin-bottom: 5px;
+    margin-top: -30px;
+    margin-left: 198px;
+    font-size: 13px;
+}
+.page-content {
+    position: relative;
+    padding-bottom: 0px;
+    height: 0%;
+}
+.fix-table{
+    position: relative;
+    right: 483px;
+    width: 49%;
+    top: 32px;
+}
+.date{
+    margin-left: 5px;
+    display: inline-block;
+    border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 3px 5px;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  width: 190px;
+}
+.no-border{
+    border: none !important;
+    box-shadow: none !important;
+    /*display: none !important;*/
+}
+.bs-searchbox .form-control {
+    margin-bottom: 0;
+    width: 98%;
+    float: none;
+    margin-left: -7px;
+}
+.control-inline{
+    position: absolute;
+    top: 291px;
+    left: 643px;
+}
+.step-delete{
+    float: right;
+    position: absolute;
+    right: 277px;
+    color: red;
+    cursor: pointer;
+}
+.step-delete-c{
+    float: right;
+    position: absolute;
+    right: 77px;
+    padding-top: 5px;
+    color: red;
+    cursor: pointer;
+}
+[type="date"] {
+    background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
+    cursor: pointer;
+  }
+  [type="date"]::-webkit-inner-spin-button {
+    display: none;
+    cursor: pointer;
+  }
+  [type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+  }
+  input[type="date"]{
+      cursor: pointer;
+      cursor: pointer;
+  }
+.control-inline-inline{
+    position: absolute;
+    top: 291px;
+    left: 956px;
+}
+.up-button{
+    float: right;
+    margin-top: -47px !important;
+    display: none;
+}
+.page-head {
+    position: relative;
+    margin: 0 -20px;
+    padding: 0 20px;
+    min-height: 100px;
+    border-bottom: 1px solid #babec4;
+    background: url(../img/background/body-bg-02-15.jpg) repeat scroll 0 0;
+}
+.step{
+    font-size: 16px;
+    margin-bottom: 36px;
+    margin-top: 12px;
+}
+.step-item{
+    border-bottom: 1px dotted rgb(0, 0, 0);
+    width: 700px;
+}
+.add-step{
+    position: absolute;
+    right: 276px;
+}
+.form-actions {
+    margin-bottom: -6px;
+    margin-top: 180px;
+    z-index: 100;
+    height: 32px;
+}
+.fix-control-row{
+    margin-right: 64px;
+    margin-left: -1px !important;
+}
+.btn.active, .btn.disabled, .btn[disabled] {
+    color: #f5f6f9;
+    background-color: #4aa7af;
+    text-shadow: none;
+}
+.table thead th {
+    background: #009999;
+    color: white;
+    text-shadow: none !important;
+}
+.table tbody {
+    background: #fbfdfd;
+}
+.step2-tittle{
+    background: #4aa7af;
+    color: white;
+    padding: 7px;
+    height: 17px;
+    width: 99%;
+    border-radius: 5px;
+}
+.step2-tittle span{
+    position: relative;
+    top: -12px;
+}
+.form-inline{
+    position: relative;
+    top: -30px;
+    float: right;
+    right: 253px;
+}
+.rubrosInput{
+    width: 172% !important;
+    position: relative;
+    right: 68px;
+}

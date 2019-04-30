@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+   <% include ./partial/head %>
+   <link id="linkCss" href="css/invoice/style.css" rel="stylesheet">
+   <body class="header-sticky sidebar-left" ng-app="startAPP" ng-cloak>
+      <div class="page-container">
+      <% include ./partial/header %>
+      <!--CONTENIDO-->
+      <div id="main-container">
+         <!--MENU LEFT-->
+         <% include ./partial/menu-left %>
+         
+         <!-- BODY CONTENIDO -->
+         <div id="invoicePrint" class="container fix-top ng-cloak" ng-controller="invoiceController" >	
+            <div class="well row">
+               <div class="row logo-row">
+                  <div class="col-xs-9">
+                     <i class="fa fa-gear" ></i>
+                     <div class="settings-holder">
+                        <span class="booico-save boico-2x" ng-click="createInvoice()"></span>
+                     </div>
+                  </div>
+                  <div class="col-xs-3 nopadding-lr">
+                     <img id="invoice-logo"  ng-src="http://thirdwishcreative.com/invoice/images/invoice-logo.png">
+                  </div>
+               </div>
+               <div class="row top-meta-row">
+                  <div class="col-xs-9 invoicee-meta">
+                     <div class="col-xs-6">
+                        <div class="customer form-inline top-name custom-select">
+                           <label for="customerInfo">Cliente:</label>
+                           <div class="customerSelec">
+                              <select class="selectpicker" data-live-search="true" ng-model="blisterPackTemplateSelected" ng-change="infoCustomer(blisterPackTemplateSelected)">
+                                 <option value="" disabled>Seleccione un cliente</option>
+                                 <option ng-repeat="customers in customer">{{customers.name}}</option>
+                              </select>
+                              <div class="alert alert-danger alert-customer"  ng-show="typeMessage === 1">
+                                    <strong>Ups...</strong> {{errorMessage}}
+                                  </div>
+                           </div>
+                           
+                        </div>
+                        <div class="customer form-inline top-street">
+                           <label for="customerInfo">Direccion:</label>
+                           <span>{{customerAddress}}</span>
+                        </div>
+                        <div class="customer form-inline top-phone">
+                           <label for="customerInfo">Telefono:</label>
+                           <span>{{customerPhone}}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xs-3 invoicee-meta nopadding-lr">
+                     <p class="our-top-name" editable-text="our_address">Cooperativa de Servicios Multiples La Alanjeña R.L</p>
+                     <p class="our-top-street" editable-text="our_address_linetwo">RES #IPACOOP-PJ-13-91</p>
+                     <div><span class="our-top-city" editable-text="our_city">Provincia de Chiriqui</span> 
+                        <span editable-text="our_state" e-style="width: 50px">Distrito de Alanje,Guarumal</span> <span editable-text="our_zip" e-style="width: 70px">{{our_zip}}</span>
+                     </div>
+                  </div>
+               </div>
+               <div class="project-meta-row">
+                  <div class="col-xs-12 nopadding-lr">
+                     #<span style="color:red;">{{invoiceNum}}</span>  
+                     &nbsp;///&nbsp; <span>{{date | date:'MM/dd/yyyy'}}</span>
+                  </div>
+                  <div class="col-md-2">
+                     <div class="table-responsive">
+                        <form action="" method="" name="">
+                           <table class="table table-condensed fix-table">
+                              <thead>
+                                 <tr>
+                                    <th style="text-align: center;">Product</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr>
+                                    <td class='modalProduct'>
+                                       <div class="delete-wpr">
+                                          <select class="selectpicker" data-live-search="true" ng-model="productSelected" ng-change="qtyIni(index,1)">
+                                             <option value="" disabled>Seleccione un producto</option>
+                                             <option ng-repeat="producto in product">{{producto.name}}</option>
+                                          </select>
+                                       </div>
+                                       <div class="alert alert-danger alert-product"  ng-show="typeMessage === 2">
+                                            <strong>Ups...</strong> {{errorMessage}}
+                                        </div>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </form>
+                     </div>
+                  </div>
+                  <div class="form-group adding nopadding-lr">
+                     <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default" ng-click="addItem(productSelected)" >
+                        <span class="booico-cart"></span>
+                        Agregar</button>
+                     </div>
+                  </div>
+               </div>
+               <div class="row main-content-row">
+                  <div class="col-xs-12 table-holder nopadding-l">
+                     <p editable-text="lead_in" e-style="width: 300px" class="lead-in-p">{{lead_in}}</p>
+                     <table class="table" ng-model="add">
+                        <thead>
+                           <tr>
+                              <th></th>
+                              <th>Producto</th>
+                              <th>Descripcion</th>
+                              <th>Precio</th>
+                              <th>Cantidad</th>
+                              <th>Total</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                                <div class="alert alert-danger alert-item"  ng-show="typeMessage === 3">
+                                        <strong>Ups...</strong> {{errorMessage}}
+                                    </div>
+                           <tr ng-repeat="products in add">
+                              <td>
+                                 <a class="delete" ng-click="deleteitem($index)" title="Remove row">
+                                 <span class="booico-trash delete-fix"></span>
+                                 </a>
+                              </td>
+                              <td>
+                                 <p>{{products.name}}</p>
+                              </td>
+                              <td>
+                                 <p>{{products.description}}</p>
+                              </td>
+                              <td class="price">
+                                 <p>{{products.cost | currency}}</p>
+                              </td>
+                              <td><input type="text" class="qtyNumber" ng-model="newQty" ng-blur="qtyChange($index,newQty)" value="{{products.qty}}"> </td>
+                              <td> {{ total | currency }} </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <div class="total-meta-holder">
+                        <span class="">Total: </span>
+                        <span class=""><strong>{{ total | currency}}</strong></span>
+                     </div>
+                     <div class="total-meta-holder two">
+                        <span class="">Due By: </span>
+                        <span class="input-group" editable-date="date" e-datepicker-popup="MM-dd-yyyy" datepicker-options="dateOptions" e-ng-required="true" e-style="width: 170px;">
+                        {{date | date:'MM/dd/yyyy' }}
+                        </span>
+                     </div>
+                  </div>
+               </div>
+               <div class="row message-holder-row">
+                  © 2019 <strong>SIP (Sistemas Integrales de Planificación)</strong> 
+               </div>
+            </div>
+         </div>
+         <!-- BODY CONTENIDO-->
+         <!--CONTENIDO-->
+         <% include ./partial/footer %>
+      </div>
+      <% include ./partial/modal %>
+      <% include ./partial/script %>
+      <!-- Component -->
+      <!-- <script src="./js/app/invoice.js"></script> -->
+      <script src="./js/app/funciones-Globales.JS"></script>
+      <script src="controller/invoiceController.js"></script>
+      <script src=" plugin/pl-form/bootstrap-select/js/bootstrap-select.js"></script>
+      <script>
+         $(document).ready(function() {
+             $('.selectpicker').selectpicker({
+         liveSearch: true,
+         maxOptions: 1
+         });
+         });
+      </script>
+   </body>
+</html>
