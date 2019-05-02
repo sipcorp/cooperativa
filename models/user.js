@@ -23,8 +23,6 @@
 // }
 // module.exports = mongoose.model('User', UserSchema);
 
-
-
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const {

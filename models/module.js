@@ -8,3 +8,5 @@ const ModuleSchema = mongoose.Schema({
 },{collection:'module'})
 
 module.exports = mongoose.model('module', ModuleSchema);
+
+

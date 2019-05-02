@@ -11,20 +11,23 @@ const user = require('./routes/user')
 const mongoose = require('mongoose');
 const modules = require('./routes/module')
 const roleApi = require('./api/role/add')
-const {
-  url
-} = require('./config/database');
+// require('./config/database');
+// const {
+//   url
+// } = require('./config/database');
 require('./config/port');
+const MongoClient = require('mongodb').MongoClient;
+
 /*
 ###################### Configuration databse  #####################
 */
-mongoose.connect(url, {
-  useNewUrlParser: true
-}, (err) => {
-  if (err) throw err;
-  console.log(' ONLINE database')
-})
-mongoose.set('useCreateIndex', true);
+// mongoose.connect(url, {
+//   useNewUrlParser: true
+// }, (err) => {
+//   if (err) throw err;
+//   console.log(' ONLINE database')
+// })
+// mongoose.set('useCreateIndex', true);
 
 /*
 ###################### Configuration of  Middleware #####################
@@ -59,6 +62,7 @@ app.use(roleApi);
 app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/routesSession')(app, passport, LocalStrategy)
 require('./session/userSession')(passport)
+require('./config/database')(MongoClient)
 // require('./service/serviceGetUsers')(app)
 
 
