@@ -10,6 +10,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const user = require('./routes/user')
 const mongoose = require('mongoose');
 const modules = require('./routes/module')
+const roleApi = require('./api/role/add')
 const {
   url
 } = require('./config/database');
@@ -54,18 +55,19 @@ app.set('view engine', 'ejs');
 app.use(routes);
 app.use(user);
 app.use(modules);
+app.use(roleApi);
 app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/routesSession')(app, passport, LocalStrategy)
 require('./session/userSession')(passport)
 // require('./service/serviceGetUsers')(app)
 
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*'),
-    res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept'),
-    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,PATCH.DELETE,OPTIONS')
-  next()
-})
+// app.use(function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*'),
+//     res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept'),
+//     res.setHeader('Access-Control-Allow-Methods', 'POST,GET,PATCH.DELETE,OPTIONS')
+//   next()
+// })
 /*
 ###################### Configuration of Port  #####################
 */

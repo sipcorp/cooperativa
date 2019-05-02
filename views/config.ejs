@@ -120,44 +120,43 @@
                             <div class="span9" ng-if="showAdd">
                                 <div class="well well-nice">
                                     <section>
-                                        <legend>NUEVO ROLE</legend>
-
+                                        <legend>NUEVO ROLE
+                                            <a class="btn add" ng-click="add()">Salvar</a>
+                                        </legend>
                                         <!-- // form item -->
                                         <label for="formA05">NOMBRE:</label>
-                                        <input id="formA05" class="span6" type="text" placeholder="Nombre del role">
-                                        <p class="help-block"><strong>Nota:</strong> Debe agregar los permisos para el
-                                            role</p>
-
+                                        <input id="formA05" class="span6" type="text" placeholder="Nombre del role" is-Active="">
+                                        <p class="help-block"><strong>Nota:</strong> Debe agregar los permisos para el role</p>
                                     </section>
                                     <section>
                                         <legend>PERMISOS</legend>
                                         <section ng-repeat="modelos in modules" style="border-bottom: 1px solid #e6e6e6;" id="{{modelos.parent}}">
-                                            <h5 class="heading-icon" data-icon="" aria-hidden="true">{{modelos.parent}}</h5>
+                                            <h5 class="heading-icon" data-icon="" aria-hidden="true" name="moduleParent">{{modelos.parent}}</h5>
                                             <div class="btn-group margin-bottom10" id="parent" style="margin-top: -49px;margin-left: 221px;">
-                                                <button data-parent="parent" class="btn module r" type="button">
+                                                <button data-parent="parent" class="btn module r" type="button" name="Read" is-Active="">
                                                     <span>Read</span>
                                                 </button>
-                                                <button data-parent="parent" class="btn module m" type="button">
+                                                <button data-parent="parent" class="btn module m" type="button" name="Modify" is-Active="" >
                                                    <span>Modify</span>
                                                 </button>
-                                                <button data-parent="parent" class="btn module d" type="button">
+                                                <button data-parent="parent" class="btn module d" type="button" name="Delete" is-Active="">
                                                    <span>Delete</span>
                                                 </button>
                                             </div>
                                             <div class="childrens"> 
                                             <div ng-repeat="children in modelos.name">
                                                     <div  class="btn-group mftop margin-bottom10">
-                                                            <button id="{{children.name}}" class="btn module sub" type="button"></button>
+                                                            <button id="{{children.name}}" class="btn sub" type="button"></button>
                                                     </div>
-                                                   <span>{{children.name}}</span>
+                                                   <span name="subModule">{{children.name}}</span>
                                                    <div class="btn-group margin-bottom10" style="margin-top:4px;margin-left:13px;">
-                                                        <button data-parent="{{children.name}}" class="btn module r" type="button">
+                                                        <button data-parent="{{children.name}}" class="btn module r" type="button" name="Read" is-Active="">
                                                             <span>Read</span>
                                                         </button>
-                                                        <button data-parent="{{children.name}}" class="btn module m" type="button">
+                                                        <button data-parent="{{children.name}}" class="btn module m" type="button" name="Modify" is-Active="">
                                                            <span>Modify</span>
                                                         </button>
-                                                        <button data-parent="{{children.name}}" class="btn module d" type="button">
+                                                        <button data-parent="{{children.name}}" class="btn module d" type="button" name="Delete" is-Active="">
                                                            <span>Delete</span>
                                                         </button>
                                                     </div>

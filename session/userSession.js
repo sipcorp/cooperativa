@@ -17,7 +17,7 @@ module.exports = (passport) => {
     passReqToCallback: true
   }, async (req, name, password, done) => {
     const user = await User.findOne({
-      'name': name
+      'userCode': name
     })
     console.log(user)
     if (user) {
@@ -38,14 +38,14 @@ module.exports = (passport) => {
     passReqToCallback: true
   }, async (req, name, password, done) => {
     const user = await User.findOne({
-      name: name
+      userCode: name
     });
     if (!user) {
       return done(null, false, req.flash('signinMessage', 'No User Found'));
     }
-    if (!user.comparePassword(password)) {
-      return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
-    }
+    // if (!user.comparePassword(password)) {
+    //   return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
+    // }
     return done(null, user);
   }));
 };

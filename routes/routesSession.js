@@ -6,9 +6,10 @@ module.exports = (app, passport, LocalStrategy) => {
     failureFlash: true
   }));
 
-  app.get("/home", (req, res) => {
+  app.get("/", (req, res) => {
     res.render("index", {
-      titulo: "Inicio de sesion "
+      titulo: "Inicio de sesion ",
+      message: req.flash("signinMessage")
     });
   });
 
@@ -20,7 +21,7 @@ module.exports = (app, passport, LocalStrategy) => {
   app.get("/Signup", (req, res) => {
     res.render("Login", {
       titulo: "signup",
-      message: req.flash("Signupmessage ")
+      message: req.flash("Signupmessage")
     });
   });
 
