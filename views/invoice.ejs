@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
-   <% include ./partial/head %>
+   <% include ./partials/head %>
    <link id="linkCss" href="css/invoice/style.css" rel="stylesheet">
    <body class="header-sticky sidebar-left" ng-app="startAPP" ng-cloak>
       <div class="page-container">
-      <% include ./partial/header %>
+      <% include ./partials/header %>
       <!--CONTENIDO-->
       <div id="main-container">
          <!--MENU LEFT-->
-         <% include ./partial/menu-left %>
+         <% include ./partials/menu-left %>
          
          <!-- BODY CONTENIDO -->
          <div id="invoicePrint" class="container fix-top ng-cloak" ng-controller="invoiceController" >	
@@ -156,10 +156,10 @@
          </div>
          <!-- BODY CONTENIDO-->
          <!--CONTENIDO-->
-         <% include ./partial/footer %>
+         <% include ./partials/footer %>
       </div>
-      <% include ./partial/modal %>
-      <% include ./partial/script %>
+      <% include ./partials/modal %>
+      <% include ./partials/script %>
       <!-- Component -->
       <!-- <script src="./js/app/invoice.js"></script> -->
       <script src="./js/app/funciones-Globales.JS"></script>
