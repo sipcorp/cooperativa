@@ -48,17 +48,17 @@ module.exports = (app, passport, LocalStrategy) => {
       data ='invoice'
       res.render("invoice",{message: JSON.stringify(data)})
     });
-    app.get('/proyecto', (req, res) => {
+    app.get('/proyecto', isAuthenticated,(req, res) => {
       res.render('proyecto.ejs', {
         titulo: "SIP-proyect",
       });
     });
-    app.get('/bitacora', (req, res) => {
+    app.get('/bitacora', isAuthenticated,(req, res) => {
       res.render('bitacora.ejs', {
         titulo: "SIP-bitacora",
       });
     });
-    app.get('/config', (req, res) => {
+    app.get('/config', isAuthenticated,(req, res) => {
       res.render('config.ejs', {
         titulo: "SIP-config",
       });
