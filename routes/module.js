@@ -1,23 +1,36 @@
-const express = require('express');
-const app = express();
-const Module = require('../models/module');
+const Module = require('../models/module')
 
-app.post("/get-module", function (req, res, next) {
-    Module.find({}, function (err, doc) {
-        if (err) throw err;
-        if (doc) {
-           res.json({
-               message:true,
-               data:doc
-           })
-        } else {
+module.exports = (app) => {
+    app.get("/test-module", function (req, res) {
+        Module.find({},).exec((err, Module) => {
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
             res.json({
-                message:false,
-                data:doc
-            })
-        }
+                ok: true,
+                Module:Module,
+            });
+        });
     });
-});
 
-module.exports = app;
+    app.get("/get-module", function (req, res) {
+        Module.find({}, function (err, doc) {
+            if (err) throw err;
+            if (doc) {
+                res.json({
+                    message: true,
+                    data: doc
+                })
+            } else {
+                res.json({
+                    message: false,
+                    data: doc
+                })
+            }
+        });
+    });
+};
 

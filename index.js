@@ -9,26 +9,10 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const user = require('./routes/user')
 const mongoose = require('mongoose');
-const modules = require('./routes/module')
-const roleApi = require('./api/role/add')
-// require('./config/database');
-// const {
-//   url
-// } = require('./config/database');
-require('./config/port');
 const MongoClient = require('mongodb').MongoClient;
-
-/*
-###################### Configuration databse  #####################
-*/
-// mongoose.connect(url, {
-//   useNewUrlParser: true
-// }, (err) => {
-//   if (err) throw err;
-//   console.log(' ONLINE database')
-// })
-// mongoose.set('useCreateIndex', true);
-
+// const roleApi = require('./api/role/add')(app)
+require('./config/port');
+// mongoose.set('useCreateIndex', true)
 /*
 ###################### Configuration of  Middleware #####################
 */
@@ -57,12 +41,13 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(routes);
 app.use(user);
-app.use(modules);
-app.use(roleApi);
+// app.use(modules);
+require('./api/role/add')(app)
 app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/routesSession')(app, passport, LocalStrategy)
 require('./session/userSession')(passport)
-require('./config/database')(MongoClient)
+require('./config/database')(mongoose)
+require('./routes/module')(app)
 // require('./service/serviceGetUsers')(app)
 
 

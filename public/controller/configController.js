@@ -1,5 +1,5 @@
 'use strict';
-app.controller('configController', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
+app.controller('configController', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
     var roleModel = {
         name: '',
         module: []
@@ -7,14 +7,16 @@ app.controller('configController', ['$scope', '$timeout', '$http', function($sco
     var modules = []
     $scope.empty = false;
     $scope.showDetails = false;
+    $scope.showError = false;
     $scope.showAdd = false;
     $scope.modules = modules;
     $scope.roleModel = roleModel;
     $scope.subChange = false;
     $scope.parentChange = false;
+    $scope.error = ''
 
     // PAGE FUNCTIONS
-    $scope.ShowAdd = function() {
+    $scope.ShowAdd = function () {
         $scope.showAdd = true
     }
 
@@ -23,7 +25,7 @@ app.controller('configController', ['$scope', '$timeout', '$http', function($sco
         "async": true,
         "crossDomain": true,
         "url": "/get-module",
-        "method": "POST",
+        "method": "GET",
         "headers": {
             "Content-Type": "application/json; charset=utf-8",
             "Cache-Control": "no-cache"
@@ -36,120 +38,128 @@ app.controller('configController', ['$scope', '$timeout', '$http', function($sco
     }, function myError(response) {
         $scope.modules = [];
     });
-
-    // ADD ROLE 
-    var roleSettings = {
-      async: true,
-      crossDomain: true,
-      url: "/add-role",
-      data:$scope.modules,
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Cache-Control": "no-cache"
-      }
-  };
-$scope.add = function(){
-  $http(roleSettings).then(function mySuccess(response) {
-     console.log(response)
-  }, function myError(response) {
-      $scope.role = [];
-  });
-}
-  
-}])
-.directive('isActive', function($timeout) {
-    return {
-        link: function(scope, elem, attrs) {
-            elem.bind("click", function() {
-                $timeout(function() {
-                    var isActive = elem.hasClass("active")
-                    if (isActive) {
-                        var parent = elem[0].dataset.parent;
-                        var $obj = [];
-                        var $sub = [];
-                        var moduleName;
-                        var isExists = false;
-                        var isExistsSub = false;
-                        if (parent === "parent") {
-                            moduleName = elem.parent().parent().find("h5")[0].innerHTML
-                            $.each(scope.roleModel.module, function(v, k) {
-                                if (k.name === moduleName) {
-                                    isExists = true
-                                    return false;
-                                }
-                            })
-                            if (isExists === false) {
-                                $obj = {
-                                    name: moduleName,
-                                    action: [{
-                                        name: elem[0].name
-                                    }],
-                                    sub: [{name:"all"}]
-                                }
-                                scope.roleModel.module.push($obj)
-                                $obj = {}
-                            }else{
-                              $obj = {name: elem[0].name}
-                              scope.roleModel.module[0].action.push($obj)
-                              $obj = {} 
-                            }
-                        }else{
-                          moduleName = elem.parentsUntil()[3].id
-                          $.each(scope.roleModel.module, function(v, k) {
-                            if (k.name === moduleName) {
-                                isExists = true
-                                return false;
-                            }
-                        })
-                        if (isExists === false) {
-                            $obj = {
-                                name: moduleName,
-                                action: [{
-                                    name: elem[0].name
-                                }],
-                                sub: [{
-                                  name:elem[0].dataset.parent,
-                                  action:[{name:elem[0].name}]
-                                }]
-                            }
-                            scope.roleModel.module.push($obj)
-                            $obj = {}
-                        }else{
-                          $obj = {name: elem[0].name};
-                          $sub ={
-                            name:elem[0].dataset.parent,
-                            action:[elem[0].name]
-                          }
-                          scope.roleModel.module[0].action.push($obj)
-                          $.each(scope.roleModel.module[0].sub, function(v, k) {
-                            if (k.name === elem[0].dataset.parent) {
-                                isExistsSub = true
-                                return false;
-                            }
-                          })
-                          if(isExistsSub === false){
-                            scope.roleModel.module[0].sub.push($sub)
-                          }else{
-                            $obj = {name: elem[0].name};
-                            scope.roleModel.module[0].sub[0].action.push($obj)
-                          }
-                          
-                          $obj = {} 
-                          $sub = {}
-                        }
-                        }
-
-                    }
-                    console.log(scope.roleModel)
-                }, 600)
-
-            })
-            elem.bind("blur",function(){
-              if(elem[0].id === "formA05" ){
-                scope.roleModel.name = elem[0].value
-              }
-            })
-        }
+    $scope.add = function () {
+        // ADD ROLE 
+        var obj = JSON.stringify($scope.roleModel);
+        var roleSettings = {
+            async: true,
+            crossDomain: true,
+            url: "/add-role",
+            data: obj,
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Cache-Control": "no-cache"
+            }
+        };
+        console.log(obj)
+        $.ajax({
+            url: '/add-role',
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "Cache-Control": "no-cache"
+            },
+            method: 'POST',
+            dataType: 'json',
+            data: obj,
+            success: function (data) {
+                var code = data.message.code
+                if(code === 11000){
+                $scope.showError = true
+                $scope.error = "El role ya existe.." 
+                }
+            }
+        });
     }
-});
+    $scope.check = function (event) {
+        var elem = event.currentTarget
+        var isActive = elem.className.indexOf("active") > 0 ? false : true
+        if (isActive && elem.id != "formA05") {
+            var parent = elem.dataset.parent;
+            var $obj = [];
+            var $sub = [];
+            var moduleName;
+            var isExists = false;
+            var isExistsSub = false;
+            if (parent === "parent") {
+                moduleName = elem.parentNode.parentNode.id
+                $.each(roleModel.module, function (v, k) {
+                    if (k.name === moduleName) {
+                        isExists = true
+                        return false;
+                    }
+                })
+                if (isExists === false) {
+                    $obj = {
+                        name: moduleName,
+                        action: [{
+                            name: elem.name
+                        }],
+                        sub: []
+                    }
+                    roleModel.module.push($obj)
+                    $obj = {}
+                } else {
+                    var actionIN = false
+                    $obj = { name: elem.name }
+                    $.each(roleModel.module[0].action,function(v,k){
+                        if(k.name === elem.name){
+                            actionIN = true
+                        }
+                    })
+                    if(actionIN === false){
+                       roleModel.module[0].action.push($obj) 
+                    }
+                    $obj = {}
+                }
+            } else {
+                moduleName = elem.offsetParent.parentNode.parentNode.parentNode.id
+                $.each(roleModel.module, function (v, k) {
+                    if (k.name === moduleName) {
+                        isExists = true
+                        return false;
+                    }
+                })
+                if (isExists === false) {
+                    $obj = {
+                        name: moduleName,
+                        action: [{
+                            name: elem.name
+                        }],
+                        sub: [{
+                            name: elem.dataset.parent,
+                            action: [{ name: elem.name }]
+                        }]
+                    }
+                    roleModel.module.push($obj)
+                    $obj = {}
+                } else {
+                    $obj = { name: elem.name };
+                    $sub = {
+                        name: elem.dataset.parent,
+                        action: [elem.name]
+                    }
+                    roleModel.module[0].action.push($obj)
+                    $.each(roleModel.module[0].sub, function (v, k) {
+                        if (k.name === elem.dataset.parent) {
+                            isExistsSub = true
+                            return false;
+                        }
+                    })
+                    if (isExistsSub === false) {
+                        roleModel.module[0].sub.push($sub)
+                    } else {
+                        $obj = { name: elem.name };
+                        roleModel.module[0].sub[0].action.push($obj)
+                    }
+                    $obj = {}
+                    $sub = {}
+                }
+            }
+
+        }
+        if (elem.id === "formA05") {
+            roleModel.name = elem.value
+        }
+        console.log($scope.roleModel)
+    }
+}]);
