@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html>
+   <% include ./partial/head %>
+   <link href="css/contac-manager/contac-manager.css" rel="stylesheet">
+   <body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
+      <% include ./partial/header %>
+      <div id="main-container" >
+        <!--MENU LEFT-->
+      <% include ./partial/menu-left %>
+        <!--CONTENIDO-->
+
+        <!-- // main-container  -->
+        <div id="main-content" class="main-content container-fluid">
+            <div class="filler filler"></div>
+            <div id="page-content" class="page-content">
+                <div class="row-fluid">
+                    <h2 class="page-title heading-icon" data-icon="&#xe10e;" aria-hidden="true">Gestión de contactos</h2>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div id="myContact-nav" class="nav-alphabet alphabet-btn"></div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                        <div class="span12">
+                           <div class="row-fluid ">
+                              <!--<div class="stacx4"> -->
+                              <div class="span12">
+                                 <div id="myContactWrap" class="scrollBox4 nav-list-wrap" style="height: 576px;">
+                                    <ul id="myContact" class="nav nav-contact list list-bordered thumb-small">
+                                       <div class="span4 grider">
+                                          <div id="user-list" class="widget widget-simple widget-user">
+                                             <div class="widget-header">
+                                                <h4><i class="fontello-icon-popup-3"></i>Estrella Azul</h4>
+                                             </div>
+                                             <div class="widget-content">
+                                                <div class="widget-body">
+                                                   <ul class="widget-list list-bordered thumb-xxlarge media-overflow">
+                                                      <li class="media">
+                                                         <div class="media-thumb media-left">
+                                                            <a class="img-shadow" href="javascript:void(0);">
+                                                            <img class="media-object thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTBlVaZW5VZUGFRsoobUv0Lh2J-zvZzLdMFwFFTEvleuTGRAdT"></a>
+                                                         </div>
+                                                         <div class="media-body">
+                                                            <span class="hidden">B</span>
+                                                            <h4 class="media-heading"><a href="javascript:void(0);">Karla Maierweisner</a></h4>
+                                                            <div class="quick-menu menu-right">                                                           
+                                                            </div>
+                                                            <ul class="data">
+                                                               <li>
+                                                                  <div class="em black margin-bottom5">manager to manager</div>
+                                                               </li>
+                                                               <li>San Francisco, CA 94107</li>
+                                                               <li>
+                                                                  <abbr title="Phone"><i class="fontello-icon-phone opaci75"></i>: </abbr>
+                                                                  <strong>(123) 456-7890</strong>
+                                                               </li>
+                                                               <li>
+                                                                  <abbr title="Phone"><i class="fontello-icon-mail-4 opaci75"></i>: </abbr>
+                                                                  <a href="javascript:void(0);">first.last@example.com</a>
+                                                               </li>
+                                                            </ul>
+                                                         </div>
+                                                      </li>
+                                                   </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <!-- // Widget -->
+                                       </div>
+                                       
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- // Example row -->
+            </div>
+        </div>
+        <!-- // main-container  -->
+
+        <!--CONTENIDO-->
+       </div>
+
+      <% include ./partial/footer %>
+      <% include ./partial/script %>
+    <script src="plugin/pl-content/rateit/js/jquery.rateit.js"></script>
+    <script src="plugin/pl-content/jquery.toolbar/js/jquery.toolbar.min.js"></script>
+    <script src="plugin/pl-content/list/js/list.min.js"></script>
+    <script src="plugin/pl-content/list/js/list.paging.min.js"></script>
+    <script src="plugin/pl-content/list/js/list.fuzzySearch.min.js"></script>
+    <script src="plugin/pl-content/list/js/list.filter.min.js"></script>
+    <script src="plugin/pl-content/jquery.listnav/js/jquery.listnav.js"></script>
+    <script src="plugin/pl-content/equalize/js/equalize.js"></script>
+    <script src="js/contac-manager.js"></script>
+
+   </body>
+</html>
+
+
+

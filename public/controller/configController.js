@@ -9,6 +9,7 @@ app.controller('configController', ['$scope', '$timeout', '$http', function ($sc
     $scope.showDetails = false;
     $scope.showError = false;
     $scope.showAdd = false;
+    $scope.NewUser = false;
     $scope.modules = modules;
     $scope.roleModel = roleModel;
     $scope.subChange = false;
@@ -18,6 +19,10 @@ app.controller('configController', ['$scope', '$timeout', '$http', function ($sc
     // PAGE FUNCTIONS
     $scope.ShowAdd = function () {
         $scope.showAdd = true
+    }
+    
+    $scope.seeNewUser = function(){
+        $scope.NewUser = true
     }
 
     // CARGA LOS MODULOS Y SUBMODULOS

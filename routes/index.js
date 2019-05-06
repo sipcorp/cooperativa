@@ -21,4 +21,7 @@ app.get('/bitacora', (req, res) => {
 app.get('/config', (req, res) => {
   res.render("config")
 });
+app.get('/contact-manager', (req, res) => {
+  res.render("contact-manager")
+});
 module.exports = app;
