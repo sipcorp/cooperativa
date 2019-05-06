@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
    <% include ./partial/head %>
    <link href="css/config/config.css" rel="stylesheet">
    <body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
@@ -9,6 +10,18 @@
          <!--MENU LEFT-->
          <% include ./partial/menu-left %>
          <div id="main-content" class="main-content container-fluid">
+=======
+<% include ./partials/head %>
+<link href="css/config/config.css" rel="stylesheet">
+
+<body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
+    <% include ./partials/header %>
+    <!--CONTENIDO-->
+    <div id="main-container" ng-controller="configController">
+        <!--MENU LEFT-->
+        <% include ./partials/menu-left %>
+        <div id="main-content" class="main-content container-fluid">
+>>>>>>> 6b1c72177511304cc4a03b2ceffaf2973e051c5c
             <div class="filler filler"></div>
             <div id="page-content" class="page-content">
                <nav>
@@ -660,6 +673,7 @@
                </div>
             </div>
             <!-- // page content -->
+<<<<<<< HEAD
          </div>
       </div>
       <div id="responsive" class="modal hide fade" tabindex="-1" data-width="375" data-height="250">
@@ -720,6 +734,16 @@
       <% include ./partial/footer %>
       <div class="modal-container">
          <div id="updateModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+=======
+
+        </div>
+    </div>
+    <!--CONTENIDO-->
+
+    <% include ./partials/footer %>
+    <div class="modal-container">
+        <div id="updateModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+>>>>>>> 6b1c72177511304cc4a03b2ceffaf2973e051c5c
             aria-hidden="true" style="display: none; margin-top: -124px;">
             <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -734,6 +758,7 @@
             <div class="modal-footer">
                <button class="btn btn-red" data-dismiss="modal">Close</button>
             </div>
+<<<<<<< HEAD
          </div>
       </div>
       <% include ./partial/script %>
@@ -746,4 +771,14 @@
       <script src="controller/configController.js"></script>
       <script src="js/config.js"></script>
    </body>
+=======
+        </div>
+    </div>
+    <% include ./partials/script %>
+    <script src="controller/configController.js"></script>
+    <script src="js/config.js"></script>
+    
+</body>
+
+>>>>>>> 6b1c72177511304cc4a03b2ceffaf2973e051c5c
 </html>

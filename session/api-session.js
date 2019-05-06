@@ -1,7 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
 const User = require("../models/user");
+const Cryptr = require('cryptr');
+const cryptr = new Cryptr('myTotalySecretKey');
 module.exports = (passport) => {
-
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
@@ -12,20 +13,27 @@ module.exports = (passport) => {
   });
 
   passport.use('local-signup', new LocalStrategy({
-    usernameField: 'name',
+    usernameField: 'userCode',
     passwordField: 'password',
     passReqToCallback: true
-  }, async (req, name, password, done) => {
+  }, async (req, userCode, password, done) => {
     const user = await User.findOne({
-      'userCode': name
+      'userCode': userCode
     })
     console.log(user)
     if (user) {
       return done(null, false, req.flash('signupMessage', 'The name is already Taken.'));
     } else {
-      const newUser = new User();
-      newUser.name = name;
-      newUser.password = newUser.encryptPassword(password);
+      let body = req.body;
+      let newUser = new User({
+        userCode: body.userCode,
+        fullName: body.fullName,
+        email: body.email,
+        password: cryptr.encrypt(body.password),
+        date: body.date,
+        role: body.role,
+        lastLogin: body.lastLogin,
+      });
       console.log(newUser)
       await newUser.save();
       done(null, newUser);
@@ -33,19 +41,18 @@ module.exports = (passport) => {
   }));
 
   passport.use('local-signin', new LocalStrategy({
-    usernameField: 'name',
+    usernameField: 'userCode',
     passwordField: 'password',
     passReqToCallback: true
-  }, async (req, name, password, done) => {
+  }, async (req, userCode, password, done) => {
     const user = await User.findOne({
-      userCode: name
+      userCode: userCode
     });
     if (!user) {
       return done(null, false, req.flash('signinMessage', 'No User Found'));
+    } else {
+      cryptr.decrypt(user.password)
     }
-    // if (!user.comparePassword(password)) {
-    //   return done(null, false, req.flash('signinMessage', 'Incorrect Password'));
-    // }
     return done(null, user);
   }));
 };
