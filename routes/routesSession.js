@@ -63,7 +63,16 @@ module.exports = (app, passport, LocalStrategy) => {
         titulo: "SIP-config",
       });
     });
-
+    app.get('/contact-manager', isAuthenticated,(req, res) => {
+      res.render('contact-manager.ejs', {
+        titulo: "SIP-contact-manager",
+      });
+    });
+    app.get('/admin', isAuthenticated,(req, res) => {
+      res.render('admin.ejs', {
+        titulo: "SIP-admin",
+      });
+    });
   /*
 #######################################################
                  CLOSE SESSION

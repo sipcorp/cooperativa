@@ -1,19 +1,8 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-   <% include ./partial/head %>
-   <link href="css/config/config.css" rel="stylesheet">
-   <body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
-      <% include ./partial/header %>
-      <!--CONTENIDO-->
-      <div id="main-container" ng-controller="configController">
-         <!--MENU LEFT-->
-         <% include ./partial/menu-left %>
-         <div id="main-content" class="main-content container-fluid">
-=======
 <% include ./partials/head %>
 <link href="css/config/config.css" rel="stylesheet">
-
+<link href="css/proyecto/proyecto.css" rel="stylesheet">
 <body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
     <% include ./partials/header %>
     <!--CONTENIDO-->
@@ -21,7 +10,6 @@
         <!--MENU LEFT-->
         <% include ./partials/menu-left %>
         <div id="main-content" class="main-content container-fluid">
->>>>>>> 6b1c72177511304cc4a03b2ceffaf2973e051c5c
             <div class="filler filler"></div>
             <div id="page-content" class="page-content">
                <nav>
@@ -58,6 +46,12 @@
                         </a>
                      </li>
                      <li>
+                           <a class="btn btn-well btn-glyph" href="#TabTop6" data-toggle="tab" style="width: 80px">
+                           <i class="fontello-icon-th-3 f30"></i>
+                           <span class="block">PROYECTO</span>
+                           </a>
+                        </li>
+                     <li>
                         <a class="btn btn-well btn-glyph" href="#updateModal" style="width: 80px"
                            data-toggle="modal">
                         <i class="fontello-icon-back-in-time f30"></i>
@@ -75,6 +69,7 @@
                   <hr class="margin-0x">
                </nav>
                <div class="tab-content">
+                  <!-- // tab 1 -->
                   <div class="tab-pane" id="TabTop1">
                      <div class="row-fluid">
                         <div class="span3">
@@ -197,7 +192,7 @@
                         <!-- // Column -->
                      </div>
                   </div>
-                  <!-- // tab 1 -->
+                  <!-- // tab 2 -->
                   <div class="tab-pane" id="TabTop2">
                      <div class="widget widget-box widget-table widget-list" ng-if="!NewUser">
                         <div class="widget-header">
@@ -446,10 +441,10 @@
                         <!-- // Widget -->
                      </div>
                   </div>
-                  <!-- // tab 2 -->
+                  <!-- // tab 3 -->
                   <div class="tab-pane" id="TabTop3">
                   </div>
-                  <!-- // tab 3 -->
+                  <!-- // tab 4 -->
                   <div class="tab-pane" id="TabTop4">
                      <div class="row-fluid">
                         <div class="span12">
@@ -480,7 +475,6 @@
                      </div>
                      <!-- // Example row -->
                   </div>
-                  <!-- // tab 3 -->
                   <!-- // tab 5 -->
                   <div class="tab-pane" id="TabTop5">                  
                     <div class="row-fluid">
@@ -670,10 +664,212 @@
                             </div>
                     </div>                   
                   </div>
+                   <!-- // tab 6 -->
+                   <div class="tab-pane" id="TabTop6">
+                           <!-- // page head -->
+                           <div class="container" ng-controller="proyectController">
+                              <form class="form-horizontal span12 m0">
+                                 <div class="row form-group">
+                                    <div class="col-xs-12">
+                                       <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                                          <li class="active">
+                                             <a href="#step-1">
+                                                <h4 class="list-group-item-heading">Generales</h4>
+                                                <p class="list-group-item-text">Defina las generales del proyecto</p>
+                                             </a>
+                                          </li>
+                                          <li class="">
+                                             <a href="#step-2">
+                                                <h4 class="list-group-item-heading">Descripción</h4>
+                                                <p class="list-group-item-text">Detalle de el proyecto</p>
+                                             </a>
+                                          </li>
+                                          <li class="">
+                                             <a href="#step-3">
+                                                <h4 class="list-group-item-heading">Cronograma de Seguimiento</h4>
+                                                <p class="list-group-item-text">Favor definir todas las variables necesarias</p>
+                                             </a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                                 <div class="row setup-content" id="step-1">
+                                    <div class="container">
+                                       <div class="row">
+                                          <div class="span12">
+                                             <fieldset>
+                                                <div class="control-group ">
+                                                   <label class="control-label">Nombre de Proyecto</label>
+                                                   <div class="controls">
+                                                      <input type="text" class="input-block-level span4" id="proyectName" ng-model="nameChange" ng-change="updateModel(1,nameChange,'n')">
+                                                   </div>
+                                                </div>
+                                                <div class="control-group control-inline">
+                                                   <div  class="input-append margin-00" >
+                                                      <label class="control-label" style="margin-left: -142px;">Start Date</label>
+                                                      <input id="step1Start" class="input-medium date"  type="date" data-date="" data-date-format="dd-mm-yyyy"  ng-model="date" ng-change="updateModel(1,date,'ns')">
+                                                   </div>
+                                                </div>
+                                                <div class="control-group control-inline-inline">
+                                                   <div  class="input-append margin-00" >
+                                                      <label class="control-label" style="margin-left: -64px;width: 62px;">End Date</label>
+                                                      <input id="end1Start" class="input-medium date"  type="date" data-date="" data-date-format="dd/mm/yyyy"  ng-model="date2" ng-change="updateModel(1,date2,'ne')">
+                                                   </div>
+                                                </div>
+                                                <div class="alert alert-error" id="alert" style="display: none;">
+                                                   <span class="msg">Ups.. Lo sentimos pero algunos de los campos esta vació favor revisar el formulario</span>
+                                                </div>
+                                             </fieldset>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row setup-content" id="step-2">
+                                    <div class="col-xs-12" style="margin-top: -28px;">
+                                       <div id="page-content" class="page-content tab-content overflow-y">
+                                          <div class="row-fluid">
+                                             <div class="span12 grider">
+                                                <div class="widget widget-simple">
+                                                   <div class="widget-content">
+                                                      <div class="widget-body">
+                                                         <div class="row-fluid">
+                                                            <div class="span12 form-dark">
+                                                               <fieldset>
+                                                                  <ul class="form-list label-left list-bordered dotted">
+                                                                     <li class="section-form">
+                                                                        <h4>Categoria del proyecto</h4>
+                                                                        <div class="alert alert-error span8" id="alert2" style="display: none;">
+                                                                           <span class="msg">Ups.. Seleccione una categoria</span>
+                                                                        </div>
+                                                                     </li>
+                                                                     <!-- // form item -->
+                                                                     <li class="control-group">
+                                                                        <label for="accountGender" class="control-label">Categorias</label>
+                                                                        <div class="controls">
+                                                                           <input id="accountGenderInput" type="hidden" name="accountGender" value="">
+                                                                           <div id="cotegoryList" class="btn-group change" data-toggle="buttons-radio" data-target="accountGenderInput">
+                                                                              <button type="button" class="btn" class-toggle="btn-green" id="cat1" value="male" ng-click="updateModel(2,$event.currentTarget,'cat')">
+                                                                               <span>Administración Complementaria</span>   
+                                                                              </button>
+                                                                              <button type="button" class="btn" class-toggle="btn-green" id="cat2" value="female">
+                                                                               <span>Asesoría e Implementación Tecnológica</span>  
+                                                                              </button>
+                                                                              <button type="button" class="btn" class-toggle="btn-green" id="cat3" value="female"> 
+                                                                              <span>Ventas y Compra</span>   
+                                                                              </button>
+                                                                           </div>
+                                                                        </div>
+                                                                     </li>
+                                                                     <!-- // form item -->
+                                                                     <fieldset>
+                                                                        <legend class="section-form">Detalles segun categoria</legend>
+                                                                        <!-- // form item -->
+                                                                        <div class="control-group">
+                                                                           <label for="accountGender" class="control-label">Beneficiarios</label>
+                                                                           <div class="controls controls-row">
+                                                                              <input  class="span1" type="text" placeholder="cantidad" ng-model="canChange" ng-change="updateModel(2,canChange,'can')">
+                                                                              <input class="span8" type="text" placeholder="tipo de beneficio" ng-model="benChange" ng-change="updateModel(2,benChange,'ben')">
+                                                                           </div>
+                                                                        </div>
+                                                                        <!-- // form item -->
+                                                                        <div class="control-group">
+                                                                           <label for="accountGender" class="control-label">Rubros</label>
+                                                                           <div class="controls controls-row">
+                                                                              <input id="metaArticleKeywords" class="span9" type="text" name="metaArticleKeywords" ng-model="rubroChange" ng-change="updateModel(2,rubroChange,'rubro')" />
+                                                                              <span class="help-block">Escriba o seleccione una etiqueta y presione "enter" o "coma" para agregarlos.</span>
+                                                                           </div>
+                                                                        </div>
+                                                                     </fieldset>
+                                                                  </ul>
+                                                               </fieldset>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <!-- // Widget -->
+                                             </div>
+                                             <!-- // Column -->
+                                          </div>
+                                          <!-- // Example row --> 
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="row setup-content" id="step-3">
+                                    <div class="col-xs-12" style="margin-top: -28px;">
+                                       <div id="page-content" class="page-content tab-content">
+                                          <div class="row-fluid" ng-repeat="models in bitacoraModels">
+                                             <div class="span11 grider">
+                                                <div class="widget widget-simple">
+                                                   <div class="widget-content">
+                                                      <div class="widget-body">
+                                                         <div class="row-fluid">
+                                                            <div class="span12 form-dark">
+                                                               <fieldset>
+                                                                  <legend class="section-form"> Rubro: {{models.name}} </legend>
+                                                                  <div class="form-actions thumbnail up-button" ng-show="$index === 0">
+                                                                     <button type="submit" class="btn btn-primary">Previous</button>
+                                                                     <button type="button" class="btn btn-danger">Cancel</button>
+                                                                     <button type="button"  class="btn btn-wordpress" ng-click="addProject()"><i class="fontello-icon-publish"></i> Save</button>
+                                                                  </div>
+                                                                  <ul class="form-list label-left list-bordered dotted">
+                                                                     <fieldset>
+                                                                        <legend class="section-form">Task<a class="btn btn-mini pull-right margin-0s txt-r" data-icon="&#xf067;" ng-click="addCiclo(models.$$hashKey)">Agregar task</a> </legend>
+                                                                        <ul class="form-list label-left list-bordered dotted">
+                                                                           <li class="control-group" ng-repeat="task in models.task">
+                                                                              <a class="delete step-delete-c" ng-click="delCiclo(models.$$hashKey,task.$$hash)" title="Remove row" ng-show="$index > 0">
+                                                                              <span class="booico-trash delete-fix"></span>
+                                                                              </a>
+                                                                              <label for="accountGender" class="control-label">Task Name<span class="required">*</span></label>
+                                                                              <div class="controls controls-row">
+                                                                                 <input class="span6" type="text" placeholder="Nombre" ng-model="taskChange" ng-blur="updateModel(3,taskChange,'task',task.$$hash,models.$$hashKey)">
+                                                                                 <input id="cicloStart" class="input-medium date"  type="date" data-date="" data-date-format="dd-mm-yyyy"  ng-model="cicloStart" ng-change="updateModel(3,cicloStart,'tsd',task.$$hash,models.$$hashKey)">
+                                                                                 <input id="cicloEnd" class="input-medium date"  type="date" data-date="" data-date-format="dd-mm-yyyy"  ng-model="cicloEnd" ng-change="updateModel(3,cicloEnd,'ted',task.$$hash,models.$$hashKey)">
+                                                                                 <div class="step">
+                                                                                    <a class="btn btn-mini add-step margin-0s txt-r" data-icon="&#xf067;" ng-click="addStep(models.$$hashKey,task.$$hash)">Step</a>
+                                                                                    <div class="step-item" ng-repeat="step in task.step" >
+                                                                                       <label class="step">Step</label>
+                                                                                       <div class="controls controls-row fix-control-row" style="width: 100%;">
+                                                                                          <input class="span5" type="text" placeholder="Nombre" ng-model="stepChange" ng-blur="updateModel(3,stepChange,'step',task.$$hash,models.$$hashKey,step.$$hash)">
+                                                                                          <input id="stepStart" class="input-medium date ng-pristine ng-untouched ng-valid ng-empty" type="date" data-date="" data-date-format="dd-mm-yyyy" ng-model="stepStartdate" ng-change="updateModel(3,stepStartdate,'ss',task.$$hash,models.$$hashKey,step.$$hash)">
+                                                                                          <input id="stepEnd" class="input-medium date ng-pristine ng-valid ng-empty ng-touched ng-untouched" type="date" data-date="" data-date-format="dd-mm-yyyy" ng-model="stepEnddate" ng-change="updateModel(3,stepEnddate,'se',task.$$hash,models.$$hashKey,step.$$hash)" style="float: right;margin-top: -30px;margin-bottom: 7px;margin-right: 2px;">
+                                                                                          <a class="delete step-delete" ng-click="delStep(models.$$hashKey,task.$$hash,step.$$hash)" title="Remove row" ng-show="$index > 0">
+                                                                                          <span class="booico-trash delete-fix"></span>
+                                                                                          </a>
+                                                                                       </div>
+                                                                                    </div>
+                                                                                 </div>
+                                                                              </div>
+                                                                           </li>
+                                                                        </ul>
+                                                                     </fieldset>
+                                                                  </ul>
+                                                               </fieldset>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                                <!-- // Widget -->
+                                             </div>
+                                             <!-- // Column -->
+                                          </div>
+                                          <!-- // Example row --> 
+                                       </div>
+                                    </div>
+                                 </div>
+                              </form>
+                              <div class="form-actions thumbnail m1">
+                                 <button type="submit" class="btn btn-primary">Previous</button>
+                                 <button type="button" class="btn btn-danger">Cancel</button>
+                                 <button type="submit" id="next" class="btn btn-primary">Next</button>
+                              </div>
+                           </div>
+                           <!-- // page content -->
+                  </div>
                </div>
             </div>
             <!-- // page content -->
-<<<<<<< HEAD
          </div>
       </div>
       <div id="responsive" class="modal hide fade" tabindex="-1" data-width="375" data-height="250">
@@ -731,19 +927,9 @@
          </ul>
       </div>
       <!--CONTENIDO-->
-      <% include ./partial/footer %>
+      <% include ./partials/footer %>
       <div class="modal-container">
          <div id="updateModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-=======
-
-        </div>
-    </div>
-    <!--CONTENIDO-->
-
-    <% include ./partials/footer %>
-    <div class="modal-container">
-        <div id="updateModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
->>>>>>> 6b1c72177511304cc4a03b2ceffaf2973e051c5c
             aria-hidden="true" style="display: none; margin-top: -124px;">
             <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -758,10 +944,9 @@
             <div class="modal-footer">
                <button class="btn btn-red" data-dismiss="modal">Close</button>
             </div>
-<<<<<<< HEAD
          </div>
       </div>
-      <% include ./partial/script %>
+      <% include ./partials/script %>
       <script src="plugin/pl-content/equalize/js/equalize.js"></script>
       <script src="plugin/pl-form/select2/js/select2.js"></script>
       <script src="plugin/pl-form/bootstrap-select/js/bootstrap-select.js"></script>
@@ -770,15 +955,11 @@
       <script src="plugin/pl-table/datatables/js/jquery.dataTables.columnFilter.js"></script>
       <script src="controller/configController.js"></script>
       <script src="js/config.js"></script>
+      <script src="plugin/pl-form/bootstrap-select/js/bootstrap-select.js"></script>
+      <script src="plugin/pl-form/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+      <script src="plugin/pl-form/select2/js/select2.js"></script>
+      <script src="./js/app/funciones-Globales.js"></script>
+      <script src="./js/app/proyecto.js"></script>
+      <script src="./controller/proyectController.js"></script>
    </body>
-=======
-        </div>
-    </div>
-    <% include ./partials/script %>
-    <script src="controller/configController.js"></script>
-    <script src="js/config.js"></script>
-    
-</body>
-
->>>>>>> 6b1c72177511304cc4a03b2ceffaf2973e051c5c
 </html>
