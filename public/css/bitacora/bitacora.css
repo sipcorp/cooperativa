@@ -3,7 +3,7 @@
  * version 2018.10.30
  * https://codepen.io/jstneg/pen/EVKYZj
  */
- .card{ background-color: #fff; border: 1px solid transparent; border-radius: 6px; }
+ .card{ background-color: #fff0; border: 1px solid transparent; border-radius: 6px; }
  .card > .card-link{ color: #333; }
  .card > .card-link:hover{  text-decoration: none; }
  .card > .card-link .card-img img{ border-radius: 6px 6px 0 0; }
@@ -36,26 +36,6 @@
  .card .card-body .heading:last-child{ margin-bottom: 0; }
  
  .card .card-body .lead{ text-align: center; }
- 
- @media( min-width: 768px ){
-   .card .card-left{ float: left; padding: 0 8px 0 0; }
-   .card .card-right{ float: left; padding: 0 0 0 8px; }
-     
-   .card .card-4-8 .card-left{ width: 33.33333333%; }
-   .card .card-4-8 .card-right{ width: 66.66666667%; }
- 
-   .card .card-5-7 .card-left{ width: 41.66666667%; }
-   .card .card-5-7 .card-right{ width: 58.33333333%; }
-   
-   .card .card-6-6 .card-left{ width: 50%; }
-   .card .card-6-6 .card-right{ width: 50%; }
-   
-   .card .card-7-5 .card-left{ width: 58.33333333%; }
-   .card .card-7-5 .card-right{ width: 41.66666667%; }
-   
-   .card .card-8-4 .card-left{ width: 66.66666667%; }
-   .card .card-8-4 .card-right{ width: 33.33333333%; }
- }
  
  /* -- default theme ------ */
  .card-default{ 
@@ -136,11 +116,19 @@
     border-bottom: 5px solid #009999;
 }
 .span-fix{
-    margin-left: 0px;
-    width: 100%;
+    margin-left: 0px !important;
+    width: 100% !important;
 }
 .widget {
     margin-bottom: 6px !important;
+}
+.widget-simple {
+    padding: 0 15px;
+    border: 1px solid #ffffff00;
+    background-color: #f5f6f900;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0);
+    -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0);
 }
 .recent{
     background: #e8e9ee;
@@ -156,12 +144,21 @@
     padding: 8px;
 }
 .card2{ width: 20%; }
-.card3{ width: 542px; }
+.card3{ 
+    width: 542px;
+    margin-top: -8px;
+}
 .card4{ width: 40%; }
 .card5{ width: 50%; }
 .card6{ width: 60%; }
 .card7{ width: 915px; }
 .card8{ width: 80%; }
+.span5 {
+    width: 403px !important;
+}
+.span5s {
+    width: 565px !important;
+}
 .well-left{
     margin-left: -30px;
     width: 142%;
@@ -172,7 +169,7 @@
 .card-fix{
     max-height: 590px;
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .step-style{
     background: #009999;

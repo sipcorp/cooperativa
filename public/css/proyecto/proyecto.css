@@ -199,12 +199,12 @@
     position: relative;
     top: -12px;
 }
-.form-inline{
+/* .form-inline{
     position: relative;
     top: -30px;
     float: right;
     right: 253px;
-}
+} */
 .rubrosInput{
     width: 172% !important;
     position: relative;
