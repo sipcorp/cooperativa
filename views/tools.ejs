@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+   <% include ./partials/head %>
+   <link href="css/tools/tools.css" rel="stylesheet">
+   <body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
+      <% include ./partials/header %>
+      <!--CONTENIDO-->
+      <div id="main-container">
+         <!--MENU LEFT-->
+         <% include ./partials/menu-left %>
+         <div id="main-content" class="main-content container-fluid">
+            <div class="filler filler"></div>
+            <div id="page-content" class="page-content">
+               <nav>
+                  <ul class="btn-toolbar page-nav margin-btn">
+                     <li>
+                        <a class="btn btn-well btn-glyph" href="#TabTop1" data-toggle="tab"style="width: 80px">
+                        <i class="fontello-icon-list-add f30"></i>
+                        <span class="block">PROYECTO</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a class="btn btn-well btn-glyph" href="#TabTop2" data-toggle="tab" style="width: 90px">
+                        <i class="fontello-icon-vcard f30"></i>
+                        <span class="block">PRODUCTORES</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a class="btn btn-well btn-glyph" href="#TabTop3" data-toggle="tab" style="width: 80px" data-toggle="modal">
+                        <i class="fontello-icon-leaf-1 f30"></i>
+                        <span class="block">PRODUCTOS</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a class="btn btn-well btn-glyph" href="#TabTop4" data-toggle="tab" style="width: 80px" data-toggle="modal">
+                        <i class="fontello-icon-water f30"></i>
+                        <span class="block">INSUMOS</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a class="btn btn-well btn-glyph" href="#TabTop5" data-toggle="tab" style="width: 80px" data-toggle="modal">
+                        <i class="fontello-icon-users-2 f30"></i>
+                        <span class="block">CLIENTES</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a class="btn btn-well btn-glyph" href="#updateModal" style="width: 85px"  data-toggle="modal">
+                        <i class="fontello-icon-arrows-cw f30"></i>
+                        <span class="block">LAST UPDATE</span>
+                        </a>
+                     </li>
+                  </ul>
+                  <hr class="margin-0x">
+               </nav>
+               <!-- // TAB SECCION -->
+               <div class="tab-content">
+                  <!-- // tab 1 -->
+                  <div class="tab-pane" id="TabTop1">
+                    
+                  </div>
+                  <!-- // tab 2 -->
+                  <div class="tab-pane" id="TabTop2">
+                    
+                  </div>
+                  <!-- // tab 3 -->
+                  <div class="tab-pane" id="TabTop3">
+                    <section>      
+                        <div class="row-fluid">
+                            <form class="form-horizontal span12">
+                                <fieldset>
+                                    <legend class="margin-00"><i class="fontello-icon-quote-left-alt"></i>
+                                        <span>Agregar Producto</span> 
+                                        <div class="form-actions-s">
+                                                <button type="submit" class="btn btn-blue">Submit &amp; Validate</button>
+                                                <button class="btn cancel">Cancel</button>
+                                            </div>
+                                    </legend>
+                                    <ul class="form-list list-bordered dotted">
+                                        <li class="control-group">
+                                            <label for="limiteChar" class="control-label">Nombre:</label>
+                                            <div class="controls">
+                                                <input id="limiteChar" class="span6 limiteChar15 clear-field" type="text">
+                                                <div id="limiteChar_counter">
+                                                    <span id="limiteChar_count"></span> 
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <!-- // control group -->
+
+                                        <li class="control-group">
+                                            <label for="limiteWords" class="control-label">Descripcion:</label>
+                                            <div class="controls">
+                                                <textarea id="limiteWords" rows="3" class="span6 limiteWords15 clear-field"></textarea>
+                                                <div id="limiteWords_counter">
+                                                    <span id="limiteWords_count"></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <!-- // control group -->
+
+                                        <li class="control-group">
+                                            <label for="regularClearText" class="control-label">Precio:</label>
+                                            <div class="controls">
+                                                <input id="regularClearText" class="span6 clear-field" type="text" placeholder="enter text and clear">
+                                            </div>
+                                        </li>
+    
+                                        <!-- // control group -->
+
+                                        <li class="control-group">
+                                                <label for="regularClearText" class="control-label">Unit:</label>
+                                                <div class="controls">
+                                                    <input id="regularClearText" class="span6 clear-field" type="text" placeholder="enter text and clear">
+                                                </div>
+                                            </li>
+                                        <!-- // control group -->
+
+                                        <li class="control-group">
+                                                <label for="regularClearText" class="control-label">Alerta:</label>
+                                                <div class="controls">
+                                                    <input id="regularClearText" class="span6 clear-field" type="text" placeholder="enter text and clear">
+                                                </div>
+                                            </li>
+                                        <!-- // control group -->
+                                    </ul>
+                                </fieldset>
+                            </form>
+                            <!-- // FORM Input fields -->
+                        </div>
+                    </section>
+                  </div>
+                  <!-- // tab 4 -->
+                  <div class="tab-pane" id="TabTop4">
+                    
+                  </div>
+                  <!-- // tab 5 -->
+                  <div class="tab-pane" id="TabTop5">
+                  
+                  </div>
+                  <!-- // tab 6 -->
+                  <div class="tab-pane" id="TabTop6">
+                   
+                  </div>
+               </div>
+            </div>
+            <!-- // page content -->
+         </div>
+      </div>
+      <!--CONTENIDO-->
+      <% include ./partials/footer %>
+      <% include ./partials/script %>
+      <script src="plugin/pl-form/jquery.counter/js/jquery.counter.min.js"></script>
+      <script src="plugin/pl-form/jquery.elastic/js/jquery.elastic.js"></script>
+      <script>
+            $(document).ready(function () {
+    
+                // FORM - LIMITER
+                // ------------------------------------------------------------------------------------------------ * -->
+                // Content/plugins/pl-form/counter/js/jquery.counter.js
+                $(".limiteChar15").counter({
+                    goal: 25,
+                    msg: 'Usar nombre comercial no mayor',
+                    type:'char'
+                });
+                $(".limiteChar140").counter({
+                    goal: 140
+                });
+                $(".limiteWords15").counter({
+                    goal: 15,
+                    type: 'word',
+                    msg: 'Descripcion corta palabras'
+                });
+                $(".countingChar").counter({
+                    goal: 'sky',
+                    msg: 'have written'
+                });
+    
+                
+    
+                // FORM - ELASTIC TEXTAREA
+                // ------------------------------------------------------------------------------------------------ * -->
+                // Content/plugins/pl-form/elastic/js/jquery.elastic.js
+                $('textarea.auto').elastic();
+                $('textarea.auto').trigger('update');
+    
+      // FORM - CLEAR FIELD
+            // ------------------------------------------------------------------------------------------------ * -->
+            $.fn.clearicon = function (options) {
+                // default settings
+                var config = {
+                    "in": 'fadeIn',
+                    "out": 'fadeOut',
+                    "speed": 'fast',
+                    "css": {
+                        "right": "-3px",
+                        "top": "-5px"
+                    },
+                    "html": '<i class="fontello-icon-cancel-circle-2 opaci55"></i>',
+                    "click": function () {
+                        // general purposes functionality for clearing a field element
+                        $(this).val('').removeAttr('checked').removeAttr('selected').keyup();
+                    }
+                };
+                if (options) $.extend(config, options);
+                // do the magic
+                $(this).each(function () {
+                    // the current element
+                    var self = $(this);
+                    var ctr = $('<span style="position: relative; width:auto; overflow: hidden;" class="clear-icon-wrap"/>');
+                    $(this).wrap(ctr);
+                    var btn = $('<a style="position: absolute;" class="btn btn-glyph btn-link clear-icon-btn" href="javascript:;"/>');
+                    btn.css(config.css).html(config.html);
+                    self.after(btn);
+                    // handle clicking of button
+                    if (config.click) btn.click(function () {
+                        config.click.apply(self);
+                    });
+                    // handle value changes of input
+                    self.keyup(function () {
+                        if (self.val().length > 0) {
+                            btn[config['in']](config.speed);
+                        } else {
+                            btn[config['out']](config.speed);
+                        }
+                    });
+                    // trigger initial state
+                    self.keyup();
+                });
+                return this;
+            };
+
+            $('.clear-field').clearicon();
+            $('.clear-textarea').clearicon({
+                'css': {
+                    'right': '-3px',
+                    'top': '0'
+                },
+            });
+
+            });
+    
+    
+        </script>
+   </body>
+</html>

@@ -9,8 +9,10 @@
       <div id="main-container">
          <!--MENU LEFT-->
          <% include ./partials/menu-left %>
-         
-         <!-- BODY CONTENIDO -->
+         <div id="main-content" class="main-content container-fluid">
+               <div class="filler filler"></div>
+               <div id="page-content" class="page-content">
+               <!-- BODY CONTENIDO -->
          <div id="invoicePrint" class="container fix-top ng-cloak" ng-controller="invoiceController" >	
             <div class="well row">
                <div class="row logo-row">
@@ -21,7 +23,7 @@
                      </div>
                   </div>
                   <div class="col-xs-3 nopadding-lr">
-                     <img id="invoice-logo"  ng-src="http://thirdwishcreative.com/invoice/images/invoice-logo.png">
+                     <img id="invoice-logo"  ng-src="../img/invoice-logo.png">
                   </div>
                </div>
                <div class="row top-meta-row">
@@ -66,17 +68,13 @@
                   <div class="col-md-2">
                      <div class="table-responsive">
                         <form action="" method="" name="">
-                           <table class="table table-condensed fix-table">
-                              <thead>
-                                 <tr>
-                                    <th style="text-align: center;">Product</th>
-                                 </tr>
-                              </thead>
+                           <table id="productSec" class="table table-condensed fix-table">
+                              <caption class="mf0" style="text-align: center;">Product</caption>
                               <tbody>
                                  <tr>
                                     <td class='modalProduct'>
                                        <div class="delete-wpr">
-                                          <select class="selectpicker" data-live-search="true" ng-model="productSelected" ng-change="qtyIni(index,1)">
+                                          <select id="productSelect" class="selectpicker" data-live-search="true" ng-model="productSelected">
                                              <option value="" disabled>Seleccione un producto</option>
                                              <option ng-repeat="producto in product">{{producto.name}}</option>
                                           </select>
@@ -133,7 +131,7 @@
                                  <p>{{products.cost | currency}}</p>
                               </td>
                               <td><input type="text" class="qtyNumber" ng-model="newQty" ng-blur="qtyChange($index,newQty)" value="{{products.qty}}"> </td>
-                              <td> {{ total | currency }} </td>
+                              <td> {{ products.price | currency }} </td>
                            </tr>
                         </tbody>
                      </table>
@@ -155,6 +153,9 @@
             </div>
          </div>
          <!-- BODY CONTENIDO-->
+               </div>
+         </div>   
+         
          <!--CONTENIDO-->
          <% include ./partials/footer %>
       </div>
@@ -165,13 +166,5 @@
       <script src="./js/app/funciones-Globales.JS"></script>
       <script src="controller/invoiceController.js"></script>
       <script src=" plugin/pl-form/bootstrap-select/js/bootstrap-select.js"></script>
-      <script>
-         $(document).ready(function() {
-             $('.selectpicker').selectpicker({
-         liveSearch: true,
-         maxOptions: 1
-         });
-         });
-      </script>
    </body>
 </html>

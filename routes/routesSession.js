@@ -46,7 +46,10 @@ module.exports = (app, passport, LocalStrategy) => {
   });
   app.get('/invoice',isAuthenticated, (req, res) => {
       data ='invoice'
-      res.render("invoice",{message: JSON.stringify(data)})
+      res.render("invoice",{
+        message: JSON.stringify(data),
+        titulo: "SIP-proyect"
+      })
     });
     app.get('/proyecto', isAuthenticated,(req, res) => {
       res.render('proyecto.ejs', {
@@ -68,9 +71,9 @@ module.exports = (app, passport, LocalStrategy) => {
         titulo: "SIP-contact-manager",
       });
     });
-    app.get('/admin', isAuthenticated,(req, res) => {
-      res.render('admin.ejs', {
-        titulo: "SIP-admin",
+    app.get('/tools', isAuthenticated,(req, res) => {
+      res.render('tools.ejs', {
+        titulo: "SIP-tools",
       });
     });
   /*
