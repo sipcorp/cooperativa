@@ -4,7 +4,65 @@
     margin-bottom: 0px;
     background-color: #f5f5f500;
     border-top: 1px solid #e5e5e500;
-    *: ;
     zoom: 1;
     float: right;
 }
+.form-horizontal .control-labels {
+    float: right;
+    width: 160px;
+    text-align: left;
+    margin-right: 341px;
+    margin-top: -24px;
+}
+.c00{
+    margin-top: -30px;
+    padding-left: 574px;
+}
+.well-xb{
+    border-color: #ffffff00;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0);
+    background-color: #f6f7fe00;
+    border: 1px solid #e3e3e300;
+}
+/* .btn:hover, .btn:focus {
+    color: #fffafa;
+    text-decoration: none;
+    background-image: none;
+    background-color: #1f2325;
+} */
+
+[contentEditable=false]:empty:not(:focus):before{
+    content: attr(data-text);
+    color: #f9f9f9;
+    font-weight: bold;
+    position: fixed;
+    margin-top: -4px;
+    font-size: 14px;
+}
+.tab-nav > li {
+    pointer-events: none;
+    opacity: 0.7;
+}
+.navbar-inverse .nav .active > a, .navbar-inverse .nav .active > a:hover, .navbar-inverse .nav .active > a:focus {
+    background-color: #111;
+    color: #fcfcfc;
+    pointer-events: auto;
+    text-decoration: none;
+    text-shadow: none;
+}
+.red{
+    color: red;
+}
+.btn.active, .btn:active {
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    background: #333;
+    color: whitesmoke;
+    text-shadow: none;
+}
+
