@@ -61,9 +61,9 @@
                 <!-- // TAB SECCION -->
                 <div class="tab-content">
                     <!-- // tab 1 -->
-                    <div class="tab-pane" id="TabTop1">
+                    <div class="tab-pane" id="TabTop1" ng-controller="proyectController">
                       <!-- // page head -->
-                      <div class="container" ng-controller="proyectController">
+                      <div class="container" >
                             <form class="form-horizontal span12 m0">
                                <div class="row form-group">
                                   <div class="col-xs-12">
@@ -263,15 +263,16 @@
                          </div>
                          <!-- // page content -->
                     </div>
+
                     <!-- // tab 2 -->
-                    <div class="tab-pane" id="TabTop2">
+                    <div class="tab-pane" id="TabTop2" ng-controller="productorController">
                         <section>
                             <div class="row-fluid">
                                 <form class="form-horizontal span12">
                                     <legend class="margin-03"><i class="fontello-icon-quote-left-alt"></i>
                                         <span>Agregar Productores</span>
                                         <div class="form-actions-s">
-                                            <button type="submit" class="btn btn-blue">Submit &amp; Validate</button>
+                                            <button type="submit" class="btn btn-blue" >Submit &amp; Validate</button>
                                             <button class="btn cancel">Cancel</button>
                                         </div>
                                     </legend>
@@ -284,7 +285,7 @@
                                                 <label for="wzNewPrefix" class="control-label">Prefix</label>
                                                 <div class="controls">
                                                     <input id="wzNewPrefix" class="span3" type="text" value=""
-                                                        name="wzNewPrefix">
+                                                        name="wzNewPrefix" ng-model="changePrefix" ng-change="createObj(changePrefix,'x')">
                                                 </div>
                                             </li>
                                             <!-- // form item -->
@@ -294,7 +295,7 @@
                                                         class="required">*</span></label>
                                                 <div class="controls">
                                                     <input id="wzNewFirstName" class="span6" type="text"
-                                                        name="wzNewFirstName">
+                                                        name="wzNewFirstName" ng-model="changeName" ng-blur="createObj(changeName,'nm')">
                                                 </div>
                                             </li>
                                             <!-- // form item -->
@@ -302,12 +303,14 @@
                                                     <label for="wzNewProject" class="control-label">Proyecto<span
                                                             class="required">*</span></label>
                                                     <div class="controls">
-                                                        <input id="wzNewProject" class="span6" type="text" name="wzNewProject">
+                                                        <input id="wzNewProject" class="span6" type="text" name="wzNewProject" ng-model="changeProject" ng-blur="createObj(changeProject,'pj')">
                                                     </div>
-                                                <label for="wzNewRubro" class="control-labels">Rubro<span class="required">*</span></label>
-                                                <div class="controls c00">
-                                                    <select id="wzNewRubro" class="span6" type="text" name="wzNewRubro">
-                                                        <option>Seleccione un rubro</option>
+                                                <label for="wzNewRubro" class="control-labels" ng-show="changeProject">Rubro<span class="required">*</span></label>
+                                                <div class="controls c00" ng-show="changeProject">
+                                                    <select id="wzNewRubro" class="span6" type="text" name="wzNewRubro" ng-model="selectedObj" ng-blur="createObj(selectedObj,'rb')">
+                                                        <option value="" disabled>Seleccione un rubro</option>
+                                                        <option value="Pollo">Pollo</option>
+                                                        <option value="Arroz">Arroz</option>
                                                     </select>
                                                 </div>
                                                 </li>
@@ -322,7 +325,7 @@
                                                 <label for="wzNewMaritalStatus" class="control-label">Cedula</label>
                                                 <div class="controls">
                                                     <input id="wzNewMaritalStatus" class="span3" type="text"
-                                                        name="wzNewMaritalStatus">
+                                                        name="wzNewMaritalStatus" ng-model="changeCedula" ng-blur="createObj(changeCedula,'cd')">
                                                 </div>
                                             </li>
                                             <!-- // form item -->
@@ -334,9 +337,9 @@
                                                     <div id="wzNewGender" class="btn-group change"
                                                         data-toggle="buttons-radio" data-target="wzNewGenderInput">
                                                         <button type="button" class="btn" class-toggle="btn-green"
-                                                            name="wzNewGender" value="male">&nbsp; Male &nbsp;</button>
+                                                            name="wzNewGender" value="male"  ng-click="createObj($event.currentTarget,'gr')">&nbsp; Male &nbsp;</button>
                                                         <button type="button" class="btn" class-toggle="btn-green"
-                                                            name="wzNewGender" value="female">Female</button>
+                                                            name="wzNewGender" value="female" ng-click="createObj($event.currentTarget,'gr')">Female</button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -346,7 +349,7 @@
                                                 <label for="wzNewDob" class="control-label">Fecha de nacimiento <span
                                                         class="required">*</span></label>
                                                 <div class="controls">
-                                                    <input id="wzNewDob" class="span6" type="text" name="wzNewDob">
+                                                    <input id="wzNewDob" class="span6" type="text" name="wzNewDob" ng-model="changeDob" ng-blur="createObj(changeDob,'dob')">
                                                 </div>
                                             </li>
                                             <!-- // form item -->
@@ -354,7 +357,7 @@
                                             <li class="control-group">
                                                 <label for="wzNewAge" class="control-label">Edad</label>
                                                 <div class="controls">
-                                                    <input id="wzNewAge" class="span4" type="text" name="wzNewAge" readonly>
+                                                    <input id="wzNewAge" class="span4" type="text" name="wzNewAge" >
                                                 </div>
                                             </li>
                                             <!-- // form item -->
@@ -363,7 +366,7 @@
                                                         class="required">*</span></label>
                                                 <div class="controls">
                                                     <input id="wzNewAddress" class="span6" type="text"
-                                                        name="wzNewAddress">
+                                                        name="wzNewAddress" ng-model="changeFullAddress" ng-blur="createObj(changeFullAddress,'fa')">
                                                 </div>
                                             </li>
                                             <!-- // form item -->
@@ -371,9 +374,8 @@
                                                 <label for="wzNewCountry" class="control-label">Pais <span
                                                         class="required">*</span></label>
                                                 <div class="controls">
-                                                    <select id="wzNewCountry" class="span6" type="text"
-                                                        name="wzNewCountry">
-                                                        <option value="">Seleccione un pais</option>
+                                                    <select id="wzNewCountry" class="span6" type="text" name="wzNewCountry" ng-model="selectCountry" ng-change="createObj(selectCountry,'cu')">
+                                                        <option value="" selected disabled>Panama</option>
                                                     </select>
                                                 </div>
                                             </li>
@@ -382,28 +384,31 @@
                                                 <label for="wzNewState" class="control-label">Provincia <span
                                                         class="required">*</span></label>
                                                 <div class="controls">
-                                                    <select id="wzNewState" class="span6" type="text" name="wzNewState">
-                                                        <option value="">Seleccione una provincia</option>
+                                                    <select id="wzNewState" class="span6" type="text" name="wzNewState" ng-model="selectStat" ng-change="createObj(selectStat,'st')">
+                                                        <option value="" selected disabled>Seleccione una provincia</option>
+                                                        <option ng-repeat="provincias in province">{{provincias.name}}</option>
                                                     </select>
                                                 </div>
                                             </li>
                                             <!-- // form item -->
                                             <li class="control-group">
-                                                <label for="wzNewState" class="control-label">Distrito <span
+                                                <label for="wzNewDist" class="control-label">Distrito <span
                                                         class="required">*</span></label>
                                                 <div class="controls">
-                                                    <select id="wzNewState" class="span6" type="text" name="wzNewState">
-                                                        <option value="">Seleccione un distrito</option>
+                                                    <select id="wzNewDist" class="span6" type="text" name="wzNewDist" ng-model="selectDist" ng-change="createObj(selectDist,'ds')">
+                                                        <option value="" selected disabled>Seleccione un distrito</option>
+                                                        <option  ng-repeat="distritos in district[0]" >{{distritos.name}}</option>
                                                     </select>
                                                 </div>
                                             </li>
                                             <!-- // form item -->
                                             <li class="control-group">
-                                                    <label for="wzNewState" class="control-label">Corregimiento <span
+                                                    <label for="wzNewCorrec" class="control-label">Corregimiento <span
                                                             class="required">*</span></label>
                                                     <div class="controls">
-                                                        <select id="wzNewState" class="span6" type="text" name="wzNewState">
-                                                            <option value="">Seleccione un corregimiento</option>
+                                                        <select id="wzNewCorrec" class="span6" type="text" name="wzNewCorrec" ng-model="selectCor" ng-change="createObj(selectCor,'cr')">
+                                                            <option value="" selected disabled>Seleccione un corregimiento</option>
+                                                            <option  ng-repeat="corregimiento in corregimiento" >{{corregimiento.name}</option>
                                                         </select>
                                                     </div>
                                                 </li>
@@ -416,6 +421,7 @@
                             </div>
                         </section>
                     </div>
+
                     <!-- // tab 3 -->
                     <div class="tab-pane" id="TabTop3">
                         <section>
@@ -489,6 +495,7 @@
                             </div>
                         </section>
                     </div>
+
                     <!-- // tab 4 -->
                     <div class="tab-pane" id="TabTop4">
                         <section>
@@ -582,6 +589,7 @@
                             </div>
                         </section>
                     </div>
+
                     <!-- // tab 5 -->
                     <div class="tab-pane" id="TabTop5">
                         <section>
@@ -656,6 +664,7 @@
                             </div>
                         </section>
                     </div>
+
                     <!-- // tab 6 -->
                     <div class="tab-pane" id="TabTop6">
 
@@ -680,6 +689,8 @@
     <script src="plugin/pl-form/select2/js/select2.js"></script>
     <script src="./js/app/proyecto.js"></script>
     <script src="./controller/proyectController.js"></script>
+    <script src="./json/json.js"></script>
+    <script src="./controller/productorController.js"></script>
 </body>
 
 </html>
