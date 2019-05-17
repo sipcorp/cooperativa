@@ -1,37 +1,44 @@
 .page-content {
     margin-top: 18px !important;
 }
+
 .nav-tabs {
     border-bottom-color: #ccc0 !important;
 }
-.add{
+
+.add {
     float: right;
     background: #009999;
-    color:white;
+    color: white;
 }
+
 td.dataTables_empty {
     color: #cc0000;
     text-align: center;
     line-height: 4em;
 }
-.heading-icon{
+
+.heading-icon {
     cursor: pointer;
 }
+
 .btn.active {
     color: #ffffff;
-    background-color: #000000;  
+    background-color: #000000;
     text-shadow: none;
-    border-left: 1px solid #ffffff; 
+    border-left: 1px solid #ffffff;
 }
-.mftop{
+
+.mftop {
     margin-top: 5px;
 }
+
 .checkbox.inline {
     padding-top: 0px;
     font-size: 13px;
 }
 
-.btn-group > .btn {
+.btn-group>.btn {
     font-weight: 100 !important;
     -webkit-border-radius: 50px !important;
     -moz-border-radius: 50px !important;
@@ -39,44 +46,63 @@ td.dataTables_empty {
     font-size: 10px !important;
     height: 17px;
 }
-.btn-group > .btn span{
+
+.btn-group>.btn span {
     position: relative;
     top: -5px;
 }
-.sub{
+
+.sub {
     height: 0px !important;
     margin-top: 2px !important;
     padding-top: 0px !important;
 }
-.action > a > i{
+
+.action>a>i {
     color: #ffffff;
 }
+
 .btn-sip,
-.btn-sip:hover{
-   background: #009999 
+.btn-sip:hover {
+    background: #009999
 }
 
 /*SECCION DE USER*/
-.toggler{display:none}
-.toggler1{display:table-row;}
+.toggler {
+    display: none
+}
+
+.toggler1 {
+    display: table-row;
+}
+
 .table caption small {
     color: #df5611;
     text-transform: none;
 }
-.pull-fix-left{
+
+.pull-fix-left {
     margin-left: 0px !important;
 }
-#accounForm{
+
+#accounForm {
     height: 516px !important;
 }
-#TabBoxTop1{
+
+#TabBoxTop1 {
     height: 321px !important;
 }
+
 .span6s {
     width: 488px !important;
 }
-.control-label-dv{
+
+.control-label-dv {
     display: inline;
     margin-right: 11px;
     margin-left: 9px;
+}
+
+.danger {
+    color: red !important;
 }

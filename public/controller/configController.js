@@ -1,10 +1,8 @@
 'use strict';
-app.controller('configController', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
-    var roleModel = {
-        name: '',
-        module: []
-    }
-    var modules = []
+app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice', function ($scope, $timeout, $http, Dataservice) {
+    /*######################################################## */
+    //                  GLOBAL VARS ANGULAR JS 
+    /*######################################################## */
     $scope.empty = false;
     $scope.showDetails = false;
     $scope.showError = false;
@@ -14,49 +12,35 @@ app.controller('configController', ['$scope', '$timeout', '$http', function ($sc
     $scope.roleModel = roleModel;
     $scope.subChange = false;
     $scope.parentChange = false;
-    $scope.error = ''
+    $scope.newRole = false;
+    $scope.showRoles = true;
+    $scope.error = '';
 
-    // PAGE FUNCTIONS
+    /*######################################################## */
+    //                FUNCTION DIV HIDE AND SHOW 
+    /*######################################################## */
     $scope.ShowAdd = function () {
         $scope.showAdd = true
-    }
-    
-    $scope.seeNewUser = function(){
-        $scope.NewUser = true
+        $scope.newRole = false;
     }
 
-    // CARGA LOS MODULOS Y SUBMODULOS
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "/get-module",
-        "method": "GET",
-        "headers": {
-            "Content-Type": "application/json; charset=utf-8",
-            "Cache-Control": "no-cache"
-        }
-    };
+    $scope.seeNewUser = function () {
+        $scope.NewUser = true
+    }
+    /*######################################################## */
+    //       CARGA LOS MODULOS Y SUBMODULOS
+    /*######################################################## */
 
     $http(settings).then(function mySuccess(response) {
         $scope.modules = response.data.data;
-        console.log($scope.modules)
     }, function myError(response) {
         $scope.modules = [];
     });
+    /*######################################################## */
+    //                FUNCTION ADD MODULES
+    /*######################################################## */
     $scope.add = function () {
-        // ADD ROLE 
-        var obj = JSON.stringify($scope.roleModel);
-        var roleSettings = {
-            async: true,
-            crossDomain: true,
-            url: "/add-role",
-            data: obj,
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Cache-Control": "no-cache"
-            }
-        };
-        console.log(obj)
+        var obj = JSON.stringify($scope.roleModel)
         $.ajax({
             url: '/add-role',
             headers: {
@@ -67,14 +51,20 @@ app.controller('configController', ['$scope', '$timeout', '$http', function ($sc
             dataType: 'json',
             data: obj,
             success: function (data) {
+                $scope.newRole = true;
                 var code = data.message.code
-                if(code === 11000){
-                $scope.showError = true
-                $scope.error = "El role ya existe.." 
+                $scope.roles.push(data.save);
+                $scope.$digest();
+                if (code === 11000) {
+                    $scope.showError = true
+                    $scope.error = "El role ya existe.."
                 }
             }
         });
     }
+    /*######################################################## */
+    //                FUNCTION CHECK
+    /*######################################################## */
     $scope.check = function (event) {
         var elem = event.currentTarget
         var isActive = elem.className.indexOf("active") > 0 ? false : true
@@ -106,13 +96,13 @@ app.controller('configController', ['$scope', '$timeout', '$http', function ($sc
                 } else {
                     var actionIN = false
                     $obj = { name: elem.name }
-                    $.each(roleModel.module[0].action,function(v,k){
-                        if(k.name === elem.name){
+                    $.each(roleModel.module[0].action, function (v, k) {
+                        if (k.name === elem.name) {
                             actionIN = true
                         }
                     })
-                    if(actionIN === false){
-                       roleModel.module[0].action.push($obj) 
+                    if (actionIN === false) {
+                        roleModel.module[0].action.push($obj)
                     }
                     $obj = {}
                 }
@@ -165,6 +155,55 @@ app.controller('configController', ['$scope', '$timeout', '$http', function ($sc
         if (elem.id === "formA05") {
             roleModel.name = elem.value
         }
-        console.log($scope.roleModel)
     }
+
+    /*######################################################## */
+    //                           DELETE ROLE
+    /*######################################################## */
+    $scope.modalVerify = function (id, name) {
+        $('#ModalDelete').modal('show')
+        $scope.id = id;
+        $scope.nameModule = name;
+        id = $scope.id
+    }
+
+    $scope.deleteRole = function (id) {
+        $.ajax({
+            type: "POST",
+            url: UrlDeleteRole,
+            timeout: 2000,
+            data: {
+                id: id
+            },
+            success: function (data) {
+                deleteObjectRole(data)
+            },
+            error: function (textStatus, err) {
+                alert("text status " + textStatus + ", err " + err);
+            }
+        });
+    }
+
+    function deleteObjectRole(data) {
+        var dataId = data.Role._id
+        for (const key in $scope.roles) {
+            if (dataId === $scope.roles[key]._id) {
+                $('#ModalDelete').modal('hide');
+                $scope.roles.splice($scope.roles[key]);
+                getRole()
+            }
+        }
+    }
+
+    /*######################################################## */
+    //         SERVICE LOAD MODULES AND ROLES OF USERS 
+    /*######################################################## */
+    function getRole() {
+        Dataservice.GetRoles().then(function (response) {
+            $scope.roles = response.data.role;
+        }, function myError(response) {
+            $scope.modules = [];
+        });
+    }
+    getRole()
 }]);

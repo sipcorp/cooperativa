@@ -10,9 +10,17 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   date: { type: Date, default: Date.now },
+  cargo: { type: String, required: true },
+  gender: { type: String, required: true },
   role: { type: String, required: true },
+  tel: { type: String, required: true },
+  movile: { type: Number, required: true },
+  direction: { type: String, required: true },
+  country: { type: String, required: true },
+  province: { type: String, required: true },
+  corregimiento: { type: String, required: true },
   lastLogin: { type: Date, required: false }
-},{ collection: 'user' });
+}, { collection: 'user' });
 
 userSchema.methods.encryptPassword = (password) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
