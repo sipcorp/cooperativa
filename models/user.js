@@ -16,9 +16,6 @@ const userSchema = new Schema({
   tel: { type: String, required: true },
   movile: { type: Number, required: true },
   direction: { type: String, required: true },
-  country: { type: String, required: true },
-  province: { type: String, required: true },
-  corregimiento: { type: String, required: true },
   lastLogin: { type: Date, required: false }
 }, { collection: 'user' });
 userSchema.methods.encryptPassword = (password) => {

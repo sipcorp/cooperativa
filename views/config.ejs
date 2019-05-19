@@ -241,11 +241,16 @@
                 </tbody>
               </table>
             </div>
-            <div class="span8 grider" ng-show="newUser">
+            <div class="span12 grider" ng-show="newUser">
               <div class="widget widget-simple">
                 <div class="widget-header">
                   <h4><i class="booico-user glyph"></i>Nuevo Usuario</h4>
+                  <div class="float-right">
+                      <button class="btn btn-blue">Guardar </button>
+                      <button class="btn cancel">Cancelar</button>
+                    </div>
                 </div>
+                
                 <div class="widget-content">
                   <div class="widget-body">
                     <form id="createUsers" class="form-horizontal" method="" action="">
@@ -257,7 +262,7 @@
                               <li class="control-group">
                                 <label for="accountPrefix" class="control-label">Prefix</label>
                                 <div class="controls">
-                                  <input id="accountPrefix" class="span6" type="text" name="userCode" />
+                                  <input id="accountPrefix" class="span2" type="text" name="userCode" readonly/>
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -280,7 +285,7 @@
                               <li class="control-group">
                                 <label for="accountSuffix" class="control-label">Cargo</label>
                                 <div class="controls">
-                                  <input id="accountSuffix" class="span6" type="text" name="cargo" />
+                                  <input id="accountSuffix" class="span11" type="text" name="cargo" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -306,7 +311,7 @@
                                 <label for="accountDob" class="control-label">Fecha de
                                   nacimiento <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountDob" class="span6" type="text" name="date" value="" />
+                                  <input id="accountDob" class="span11" type="text" name="date" value="" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -315,9 +320,8 @@
                                   <span class="required">*</span></label>
                                 <div class="controls">
                                   <div class="input-append block">
-                                    <input id="accountEmail" class="span6" type="email" name="email" value="" />
-                                    <a class="btn btn-glyph txt-r" data-icon="&#xf47c;" type="button">write an
-                                      email</a>
+                                    <input id="accountEmail" class="span11" type="email" name="email" value="" />
+                                  
                                   </div>
                                 </div>
                               </li>
@@ -326,29 +330,18 @@
                                 <label for="accountPhoneNumber" class="control-label">Telefono <span
                                     class="required">*</span></label>
                                 <div class="controls controls-row">
-                                  <input id="accountPhoneNumber" class="span6 maskPhone margin-right5" type="text"
+                                  <input id="accountPhoneNumber" class="span11 maskPhone margin-right5" type="text"
                                     name="tel" value="" />
-                                  <select id="accountPhoneType" class="selectpicker" data-style="btn-info"
-                                    data-width="80px" name="accountPhoneType">
-                                    <option value="1">Work</option>
-                                    <option value="2">Home</option>
-                                    <option value="3">Next</option>
-                                  </select>
+            
                                 </div>
                               </li>
                               <!-- // form item -->
                               <li class="control-group">
                                 <label for="accountFaxNumber" class="control-label">Movile</label>
                                 <div class="controls controls-row">
-                                  <input id="accountFaxNumber" class="span6 maskPhone margin-right5" type="text"
+                                  <input id="accountFaxNumber" class="span11 maskPhone margin-right5" type="text"
                                     name="movile" value="" />
-                                  <select id="accountFaxType" class="selectpicker" data-style="btn-info"
-                                    data-width="80px" name="accountFaxType">
-                                    <option value="1">Work</option>
-                                    <option value="2">Home</option>
-                                    <option value="3">Next</option>
-                                  </select>
-                                  <a class="btn btn-glyph" data-icon="&#xf067;" href="javascript:void(0);"></a>
+                               
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -358,49 +351,13 @@
                                 <label for="accountAddressStreet" class="control-label">Direccion <span
                                     class="required">*</span></label>
                                 <div class="controls controls-row">
-                                  <textarea id="accountAddressStreet" class="span6 margin-right5" type="text"
+                                  <textarea id="accountAddressStreet" class="span11 margin-right5" type="text"
                                     name="direction"></textarea>
                                 </div>
                               </li>
-                              <!-- // form item -->
-                              <li class="control-group">
-                                <label for="accountAddressCity" class="control-label">Pais <span
-                                    class="required">*</span></label>
-                                <div class="controls">
-                                  <input id="accountAddressCity" class="span6" type="text" value="" name="country">
-                                </div>
-                              </li>
-                              <!-- // form item -->
-                              <li class="control-group">
-                                <label for="accountAddressState" class="control-label">Provincia <span
-                                    class="required">*</span></label>
-                                <div class="controls">
-                                  <input id="" class="span6" type="text" value="" name="province">
-                                </div>
-                                <!-- <div class="controls">
-                                  <select id="accountAddressState" class="span6" name="accountAddressState">
-                                    <option value="" selected="selected">Select a
-                                      State
-                                    </option>
-                                  </select>
-                                </div> -->
-                              </li>
-                              <!-- // form item -->
-                              <li class="control-group">
-                                <label for="accountAddressCountry" class="control-label">Corregimiento
-                                  <span class="required">*</span></label>
-                                <div class="controls">
-                                  <input id="" class="span6" type="text" name="corregimiento">
-                                </div>
-                              </li>
-                              <!-- // form item -->
                             </ul>
                           </fieldset>
                           <!-- // fieldset Input -->
-                          <div class="form-actions">
-                            <button class="btn btn-blue">Guardar </button>
-                            <button class="btn cancel">Cancelar</button>
-                          </div>
                         </div>
                       </div>
                     </form>

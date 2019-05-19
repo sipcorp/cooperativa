@@ -111,3 +111,6 @@ td.dataTables_empty {
     margin-bottom: 52px;
     
 }
+.float-right {
+    float: right;
+}

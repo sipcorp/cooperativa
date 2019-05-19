@@ -59,7 +59,9 @@ $(document).ready(function () {
         }
 
     }
-
+$(".add").on("click",function(){
+    $("#accountPrefix").val(rand_code(2, 5, ""))
+})
     // SECCION DE USER
 
     $(".tbtn").click(function () {

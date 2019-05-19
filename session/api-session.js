@@ -37,9 +37,6 @@ module.exports = (passport) => {
         tel: body.tel,
         movile: body.movile,
         direction: body.direction,
-        country: body.country,
-        province: body.province,
-        corregimiento: body.corregimiento,
         lastLogin: body.lastLogin,
       });
       console.log(newUser)

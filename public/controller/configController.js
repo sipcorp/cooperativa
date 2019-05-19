@@ -96,7 +96,7 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
         var elem = event.currentTarget
         var isActive = elem.className.indexOf("active") > 0 ? false : true
         if (isActive && elem.id != "formA05") {
-            var parent = elem.dataset.parent;
+            //var parent = elem.dataset.parent;
             // if (parent === "parent") {
             //     moduleName = elem.parentNode.parentNode.id
             //     $.each(roleModel.module, function (v, k) {
