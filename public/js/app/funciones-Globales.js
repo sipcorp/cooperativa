@@ -575,5 +575,21 @@ function toggleFull() {
     }
     return false;
 }
-
+// DEVICE DETECTOR - INSERT MENSAJE
+    // ------------------------------------------------------------------------------------------------ * -->
+    function getDevice(){
+        if(window.innerWidth < 768){
+            // Extra Small Device
+            return "xs";
+        } else if(window.innerWidth < 991){
+            // Small Device
+            return "sm"
+        } else if(window.innerWidth < 1199){
+            // Medium Device
+            return "md"
+        } else {
+            // Large Device
+            return "lg"
+        }
+    }
 

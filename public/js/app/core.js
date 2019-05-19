@@ -184,6 +184,7 @@
         placement: 'left'
     });
 
+
     // GTIP - TOOLTIP
     // ------------------------------------------------------------------------------------------------ * -->
     // assets/plugins/pl-system-info/qtip2/boo/js/jquery.qtip.min.js

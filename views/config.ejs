@@ -199,7 +199,7 @@
             <div class="widget widget-box widget-table widget-list" ng-show="listUser">
               <div class="widget-header">
                 <h4><i class="fontello-icon-user"></i> Informacion del Usuario</h4>
-                <button ng-click="seeNewUser()" class="btn btn-primary add" href="javascript:void(0);">
+                <button ng-click="seeNewUser()" id="newUsers" class="btn btn-primary add" href="javascript:void(0);">
                   <i class="fontello-icon-arrows-cw"></i>New User
                 </button>
               </div>
@@ -278,7 +278,11 @@
                                 <label for="accountLastName" class="control-label">Role
                                   <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountLastName" class="span11" type="text" name="role" value="" />
+                                    <select id="roleSelect" ng-model="roleSelected">
+                                    <option value="" selected disabled>Seleccione un role</option>
+                                    <option ng-repeat="role in roles" ng-disabled="role.name=='ADMIN'" value="{{$index}}">{{role.name}}</option>
+                                  </select>
+                                  <input type="text" name="role" value="roleSelected" readonly style="opacity: 0;" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -472,12 +476,7 @@
                                     <div class="controls controls-row">
                                       <input id="accountPhoneNumber" class="span7 maskPhone margin-right5" type="text"
                                         name="accountPhoneNumber" value="" />
-                                      <select id="accountPhoneType" class="selectpicker" data-style="btn-info"
-                                        name="accountPhoneType">
-                                        <option value="1">Work</option>
-                                        <option value="2">Home</option>
-                                        <option value="3">Next</option>
-                                      </select>
+                                      
                                     </div>
                                   </li>
                                   <!-- // form item -->

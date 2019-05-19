@@ -49,7 +49,7 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
     }
 
     /*######################################################## */
-    //                FUNCTION ADD MODULES
+    //                FUNCTION ADD ROLE
     /*######################################################## */
     $scope.add = function () {
         obj = JSON.stringify($scope.roleModel)
@@ -96,41 +96,6 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
         var elem = event.currentTarget
         var isActive = elem.className.indexOf("active") > 0 ? false : true
         if (isActive && elem.id != "formA05") {
-            //var parent = elem.dataset.parent;
-            // if (parent === "parent") {
-            //     moduleName = elem.parentNode.parentNode.id
-            //     $.each(roleModel.module, function (v, k) {
-            //         if (k.name === moduleName) {
-            //             isExists = true
-            //             return false;
-            //         }
-            //     })
-            //     if (isExists === false) {
-            //         $obj = {
-            //             name: moduleName,
-            //             action: [{
-            //                 name: elem.name
-            //             }],
-            //             sub: []
-            //         }
-            //         roleModel.module.push($obj)
-            //         $obj = {}
-            //     } else {
-            //         var actionIN = false
-            //         $obj = {
-            //             name: elem.name
-            //         }
-            //         $.each(roleModel.module[0].action, function (v, k) {
-            //             if (k.name === elem.name) {
-            //                 actionIN = true
-            //             }
-            //         })
-            //         if (actionIN === false) {
-            //             roleModel.module[0].action.push($obj)
-            //         }
-            //         $obj = {}
-            //     }
-            // } else {
                 moduleName = elem.offsetParent.parentNode.parentNode.parentNode.id
                 $.each(roleModel.module, function (v, k) {
                     if (k.name === moduleName) {
@@ -196,8 +161,6 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
                     isExistsSub = false;
                 }
             }
-
-        // }
         if (elem.id === "formA05") {
             roleModel.name = elem.value
         }

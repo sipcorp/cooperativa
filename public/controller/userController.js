@@ -8,6 +8,19 @@ app.controller('userController', ['$scope', 'Dataservice', function ($scope, Dat
   $scope.seeNewUser = function () {
     $scope.newUser = true;
     $scope.listUser = false;
+   
+    console.log($scope.roles)
   }
-
+ /*######################################################## */
+    //         SERVICE LOAD MODULES AND ROLES OF USERS 
+    /*######################################################## */
+    function getRole() {
+      Dataservice.GetRoles().then(function (response) {
+          $scope.roles = response.data.role;
+      }, function myError(response) {
+          $scope.modules = [];
+      });
+  }
+  getRole()
+ 
 }]);

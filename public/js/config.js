@@ -149,5 +149,9 @@ $(".add").on("click",function(){
     // SELECT2 INPUT
     $('#equalizeContent').equalize({ children: '.equalize' });
     $('select.selectpicker').selectpicker();
+    $("#newUsers").on("click",function(){
+        $("#roleSelect").addClass("selectpicker")
+        $("#roleSelect").selectpicker();
+    })
 
 }); 
