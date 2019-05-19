@@ -1,5 +1,6 @@
 $(document).ready(function () {
     // SECCION DE ROLE 
+  
     $(document).on("click", ".module", function () {
         buttonCheck($(this))
     })
@@ -85,7 +86,8 @@ $(".add").on("click",function(){
                         oLanguage: {
                             sSearch: 'Global search:',
                             sLengthMenu: '_MENU_ to page',
-                            sZeroRecords: 'No record found...',
+                            sZeroRecords:"",
+                            sEmptyTable:"",
                             oPaginate: {
                                 sNext: '<i class="arrowicon-r-black"></i>',
                                 sPrevious: '<i class="arrowicon-l-black"></i>'
@@ -99,19 +101,15 @@ $(".add").on("click",function(){
                             "aTargets": [0],
                             'sWidth': '40px'
                         }, {
-                            "aTargets": [2],
+                            "aTargets": [1],
                             'sClass': 'hidden-phone'
                         }, {
-                            "aTargets": [3],
+                            "aTargets": [2],
                             'sClass': 'hidden-tablet hidden-phone'
                         }, {
-                            "aTargets": [4]
-                        }, {
-                            "aTargets": [6],
-                            'sClass': 'hidden-tablet hidden-phone'
+                            "aTargets": [3]
                         }],
                         sDom: "<'row-fluid'<'widget-header'<'span6'l><'span6'f>>>rt<'row-fluid'<'widget-footer'<'span6'><'span6'p>>"
-    
                     });
 
                     // DATATABLE exampleDT
@@ -134,7 +132,7 @@ $(".add").on("click",function(){
             $('#exampleDT_wrapper .table-global-filter input')
             .attr("placeholder", "enter search terms");
             $('#exampleDT_length select').select2({
-                minimumResultsForSearch: 6,
+                minimumResultsForSearch: 5,
                 width: "off"
             });
             // $('#exampleDT_wrapper .table-tool-wrapper')

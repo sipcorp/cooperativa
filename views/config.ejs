@@ -103,7 +103,7 @@
                 </div>
                 <!-- // Table in well-nice -->
               </div>
-        
+
               <!-- // Column -->
               <div class="span8">
                 <div class="well well-nice" id="reloadDiv" ng-hide="newRole">
@@ -211,32 +211,32 @@
                     <th scope="col">Username <span class="column-sorter"></span></th>
                     <th scope="col">Active <span class="column-sorter"></span></th>
                     <th scope="col">Roles <span class="column-sorter"></span></th>
-                    <th scope="col">Status <span class="column-sorter"></span></th>
-                    <th scope="col">Last Access <span class="column-sorter"></span></th>
+                    <!-- <th scope="col">Status <span class="column-sorter"></span></th>
+                    <th scope="col">Last Access <span class="column-sorter"></span></th> -->
                   </tr>
                 </thead>
-                <tbody class="media-thumb">
-                  <tr class="tbtn" href="#responsive" data-toggle="modal">
+                <tbody class="media-thumb" ng-repeat ="user in users ">
+                  <tr class="tbtn" href="" ng-click= "modalGetInfo(user.fullName,user.userCode,user.email,user.role,user.direction,user.tel,user.gender,user.cargo)">
                     <td><span class="img-shadow">
                         <img class="media-object thumb"
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTBlVaZW5VZUGFRsoobUv0Lh2J-zvZzLdMFwFFTEvleuTGRAdT"></span>
                     </td>
                     <td>
                       <a href="javascript:void(0)">
-                        <h6 class="media-heading">Colin Nixon</h6>
+                        <h6 class="media-heading">{{user.fullName}}</h6>
                       </a>
-                      <div>semper@example.edu</div>
+                      <div>{{user.email}}</div>
                     </td>
-                    <td>[ <strong>Colix</strong> ]</td>
+                    <td>[ <strong>{{user.fullName}}</strong> ]</td>
                     <td><strong>Yes</strong></td>
-                    <td>administrator</td>
-                    <td><span class="label label-success">online</span></td>
+                    <td>{{user.cargo}}</td>
+                    <!-- <td><span class="label label-success">online</span></td>
                     <td>
                       <ul class="data">
                         <li><em>2 min 21 sec</em> ago</li>
                         <li>IP address: <strong class="f_ip">133.64.146.145</strong></li>
                       </ul>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
@@ -246,14 +246,13 @@
                 <div class="widget-header">
                   <h4><i class="booico-user glyph"></i>Nuevo Usuario</h4>
                   <div class="float-right">
-                      <button class="btn btn-blue">Guardar </button>
-                      <button class="btn cancel">Cancelar</button>
-                    </div>
+                    <button class="btn btn-blue" ng-click="getDataUser()">Guardar </button>
+                    <button class="btn cancel" ng-click="hideNewUser()" >Cancelar</button>
+                  </div>
                 </div>
-                
                 <div class="widget-content">
                   <div class="widget-body">
-                    <form id="createUsers" class="form-horizontal" method="" action="">
+                    <form id="createUsers" name="createUsers" class="form-horizontal" method="" action="">
                       <div class="row-fluid">
                         <div class="span12 form-dark">
                           <fieldset>
@@ -262,7 +261,7 @@
                               <li class="control-group">
                                 <label for="accountPrefix" class="control-label">Prefix</label>
                                 <div class="controls">
-                                  <input id="accountPrefix" class="span2" type="text" name="userCode" readonly/>
+                                  <input id="accountPrefix" class="span2" type="text" name="userCode" readonly />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -270,19 +269,21 @@
                                 <label for="accountFirstName" class="control-label">Nombre Completo
                                   <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountFirstName" class="span11" type="text" name="fullName" value="" />
+                                  <input class="span11" type="text" name="fullName" value="" />
                                 </div>
                               </li>
                               <!-- // form item -->
                               <li class="control-group">
                                 <label for="accountLastName" class="control-label">Role
                                   <span class="required">*</span></label>
-                                <div class="controls">
-                                    <select id="roleSelect" ng-model="roleSelected">
-                                    <option value="" selected disabled>Seleccione un role</option>
-                                    <option ng-repeat="role in roles" ng-disabled="role.name=='ADMIN'" value="{{$index}}">{{role.name}}</option>
+                                <div class="">
+                                  <select id="roleSelect" ng-change="setRole(this)" ng-model="change">
+                                    <option selected disabled>Seleccione un role</option>
+                                    <option ng-repeat="role in roles" ng-disabled="role.name=='ADMIN'"
+                                      value="{{role.name}}" ng-model="role">{{role.name}}</option>
                                   </select>
-                                  <input type="text" name="role" value="roleSelected" readonly style="opacity: 0;" />
+                                  <input type="text" id="roleSelected" name="role" value="" readonly
+                                    style="opacity:0;" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -292,19 +293,26 @@
                                   <input id="accountSuffix" class="span11" type="text" name="cargo" />
                                 </div>
                               </li>
+                              <li class="control-group">
+                                <label for="accountLastpassword" class="control-label">Contraseña
+                                  <span class="required">*</span></label>
+                                <div class="controls">
+                                  <input id="password" class="span11" type="password" name="password" />
+                                </div>
+                              </li>
                               <!-- // form item -->
                               <li class="control-group">
                                 <label for="accountGender" class="control-label">Genero</label>
                                 <div class="controls">
-                                  <input id="accountGenderInput" type="hidden" name="accountGender" value="" />
+                                  <input id="accountGender" type="hidden" name="gender" />
                                   <div id="accountGender" class="btn-group change" data-toggle="buttons-radio"
                                     data-target="accountGenderInput">
-                                    <button type="button" class="btn" class-toggle="btn-green" name="gender"
-                                      value="male">
+                                    <button type="button" class="btn" class-toggle="btn-green" value="male"
+                                      ng-click="setGender('1')">
                                       <span>Hombre</span>
                                     </button>
-                                    <button type="button" class="btn" class-toggle="btn-green" name="gender"
-                                      value="female">
+                                    <button type="button" class="btn" class-toggle="btn-green" value="female"
+                                      ng-click="setGender('2')">
                                       <span>Mujer</span>
                                     </button>
                                   </div>
@@ -315,7 +323,7 @@
                                 <label for="accountDob" class="control-label">Fecha de
                                   nacimiento <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountDob" class="span11" type="text" name="date" value="" />
+                                  <input id="accountDob" class="span11" type="date" name="date" value="" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -324,8 +332,8 @@
                                   <span class="required">*</span></label>
                                 <div class="controls">
                                   <div class="input-append block">
-                                    <input id="accountEmail" class="span11" type="email" name="email" value="" />
-                                  
+                                    <input class="span11" type="email" name="email" value="" />
+
                                   </div>
                                 </div>
                               </li>
@@ -334,18 +342,16 @@
                                 <label for="accountPhoneNumber" class="control-label">Telefono <span
                                     class="required">*</span></label>
                                 <div class="controls controls-row">
-                                  <input id="accountPhoneNumber" class="span11 maskPhone margin-right5" type="text"
-                                    name="tel" value="" />
-            
+                                  <input class="span11 maskPhone margin-right5" type="text" name="tel" value="" />
+
                                 </div>
                               </li>
                               <!-- // form item -->
                               <li class="control-group">
                                 <label for="accountFaxNumber" class="control-label">Movile</label>
                                 <div class="controls controls-row">
-                                  <input id="accountFaxNumber" class="span11 maskPhone margin-right5" type="text"
-                                    name="movile" value="" />
-                               
+                                  <input class="span11 maskPhone margin-right5" type="text" name="movile" value="" />
+
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -355,8 +361,7 @@
                                 <label for="accountAddressStreet" class="control-label">Direccion <span
                                     class="required">*</span></label>
                                 <div class="controls controls-row">
-                                  <textarea id="accountAddressStreet" class="span11 margin-right5" type="text"
-                                    name="direction"></textarea>
+                                  <textarea class="span11 margin-right5" type="text" name="direction"></textarea>
                                 </div>
                               </li>
                             </ul>
@@ -369,6 +374,50 @@
                 </div>
               </div>
               <!-- // Widget -->
+            </div>
+            <div id="responsive" class="modal hide fade" tabindex="-1" data-width="375" data-height="250" style="background: #ffffff !important">
+              <!--BOX FOR USER INFO OR EDIT INFO-->
+              <div class="span4 grider" style="margin-left: 3px;margin-top: 6px; ">
+                <div id="user-list" class="widget widget-simple widget-user">
+                  <div class="widget-header">
+                    <h4><i class="fontello-icon-user"></i>{{role}}</h4>
+                  </div>
+                  <div class="widget-content">
+                    <div class="widget-body">
+                      <ul class="widget-list list-bordered thumb-xxlarge media-overflow">
+                        <li class="media">
+                          <div class="media-thumb media-left">
+                            <a class="img-shadow" href="javascript:void(0);">
+                              <img class="media-object thumb"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTBlVaZW5VZUGFRsoobUv0Lh2J-zvZzLdMFwFFTEvleuTGRAdT"></a>
+                          </div>
+                          <div class="media-body">
+                            <h4 class="media-heading">
+                              <a href="javascript:void(0);">{{fullName}}</a>
+                              <span class="label label-success pull-right">Active</span>
+                            </h4>
+                            <ul class="data">
+                              <li>
+                                <div class="em black margin-bottom5">{{cargo}}</div>
+                              </li>
+                              <li>{{direction}}</li>
+                              <li>
+                                <abbr title="Phone"><i class="fontello-icon-phone opaci75"></i>: </abbr>
+                                <strong>(507) {{tel}}</strong>
+                              </li>
+                              <li>
+                                <abbr title="Phone"><i class="fontello-icon-mail-4 opaci75"></i>: </abbr>
+                                <a href="javascript:void(0);">{{email}}</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- // Widget -->
+              </div>
             </div>
           </div>
           <!-- // tab 3 -->
@@ -453,8 +502,7 @@
                                     <label for="accountFirstName" class="control-label">Nombre
                                       completo <span class="required">!</span></label>
                                     <div class="controls">
-                                      <input id="accountFirstName" class="span8" type="text" name="accountFirstName"
-                                        value="" />
+                                      <input class="span8" type="text" name="accountFirstName" value="" />
                                     </div>
                                   </li>
                                   <!-- // form item -->
@@ -466,7 +514,7 @@
                                     <label for="accountEmail" class="control-label">Email <span
                                         class="required">!</span></label>
                                     <div class="controls">
-                                      <input id="accountEmail" class="span8" type="text" name="accountEmail" value="" />
+                                      <input class="span8" type="text" name="accountEmail" value="" />
                                     </div>
                                   </li>
                                   <!-- // form item -->
@@ -474,17 +522,17 @@
                                     <label for="accountPhoneNumber" class="control-label">Telefono
                                       <span class="required">!</span></label>
                                     <div class="controls controls-row">
-                                      <input id="accountPhoneNumber" class="span7 maskPhone margin-right5" type="text"
-                                        name="accountPhoneNumber" value="" />
-                                      
+                                      <input class="span7 maskPhone margin-right5" type="text" name="accountPhoneNumber"
+                                        value="" />
+
                                     </div>
                                   </li>
                                   <!-- // form item -->
                                   <li class="control-group">
                                     <label for="accountFaxNumber" class="control-label">Movile</label>
                                     <div class="controls controls-row">
-                                      <input id="accountFaxNumber" class="span7 maskPhone margin-right5" type="text"
-                                        name="accountFaxNumber" value="" />
+                                      <input class="span7 maskPhone margin-right5" type="text" name="accountFaxNumber"
+                                        value="" />
                                       <select id="accountFaxType" class="selectpicker" data-style="btn-info"
                                         name="accountFaxType">
                                         <option value="1">Work</option>
@@ -507,10 +555,10 @@
                                   </li>
                                   <!-- // section form divider -->
                                   <li class="control-group">
-                                    <label for="accountAddressStreet" class="control-label">Direccion
+                                    <label for="" class="control-label">Direccion
                                       <span class="required">!</span></label>
                                     <div class="controls controls-row">
-                                      <input id="accountAddressStreet" class="span6 margin-right5" type="text" value=""
+                                      <input class="span6 margin-right5" type="text" value=""
                                         name="accountAddressStreet" />
                                     </div>
                                   </li>
@@ -705,11 +753,11 @@
                                         </li>
                                         <!-- // form item -->
                                         <li class="control-group">
-                                          <label for="accountGender" class="control-label">Categorias</label>
+                                          <label for="" class="control-label">Categorias</label>
                                           <div class="controls">
-                                            <input id="accountGenderInput" type="hidden" name="accountGender" value="">
+                                            <input type="hidden" value="">
                                             <div id="cotegoryList" class="btn-group change" data-toggle="buttons-radio"
-                                              data-target="accountGenderInput">
+                                              data-target="">
                                               <button type="button" class="btn" class-toggle="btn-green" id="cat1"
                                                 value="male" ng-click="updateModel(2,$event.currentTarget,'cat')">
                                                 <span>Administración Complementaria</span>
@@ -732,7 +780,7 @@
                                           </legend>
                                           <!-- // form item -->
                                           <div class="control-group">
-                                            <label for="accountGender" class="control-label">Beneficiarios</label>
+                                            <label for="" class="control-label">Beneficiarios</label>
                                             <div class="controls controls-row">
                                               <input class="span1" type="text" placeholder="cantidad"
                                                 ng-model="canChange" ng-change="updateModel(2,canChange,'can')">
@@ -742,7 +790,7 @@
                                           </div>
                                           <!-- // form item -->
                                           <div class="control-group">
-                                            <label for="accountGender" class="control-label">Rubros</label>
+                                            <label for="" class="control-label">Rubros</label>
                                             <div class="controls controls-row">
                                               <input id="metaArticleKeywords" class="span9" type="text"
                                                 name="metaArticleKeywords" ng-model="rubroChange"
@@ -871,50 +919,6 @@
         </div>
       </div>
       <!-- // page content -->
-    </div>
-  </div>
-  <div id="responsive" class="modal hide fade" tabindex="-1" data-width="375" data-height="250">
-    <!--BOX FOR USER INFO OR EDIT INFO-->
-    <div class="span4 grider" style="margin-left: 3px;margin-top: 6px;">
-      <div id="user-list" class="widget widget-simple widget-user">
-        <div class="widget-header">
-          <h4><i class="fontello-icon-user"></i>Addresse</h4>
-        </div>
-        <div class="widget-content">
-          <div class="widget-body">
-            <ul class="widget-list list-bordered thumb-xxlarge media-overflow">
-              <li class="media">
-                <div class="media-thumb media-left">
-                  <a class="img-shadow" href="javascript:void(0);">
-                    <img class="media-object thumb"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTBlVaZW5VZUGFRsoobUv0Lh2J-zvZzLdMFwFFTEvleuTGRAdT"></a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading">
-                    <a href="javascript:void(0);">Karla Maierweisner</a>
-                    <span class="label label-success pull-right">Active</span>
-                  </h4>
-                  <ul class="data">
-                    <li>
-                      <div class="em black margin-bottom5">manager to manager</div>
-                    </li>
-                    <li>San Francisco, CA 94107</li>
-                    <li>
-                      <abbr title="Phone"><i class="fontello-icon-phone opaci75"></i>: </abbr>
-                      <strong>(123) 456-7890</strong>
-                    </li>
-                    <li>
-                      <abbr title="Phone"><i class="fontello-icon-mail-4 opaci75"></i>: </abbr>
-                      <a href="javascript:void(0);">first.last@example.com</a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- // Widget -->
     </div>
   </div>
   <div id="DTCF_toolBar">

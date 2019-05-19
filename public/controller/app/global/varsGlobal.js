@@ -4,7 +4,7 @@
 /*######################################################## */
 const UrlDeleteRole = "/delete/";
 const UrlAddRole = '/add-role';
-
+var UrlAddUsers = '/Signup';
 var settings = {
   "async": true,
   "crossDomain": true,
