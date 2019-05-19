@@ -32,13 +32,14 @@ module.exports = (passport) => {
         cargo: body.cargo,
         gender: body.gender,
         password: cryptr.encrypt(body.password),
-        date: body.date,
+        date: body.date ,
         email: body.email,
         tel: body.tel,
         movile: body.movile,
         direction: body.direction,
         lastLogin: body.lastLogin,
       });
+      // + ' ' + '19:00:00.000'
       console.log(newUser)
       await newUser.save();
       done(null, newUser);
