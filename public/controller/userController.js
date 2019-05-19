@@ -1,5 +1,5 @@
 'use strict';
-app.controller('configController', ['$scope', 'Dataservice', function ($scope, Dataservice) {
+app.controller('userController', ['$scope', 'Dataservice', function ($scope, Dataservice) {
   /*################################################### */
   //                GLOBAL VAR ANGULAR JS 
   /*################################################### */

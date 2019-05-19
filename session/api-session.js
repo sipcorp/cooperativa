@@ -28,10 +28,18 @@ module.exports = (passport) => {
       let newUser = new User({
         userCode: body.userCode,
         fullName: body.fullName,
-        email: body.email,
+        role: body.role,
+        cargo: body.cargo,
+        gender: body.gender,
         password: cryptr.encrypt(body.password),
         date: body.date,
-        role: body.role,
+        email: body.email,
+        tel: body.tel,
+        movile: body.movile,
+        direction: body.direction,
+        country: body.country,
+        province: body.province,
+        corregimiento: body.corregimiento,
         lastLogin: body.lastLogin,
       });
       console.log(newUser)

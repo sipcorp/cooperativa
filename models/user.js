@@ -7,12 +7,12 @@ const {
 const userSchema = new Schema({
   userCode: { type: String, unique: true, required: true },
   fullName: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  date: { type: Date, default: Date.now },
+  role: { type: String, required: true },
   cargo: { type: String, required: true },
   gender: { type: String, required: true },
-  role: { type: String, required: true },
+  password: { type: String, required: true },
+  date: { type: Date, default: Date.now },
+  email: { type: String, required: true },
   tel: { type: String, required: true },
   movile: { type: Number, required: true },
   direction: { type: String, required: true },
@@ -21,7 +21,6 @@ const userSchema = new Schema({
   corregimiento: { type: String, required: true },
   lastLogin: { type: Date, required: false }
 }, { collection: 'user' });
-
 userSchema.methods.encryptPassword = (password) => {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 };
