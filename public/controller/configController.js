@@ -81,6 +81,8 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
             $scope.roles.push(data.save);
             $scope.$digest();
             clearObj();
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success('Se  guardo el Role correctamente');
         }
     }
 
