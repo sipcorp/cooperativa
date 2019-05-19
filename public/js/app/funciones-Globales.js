@@ -1,8 +1,9 @@
 function rand_code(string, lon, start) {
-    var caracteres = "0123456789",
+    var number = "0123456789",
         numLetra = "0123456789PLIKMNJUYHBVGTRFCXDEWSZAQ",
+        lether = "PLIKMNJUYHBVGTRFCXDEWSZAQqazwsxedcrfvtgbyhnujmiklop"
         lon = lon,
-        chars = (string <= 1) ? caracteres : numLetra,
+        chars = (string === 1) ? number : ((string === 2) ? numLetra : lether),
         code = start;
     for (x = 0; x < lon; x++) {
         rand = Math.floor(Math.random() * chars.length);

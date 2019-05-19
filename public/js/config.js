@@ -60,7 +60,7 @@ $(document).ready(function () {
 
     }
 $(".add").on("click",function(){
-    $("#accountPrefix").val(rand_code(2, 5, ""))
+    $("#accountPrefix").val(rand_code(3, 7, ""))
 })
     // SECCION DE USER
 

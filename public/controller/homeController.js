@@ -1,9 +1,20 @@
 'use strict';
-app.controller('homeController', ['$scope','$timeout', "$http", function($scope,$timeout,$http) {
+app.controller('homeController', ['$scope','$timeout', "$http", 'Dataservice', function($scope,$timeout,$http,Dataservice) {
     var modules =[]
     var modulet = []
+    var roles = []
  $scope.modules = modules;
  $scope.module = modulet;   
+ $scope.role = roles
+  // Load Roles
+  Dataservice.GetRoles().then(function (response) {
+    $scope.role = response.data.role;
+    console.log($scope.role)
+}, function myError(response) {
+    $scope.modules = [];
+});
+
+
 var role = $("#role").val()
 if(role === "ADMIN"){
     $http(settings).then(function mySuccess(response) {

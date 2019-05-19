@@ -176,7 +176,6 @@
 }
 .btn.active, .btn.disabled, .btn[disabled] {
     color: #f5f6f9;
-    background-color: #4aa7af;
     text-shadow: none;
 }
 .table thead th {
