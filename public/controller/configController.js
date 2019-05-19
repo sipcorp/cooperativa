@@ -1,5 +1,4 @@
-'use strict';
-app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice', function ($scope, $timeout, $http, Dataservice) {
+app.controller('configController', ['$scope', '$http', 'Dataservice', function ($scope, $http, Dataservice) {
     /*######################################################## */
     //                  GLOBAL VARS ANGULAR JS 
     /*######################################################## */
@@ -12,7 +11,7 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
     $scope.roleModel = roleModel;
     $scope.subChange = false;
     $scope.parentChange = false;
-    $scope.newRole = false;
+    $scope.newRole = true;
     $scope.showRoles = true;
     $scope.error = '';
 
@@ -20,47 +19,62 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
     //                FUNCTION DIV HIDE AND SHOW 
     /*######################################################## */
     $scope.ShowAdd = function () {
-        $scope.showAdd = true
+        $scope.showAdd = true;
         $scope.newRole = false;
-    }
-
-    $scope.seeNewUser = function () {
-        $scope.NewUser = true
+        loadModules();
     }
     /*######################################################## */
     //       CARGA LOS MODULOS Y SUBMODULOS
     /*######################################################## */
+    function loadModules() {
+        $http(settings).then(function mySuccess(response) {
+            $scope.modules = response.data.data;
+        }, function myError(response) {
+            $scope.modules = [];
+        });
+    }
 
-    $http(settings).then(function mySuccess(response) {
-        $scope.modules = response.data.data;
-    }, function myError(response) {
-        $scope.modules = [];
-    });
     /*######################################################## */
     //                FUNCTION ADD MODULES
     /*######################################################## */
     $scope.add = function () {
-        var obj = JSON.stringify($scope.roleModel)
-        $.ajax({
-            url: '/add-role',
-            headers: {
-                "Content-Type": "application/json; charset=utf-8",
-                "Cache-Control": "no-cache"
-            },
-            method: 'POST',
-            dataType: 'json',
-            data: obj,
-            success: function (data) {
-                $scope.newRole = true;
-                var code = data.message.code
-                $scope.roles.push(data.save);
-                $scope.$digest();
-                if (code === 11000) {
-                    $scope.showError = true
-                    $scope.error = "El role ya existe.."
+        obj = JSON.stringify($scope.roleModel)
+        console.log(obj)
+        if (JSON.parse(obj).name == "" && $scope.roleModel === JSON.parse(obj).name) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('El formulario Esta Vacio');
+        } else {
+            obj = JSON.stringify($scope.roleModel)
+            $.ajax({
+                url: UrlAddRole,
+                headers: headerAjax,
+                method: 'POST',
+                dataType: 'json',
+                data: obj,
+                success: function (data) {
+                    saveSuccess(data);
                 }
-            }
-        });
+            });
+        }
+    }
+
+    function saveSuccess(data) {
+        var code = data.message.code;
+        if (code === 11000) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('El role ya existe..');
+        } else {
+            $scope.newRole = true;
+            $scope.roles.push(data.save);
+            $scope.$digest();
+            clearObj();
+        }
+    }
+
+    function clearObj() {
+        document.getElementById("formA05").value = " ";
+        $scope.modules = [];
+        $scope.$digest();
     }
     /*######################################################## */
     //                FUNCTION CHECK
@@ -70,11 +84,6 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
         var isActive = elem.className.indexOf("active") > 0 ? false : true
         if (isActive && elem.id != "formA05") {
             var parent = elem.dataset.parent;
-            var $obj = [];
-            var $sub = [];
-            var moduleName;
-            var isExists = false;
-            var isExistsSub = false;
             if (parent === "parent") {
                 moduleName = elem.parentNode.parentNode.id
                 $.each(roleModel.module, function (v, k) {
@@ -95,7 +104,9 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
                     $obj = {}
                 } else {
                     var actionIN = false
-                    $obj = { name: elem.name }
+                    $obj = {
+                        name: elem.name
+                    }
                     $.each(roleModel.module[0].action, function (v, k) {
                         if (k.name === elem.name) {
                             actionIN = true
@@ -122,13 +133,17 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
                         }],
                         sub: [{
                             name: elem.dataset.parent,
-                            action: [{ name: elem.name }]
+                            action: [{
+                                name: elem.name
+                            }]
                         }]
                     }
                     roleModel.module.push($obj)
                     $obj = {}
                 } else {
-                    $obj = { name: elem.name };
+                    $obj = {
+                        name: elem.name
+                    };
                     $sub = {
                         name: elem.dataset.parent,
                         action: [elem.name]
@@ -143,7 +158,9 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
                     if (isExistsSub === false) {
                         roleModel.module[0].sub.push($sub)
                     } else {
-                        $obj = { name: elem.name };
+                        $obj = {
+                            name: elem.name
+                        };
                         roleModel.module[0].sub[0].action.push($obj)
                     }
                     $obj = {}
@@ -185,14 +202,10 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
     }
 
     function deleteObjectRole(data) {
-        var dataId = data.Role._id
-        for (const key in $scope.roles) {
-            if (dataId === $scope.roles[key]._id) {
-                $('#ModalDelete').modal('hide');
-                $scope.roles.splice($scope.roles[key]);
-                getRole()
-            }
-        }
+        $('#ModalDelete').modal('hide');
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success('Se elimino : el Role correctamente');
+        getRole();
     }
 
     /*######################################################## */
@@ -205,5 +218,6 @@ app.controller('configController', ['$scope', '$timeout', '$http', 'Dataservice'
             $scope.modules = [];
         });
     }
+    loadModules()
     getRole()
 }]);
