@@ -13,7 +13,8 @@ if(role === "ADMIN"){
             for(var i=0;i<k.name.length;i++) {
                 object = {
                     name:k.name[i].name,
-                    font:k.name[i].font
+                    font:k.name[i].font,
+                    href:k.name[i].href
                 }
                 $scope.module.push(object) 
                 object ={}

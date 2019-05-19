@@ -106,3 +106,8 @@ td.dataTables_empty {
 .danger {
     color: red !important;
 }
+
+.well {
+    margin-bottom: 52px;
+    
+}

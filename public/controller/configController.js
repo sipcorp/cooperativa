@@ -1,4 +1,18 @@
 app.controller('configController', ['$scope', '$http', 'Dataservice', function ($scope, $http, Dataservice) {
+    var roleModel = {
+        name: '',
+        module: []
+      }
+      var $obj = [];
+      var $sub = [];
+      var moduleName = "";
+      var isExistsAction = false;
+      var isExists = false;
+      var isExistsSub = false;
+      var modules = []
+      var id = "";
+      var obj = [];
+    
     /*######################################################## */
     //                  GLOBAL VARS ANGULAR JS 
     /*######################################################## */
@@ -39,7 +53,6 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
     /*######################################################## */
     $scope.add = function () {
         obj = JSON.stringify($scope.roleModel)
-        console.log(obj)
         if (JSON.parse(obj).name == "" && $scope.roleModel === JSON.parse(obj).name) {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('El formulario Esta Vacio');
@@ -84,40 +97,40 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
         var isActive = elem.className.indexOf("active") > 0 ? false : true
         if (isActive && elem.id != "formA05") {
             var parent = elem.dataset.parent;
-            if (parent === "parent") {
-                moduleName = elem.parentNode.parentNode.id
-                $.each(roleModel.module, function (v, k) {
-                    if (k.name === moduleName) {
-                        isExists = true
-                        return false;
-                    }
-                })
-                if (isExists === false) {
-                    $obj = {
-                        name: moduleName,
-                        action: [{
-                            name: elem.name
-                        }],
-                        sub: []
-                    }
-                    roleModel.module.push($obj)
-                    $obj = {}
-                } else {
-                    var actionIN = false
-                    $obj = {
-                        name: elem.name
-                    }
-                    $.each(roleModel.module[0].action, function (v, k) {
-                        if (k.name === elem.name) {
-                            actionIN = true
-                        }
-                    })
-                    if (actionIN === false) {
-                        roleModel.module[0].action.push($obj)
-                    }
-                    $obj = {}
-                }
-            } else {
+            // if (parent === "parent") {
+            //     moduleName = elem.parentNode.parentNode.id
+            //     $.each(roleModel.module, function (v, k) {
+            //         if (k.name === moduleName) {
+            //             isExists = true
+            //             return false;
+            //         }
+            //     })
+            //     if (isExists === false) {
+            //         $obj = {
+            //             name: moduleName,
+            //             action: [{
+            //                 name: elem.name
+            //             }],
+            //             sub: []
+            //         }
+            //         roleModel.module.push($obj)
+            //         $obj = {}
+            //     } else {
+            //         var actionIN = false
+            //         $obj = {
+            //             name: elem.name
+            //         }
+            //         $.each(roleModel.module[0].action, function (v, k) {
+            //             if (k.name === elem.name) {
+            //                 actionIN = true
+            //             }
+            //         })
+            //         if (actionIN === false) {
+            //             roleModel.module[0].action.push($obj)
+            //         }
+            //         $obj = {}
+            //     }
+            // } else {
                 moduleName = elem.offsetParent.parentNode.parentNode.parentNode.id
                 $.each(roleModel.module, function (v, k) {
                     if (k.name === moduleName) {
@@ -146,9 +159,20 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
                     };
                     $sub = {
                         name: elem.dataset.parent,
-                        action: [elem.name]
+                        action: [{
+                            name:elem.name
+                        }]
                     }
-                    roleModel.module[0].action.push($obj)
+                    var actionINS = false
+                    $.each(roleModel.module[0].action,function(v,k){
+                        if(k.name === elem.name){
+                            actionINS = true;
+                            return false;
+                        }
+                    })
+                    if(actionINS === false){
+                        roleModel.module[0].action.push($obj) 
+                    }
                     $.each(roleModel.module[0].sub, function (v, k) {
                         if (k.name === elem.dataset.parent) {
                             isExistsSub = true
@@ -161,19 +185,25 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
                         $obj = {
                             name: elem.name
                         };
-                        roleModel.module[0].sub[0].action.push($obj)
+                        $.each(roleModel.module[0].sub,function(v,k){
+                            if(k.name === elem.dataset.parent){
+                                roleModel.module[0].sub[v].action.push($obj)
+                            }
+                        })
                     }
                     $obj = {}
                     $sub = {}
+                    isExistsSub = false;
                 }
             }
 
-        }
+        // }
         if (elem.id === "formA05") {
             roleModel.name = elem.value
         }
+        console.log($scope.roleModel)
     }
-
+    
     /*######################################################## */
     //                           DELETE ROLE
     /*######################################################## */

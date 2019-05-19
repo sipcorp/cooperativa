@@ -71,7 +71,7 @@
           <!--  tab 1 -->
           <div class="tab-pane" id="TabTop1" ng-controller="configController">
             <div class="row-fluid">
-              <div class="span3">
+              <div class="span4">
                 <div class="well well-nice" ng-show="showRoles">
                   <table class="table table-condensed table-hover margin-00">
                     <caption>
@@ -94,7 +94,7 @@
                         <td>{{config.name}}</td>
                         <td><i ng-repeat="action in config.module[0].action">{{action.name + " "}}</i>
                         </td>
-                        <td class=" text-danger"><i class="icon-trash danger"
+                        <td class="text-center text-danger"><i class="icon-trash danger"
                             ng-click="modalVerify(config._id,config.name)"></i>
                         </td>
                       </tr>
@@ -103,19 +103,9 @@
                 </div>
                 <!-- // Table in well-nice -->
               </div>
+        
               <!-- // Column -->
-              <div class="span8" ng-hide="newRole">
-                <div class="well well-nice well-impressed">
-                  <table class="table table-condensed table-hover margin-00">
-                    <caption>
-                      DETALLES
-                    </caption>
-                  </table>
-                </div>
-                <!-- // Table in well-nice -->
-              </div>
-              <!-- // Column -->
-              <div class="span9">
+              <div class="span8">
                 <div class="well well-nice" id="reloadDiv" ng-hide="newRole">
                   <section>
                     <legend>NUEVO ROLE
@@ -139,7 +129,7 @@
                       id="{{modelos.parent}}">
                       <h5 class="heading-icon" data-icon="" aria-hidden="true" name="moduleParent">
                         {{modelos.parent}}</h5>
-                      <div class="btn-group margin-bottom10" id="parent" style="margin-top: -49px;margin-left: 221px;">
+                      <!-- <div class="btn-group margin-bottom10" id="parent" style="margin-top: -49px;margin-left: 221px;">
                         <button data-parent="parent" class="btn module r" type="button" name="Read"
                           ng-click="check($event)">
                           <span>Read</span>
@@ -152,7 +142,7 @@
                           ng-click="check($event)">
                           <span>Delete</span>
                         </button>
-                      </div>
+                      </div> -->
                       <div class="childrens">
                         <div ng-repeat="children in modelos.name">
                           <div class="btn-group mftop margin-bottom10">
