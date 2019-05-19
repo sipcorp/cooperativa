@@ -1,16 +1,59 @@
 <!DOCTYPE html>
 <html>
-   <% include ./partials/head %>
-   <body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
-      <% include ./partials/header %>
-      <div id="main-container">
-      <!--MENU LEFT-->
-      <% include ./partials/menu-left %>
+<title><%=titulo%></title>
+<meta name="viewport"
+   content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+   integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="css/home/home.css" rel="stylesheet">
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="plugin/ico/8112icon.ico">
+
+<body class="ng-cloak" ng-app="startAPP" ng-controller="homeController">
+   <nav class="navbar navbar-dark bg-dark">
+      <a class="brand" href="javascript:void(0);">
+         <img src="img/demo/logo-brand.png" alt="logo">
+      </a>
+   </nav>
+   <div id="main-container">
       <!--CONTENIDO-->
-      
-      <!--CONTENIDO-->
+      <input type="hidden" readonly value="<%= user.role%>" id="role">
+      <div class="container">
+         <div class="demo-title">
+            <h3 class="display-4">Modulos</h3>
+         </div>
+         <section class="container-fluid sec-calendar">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-3" ng-repeat="modules in module">
+                     <div class="card info-box style-04 text-center">
+                        <div class="card-body">
+                           <div class="card-header">
+                              <a href="/invoice"><i class="{{modules.font}}"></i><span> {{modules.name}}</span></a>
+                           </div>
+                        </div>
+                     </div>
+                     <!--.card-->
+                  </div>
+                  <!--.col-->
+
+               </div>
+            </div>
+         </section>
+
+
       </div>
-      <% include ./partials/footer %>
-      <% include ./partials/script %>
-   </body>
+
+      <!--CONTENIDO-->
+   </div>
+   <% include ./partials/script %>
+   <script src="./controller/homeController.js"></script>
+</body>
+
 </html>

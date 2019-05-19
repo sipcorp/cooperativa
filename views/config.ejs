@@ -7,7 +7,7 @@
 <body class="header-sticky sidebar-left ng-cloak" ng-app="startAPP">
   <% include ./partials/header %>
   <!--CONTENIDO-->
-  <div id="main-container" ng-controller="configController">
+  <div id="main-container">
     <!--MENU LEFT-->
     <% include ./partials/menu-left %>
     <div id="main-content" class="main-content container-fluid">
@@ -69,7 +69,7 @@
         </nav>
         <div class="tab-content">
           <!--  tab 1 -->
-          <div class="tab-pane" id="TabTop1">
+          <div class="tab-pane" id="TabTop1" ng-controller="configController">
             <div class="row-fluid">
               <div class="span3">
                 <div class="well well-nice" ng-show="showRoles">
@@ -89,7 +89,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="config in roles ">
+                      <tr ng-repeat="config in roles track by $index ">
                         <td>{{$index+1}}</td>
                         <td>{{config.name}}</td>
                         <td><i ng-repeat="action in config.module[0].action">{{action.name + " "}}</i>
@@ -104,7 +104,7 @@
                 <!-- // Table in well-nice -->
               </div>
               <!-- // Column -->
-              <div class="span8" ng-if="showDetails">
+              <div class="span8" ng-hide="newRole">
                 <div class="well well-nice well-impressed">
                   <table class="table table-condensed table-hover margin-00">
                     <caption>
@@ -115,7 +115,7 @@
                 <!-- // Table in well-nice -->
               </div>
               <!-- // Column -->
-              <div class="span9" ng-if="showAdd">
+              <div class="span9">
                 <div class="well well-nice" id="reloadDiv" ng-hide="newRole">
                   <section>
                     <legend>NUEVO ROLE
@@ -182,9 +182,30 @@
               </div>
               <!-- // Column -->
             </div>
+
+            <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar el Modulo {{nameModule}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="d-flex justify-content-center">Desea Eliminar el Modulo <b>{{nameModule}}</b></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                    <button type="button" class="btn btn-danger" id={{id}} ng-click="deleteRole(this.id)">SI</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- // tab 2 -->
-          <div class="tab-pane" id="TabTop2">
+          <div class="tab-pane" id="TabTop2" ng-controller="userController">
             <div class="widget widget-box widget-table widget-list" ng-show="listUser">
               <div class="widget-header">
                 <h4><i class="fontello-icon-user"></i> Informacion del Usuario</h4>
@@ -246,7 +267,7 @@
                               <li class="control-group">
                                 <label for="accountPrefix" class="control-label">Prefix</label>
                                 <div class="controls">
-                                  <input id="accountPrefix" class="span6" type="text" value="" name="userCode" />
+                                  <input id="accountPrefix" class="span6" type="text" name="userCode" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -254,8 +275,7 @@
                                 <label for="accountFirstName" class="control-label">Nombre Completo
                                   <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountFirstName" class="span11" type="text" name="fullName"
-                                    value="" />
+                                  <input id="accountFirstName" class="span11" type="text" name="fullName" value="" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -263,15 +283,14 @@
                                 <label for="accountLastName" class="control-label">Role
                                   <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountLastName" class="span11" type="text" name="accountLastName"
-                                    value="" />
+                                  <input id="accountLastName" class="span11" type="text" name="role" value="" />
                                 </div>
                               </li>
                               <!-- // form item -->
                               <li class="control-group">
                                 <label for="accountSuffix" class="control-label">Cargo</label>
                                 <div class="controls">
-                                  <input id="accountSuffix" class="span6" type="text" name="accountSuffix" value="" />
+                                  <input id="accountSuffix" class="span6" type="text" name="cargo" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -281,11 +300,11 @@
                                   <input id="accountGenderInput" type="hidden" name="accountGender" value="" />
                                   <div id="accountGender" class="btn-group change" data-toggle="buttons-radio"
                                     data-target="accountGenderInput">
-                                    <button type="button" class="btn" class-toggle="btn-green" name="accountGender"
+                                    <button type="button" class="btn" class-toggle="btn-green" name="gender"
                                       value="male">
                                       <span>Hombre</span>
                                     </button>
-                                    <button type="button" class="btn" class-toggle="btn-green" name="accountGender"
+                                    <button type="button" class="btn" class-toggle="btn-green" name="gender"
                                       value="female">
                                       <span>Mujer</span>
                                     </button>
@@ -297,7 +316,7 @@
                                 <label for="accountDob" class="control-label">Fecha de
                                   nacimiento <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountDob" class="span6" type="text" name="accountDob" value="" />
+                                  <input id="accountDob" class="span6" type="text" name="date" value="" />
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -306,7 +325,7 @@
                                   <span class="required">*</span></label>
                                 <div class="controls">
                                   <div class="input-append block">
-                                    <input id="accountEmail" class="span6" type="text" name="email" value="" />
+                                    <input id="accountEmail" class="span6" type="email" name="email" value="" />
                                     <a class="btn btn-glyph txt-r" data-icon="&#xf47c;" type="button">write an
                                       email</a>
                                   </div>
@@ -318,7 +337,7 @@
                                     class="required">*</span></label>
                                 <div class="controls controls-row">
                                   <input id="accountPhoneNumber" class="span6 maskPhone margin-right5" type="text"
-                                    name="accountPhoneNumber" value="" />
+                                    name="tel" value="" />
                                   <select id="accountPhoneType" class="selectpicker" data-style="btn-info"
                                     data-width="80px" name="accountPhoneType">
                                     <option value="1">Work</option>
@@ -332,7 +351,7 @@
                                 <label for="accountFaxNumber" class="control-label">Movile</label>
                                 <div class="controls controls-row">
                                   <input id="accountFaxNumber" class="span6 maskPhone margin-right5" type="text"
-                                    name="accountFaxNumber" value="" />
+                                    name="movile" value="" />
                                   <select id="accountFaxType" class="selectpicker" data-style="btn-info"
                                     data-width="80px" name="accountFaxType">
                                     <option value="1">Work</option>
@@ -350,7 +369,7 @@
                                     class="required">*</span></label>
                                 <div class="controls controls-row">
                                   <textarea id="accountAddressStreet" class="span6 margin-right5" type="text"
-                                    name="accountAddressStreet"></textarea>
+                                    name="direction"></textarea>
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -358,8 +377,7 @@
                                 <label for="accountAddressCity" class="control-label">Pais <span
                                     class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountAddressCity" class="span6" type="text" value=""
-                                    name="accountAddressCity">
+                                  <input id="accountAddressCity" class="span6" type="text" value="" name="country">
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -367,23 +385,22 @@
                                 <label for="accountAddressState" class="control-label">Provincia <span
                                     class="required">*</span></label>
                                 <div class="controls">
+                                  <input id="" class="span6" type="text" value="" name="province">
+                                </div>
+                                <!-- <div class="controls">
                                   <select id="accountAddressState" class="span6" name="accountAddressState">
                                     <option value="" selected="selected">Select a
                                       State
                                     </option>
                                   </select>
-                                </div>
+                                </div> -->
                               </li>
                               <!-- // form item -->
                               <li class="control-group">
                                 <label for="accountAddressCountry" class="control-label">Corregimiento
                                   <span class="required">*</span></label>
                                 <div class="controls">
-                                  <input id="accountAddressCountryData" type="hidden" value=""
-                                    name="accountAddressCountry">
-                                  <select id="accountAddressCountry" class="span6" name="accountAddressCountry">
-                                    <option value=""></option>
-                                  </select>
+                                  <input id="" class="span6" type="text" name="corregimiento">
                                 </div>
                               </li>
                               <!-- // form item -->
@@ -391,8 +408,8 @@
                           </fieldset>
                           <!-- // fieldset Input -->
                           <div class="form-actions">
-                            <button type="submit" class="btn btn-blue">Submit</button>
-                            <button class="btn cancel">Cancel</button>
+                            <button class="btn btn-blue">Guardar </button>
+                            <button class="btn cancel">Cancelar</button>
                           </div>
                         </div>
                       </div>
@@ -908,27 +925,6 @@
         </div>
       </div>
       <!-- // page content -->
-    </div>
-
-    <div class="modal fade" id="ModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Eliminar el Modulo {{nameModule}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p class="d-flex justify-content-center">Desea Eliminar el Modulo <b>{{nameModule}}</b></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-            <button type="button" class="btn btn-danger" id={{id}} ng-click="deleteRole(this.id)">SI</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <div id="responsive" class="modal hide fade" tabindex="-1" data-width="375" data-height="250">

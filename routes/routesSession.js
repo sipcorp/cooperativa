@@ -48,17 +48,20 @@ module.exports = (app, passport, LocalStrategy) => {
     data = 'invoice'
     res.render("invoice", {
       message: JSON.stringify(data),
-      titulo: "SIP-proyect"
+      titulo: "SIP-proyect",
+      name:"invoice"
     })
   });
   app.get('/proyecto', isAuthenticated, (req, res) => {
     res.render('proyecto.ejs', {
       titulo: "SIP-proyect",
+      name:"proyectos"
     });
   });
   app.get('/bitacora', isAuthenticated, (req, res) => {
     res.render('bitacora.ejs', {
       titulo: "SIP-bitacora",
+      name:"bitacora"
     });
   });
   app.get('/config', (req, res) => {
@@ -70,11 +73,13 @@ module.exports = (app, passport, LocalStrategy) => {
   app.get('/contact-manager', isAuthenticated, (req, res) => {
     res.render('contact-manager.ejs', {
       titulo: "SIP-contact-manager",
+      name: "contact-manager"
     });
   });
   app.get('/tools', isAuthenticated, (req, res) => {
     res.render('tools.ejs', {
       titulo: "SIP-tools",
+      name:"tools"
     });
   });
   /*
