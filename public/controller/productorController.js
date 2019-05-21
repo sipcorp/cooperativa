@@ -39,6 +39,7 @@ $scope.myFilter = function(item,type){
     }
     
 }
+
 $scope.createObj = function(data,type){
 
     // LOAD NAME AND PREFIX

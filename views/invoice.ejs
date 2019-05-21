@@ -2,13 +2,14 @@
 <html>
    <% include ./partials/head %>
    <link id="linkCss" href="css/invoice/style.css" rel="stylesheet">
-   <body class="header-sticky sidebar-left" ng-app="startAPP" ng-cloak>
+   <body class="header-sticky sidebar-left sidebar-hidden" ng-app="startAPP" ng-cloak>
+         <div id="page-loader"><span class="preloader-interior"></span></div>
       <div class="page-container">
       <% include ./partials/header %>
       <!--CONTENIDO-->
       <div id="main-container">
          <!--MENU LEFT-->
-         <% include ./partials/menu-left %>
+         
          <div id="main-content" class="main-content container-fluid">
                <div class="filler filler"></div>
                <div id="page-content" class="page-content">

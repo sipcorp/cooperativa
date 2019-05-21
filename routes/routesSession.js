@@ -44,7 +44,7 @@ module.exports = (app, passport, LocalStrategy) => {
       name: req.userCode
     });
   });
-  app.get('/invoice', isAuthenticated, (req, res) => {
+  app.get('/invoice', isAuthenticated, async (req, res) => {
     data = 'invoice'
     res.render("invoice", {
       message: JSON.stringify(data),
@@ -80,6 +80,12 @@ module.exports = (app, passport, LocalStrategy) => {
     res.render('tools.ejs', {
       titulo: "SIP-tools",
       name:"tools"
+    });
+  });
+  app.get('/caja', isAuthenticated, (req, res) => {
+    res.render('caja.ejs', {
+      titulo: "SIP-Ventas",
+      name:"caja"
     });
   });
   /*

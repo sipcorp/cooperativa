@@ -1,0 +1,7 @@
+[data-icon]:before, i:before {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 700;
+}
+.nav-tabs {
+    border-bottom: none;
+}

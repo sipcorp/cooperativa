@@ -7,7 +7,12 @@
 			"district": {
 				"Almirante": {
 					"corregimientos": [
-						"Puerto Almirante", "Barriada Guaymí", "Barrio Francés", "Nance de Riscó", "Valle de Aguas Arriba", "Valle de Riscó"
+						{"name":"Puerto Almirante"}, 
+						{"name":"Barriada Guaymí"}, 
+						{"name":"Barrio Francés"}, 
+						{"name":"Nance de Riscó"}, 
+						{"name":"Valle de Aguas Arriba"}, 
+						{"name":"Valle de Riscó"}
 					]
         },
 				"Bocas del Toro": {
@@ -192,32 +197,63 @@
 			},{
 				"name":"Gualaca",
 				"corregimientos": [
-					"Gualaca", "Hornito", "Los Angeles", "Paja de Sombrero", "Rincón"
+					{"name":"Gualaca"}, 
+					{"name":"Hornito"}, 
+					{"name":"Los Angeles"}, 
+					{"name":"Paja de Sombrero"}, 
+					{"name":"Rincón"}
 				]
 			},{
 				"name":"Remedios",
 				"corregimientos": [
-					"Nuestra Señora de los Remedios", "El Nancito", "El Porvenir", "El Puerto", "Santa Lucía"
+					{"name":"Nuestra Señora de los Remedios"}, 
+					{"name":"El Nancito"}, 
+					{"name":"El Porvenir"}, 
+					{"name":"El Puerto"}, 
+					{"name":"Santa Lucía"}
 				]
 			},{
 				"name":"Renacimiento",
 				"corregimientos": [
-					"Río Sereno", "Breñón", "Cañas Gordas", "Monte Lirio", "Plaza de Caisán", "Santa Cruz", "Dominical", "Santa Clara"
+					{"name":"Río Sereno"}, 
+					{"name":"Breñón"}, 
+					{"name":"Cañas Gordas"}, 
+					{"name":"Monte Lirio"}, 
+					{"name":"Plaza de Caisán"}, 
+					{"name":"Santa Cruz"}, 
+					{"name":"Dominical"}, 
+					{"name":"Santa Clara"}
 				]
 			},{
 				"name":"San Felix",
 				"corregimientos": [
-					"Las Lajas", "Juay", "San Félix", "Lajas Adentro", "Santa Cruz"
+					{"name":"Las Lajas"}, 
+					{"name":"Juay"}, 
+					{"name":"San Félix"}, 
+					{"name":"Lajas Adentro"}, 
+					{"name":"Santa Cruz"}
 				]	
 			},{
 				"name":"San Lorenzo",
 				"corregimientos": [
-					"Horconcitos", "Boca Chica", "Boca del Monte", "San Juan", "San Lorenzo"
+					{"name":"Horconcitos"}, 
+					{"name":"Boca Chica"}, 
+					{"name":"Boca del Monte"}, 
+					{"name":"San Juan"}, 
+					{"name":"San Lorenzo"}
 				]	
 			},{
 				"name":"Tolé",
 				"corregimientos": [
-					"Tolé", "Cerro Viejo", "Potrero de Caña", "Quebrada de Piedra", "Bella Vista", "El Cristo", "Lajas de Tolé", "Justo Fidel Palacios", "Veladero"
+					{"name":"Tolé"}, 
+					{"name":"Cerro Viejo"}, 
+					{"name":"Potrero de Caña"}, 
+					{"name":"Quebrada de Piedra"}, 
+					{"name":"Bella Vista"}, 
+					{"name":"El Cristo"}, 
+					{"name":"Lajas de Tolé"}, 
+					{"name":"Justo Fidel Palacios"}, 
+					{"name":"Veladero"}
 				]	
 			}	
 			]
