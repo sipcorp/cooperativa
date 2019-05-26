@@ -5,11 +5,10 @@ const CajaSchema = mongoose.Schema({
    amountStart: {type:Number, require:true},
    startDate: {type:Date,require:true},
    endDate:{type:Date,require:true},
-   userCode:{type:String,require:false},
+   userCode:{type:String,require:true},
    faltante:{type:Number,require:false},
-   sobrante:{type:Boolean,require:true},
-   amountCredit:{type:String,require:false},
-   amountCash:{type:String,require:false}
+   sobrante:{type:Boolean,require:false},
+   cashCount:{type:Array,require:true}
 },{collection:'caja'})
 
 module.exports = mongoose.model('caja', CajaSchema);

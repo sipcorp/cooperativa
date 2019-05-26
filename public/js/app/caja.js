@@ -48,6 +48,9 @@ $(document).ready(function () {
 				$('#DTA_length select').select2({
 						minimumResultsForSearch: 6,
 						width: "off"
-				});
+                                });
+                                
+
+                                
 
 });

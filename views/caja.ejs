@@ -9,8 +9,9 @@
         <!--CONTENIDO-->
         <div id="main-container">
             <!--MENU LEFT-->
-
-            <div id="main-content" class="main-content container-fluid">
+            
+            <div id="main-content" class="main-content container-fluid" ng-controller="cajaController">
+                <input id='startCashier' type="hidden" readonly value="{{startCashier}}" />
                 <div class="filler filler"></div>
                 <div id="page-content" class="page-content">
                     <nav>
@@ -166,32 +167,32 @@
                                         <tbody>
                                             <tr id="DataRow0">
                                                 <td class="bold"><span>$1</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1"/></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow1">
                                                 <td class="bold"><span>$5</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1"/></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow2">
                                                 <td class="bold"><span>$10</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1"/></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow3">
                                                 <td class="bold"><span>$20</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1"/></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow4">
                                                 <td class="bold"><span>$50</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1"/></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow5">
                                                 <td class="bold"><span>$100</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1" /></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                         </tbody>
@@ -212,32 +213,32 @@
                                         <tbody>
                                             <tr id="DataRow0">
                                                 <td class="bold"><span>$0.01</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1"/></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow1">
                                                 <td class="bold"><span>$0.05</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1" /></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow2">
                                                 <td class="bold"><span>$0.10</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1" /></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow3">
                                                 <td class="bold"><span>$0.25</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1"/></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow4">
                                                 <td class="bold"><span>$0.50</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1" /></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                             <tr id="DataRow5">
                                                 <td class="bold"><span>$1</span></td>
-                                                <td><input type="number" /></td>
+                                                <td><input type="number" min="1" /></td>
                                                 <td class="text-right"></td>
                                             </tr>
                                         </tbody>
