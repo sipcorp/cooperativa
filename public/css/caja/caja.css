@@ -5,3 +5,67 @@
 .nav-tabs {
     border-bottom: none;
 }
+.mt-0 {
+    margin-top: 0 !important;
+  }
+  .mt-1 {
+    margin-top: -4% !important;
+  }
+  .mt-2 {
+    margin-top: -1% !important;
+  }
+  .date-caption{
+    background: #31bcc8;
+    color: whitesmoke !important;
+    text-shadow: none !important;
+    text-align: center !important;
+    font-size: 15px;
+  }
+
+  .display-4{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .display-p{
+    font-size: 20px;
+    font-weight: 100;
+    margin-left: 10px
+  }
+  .well-enter{
+    background: aliceblue !important;
+    padding: 6px 9px 4px !important;
+    min-height: 17px !important;
+  }
+  .well-exit{
+    background: #d2691e4f !important;
+    padding: 6px 9px 4px !important;
+    min-height: 17px !important;
+  }
+  .row-fluid .span {
+    width: 3.382979%;
+  }
+  .f16 {
+    font-size: 16px;
+    line-height: 16px;
+}
+.delete{
+    color: red;
+}
+.table td.span1, .table th.span1 {
+  float: none;
+  width: 68px;
+  margin-left: 0;
+}
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-text)
+}
+.number{
+  width: 124px;
+    height: 15px !important;
+    color: #555555;
+    border: none !important;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0), 0 1px 2px rgba(0, 0, 0, 0) inset !important;
+    margin-bottom: 0px !important;
+    padding: 0px !important;
+    background-color: #373b3e !important;
+}

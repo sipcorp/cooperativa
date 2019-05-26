@@ -1359,7 +1359,7 @@ thead th.sorting_asc .column-sorter,
 thead th.sorting_desc .column-sorter,
 thead th.sorting_disabled .column-sorter {
   display: inline-block;
-  /* float: right; */
+  float: right; 
   margin: 0 0 0 0.208em;
   width: 9px;
   height: 16px;

@@ -29,7 +29,7 @@ app.controller('homeController', ['$scope', '$timeout', "$http", 'Dataservice', 
                     object = {}
                 }
             })
-        }, 200);
+        }, 500);
 
     } else {
         // Load Roles
@@ -65,7 +65,6 @@ app.controller('homeController', ['$scope', '$timeout', "$http", 'Dataservice', 
                 })
             })
         }, 500);
-
     }
 
 }]);
