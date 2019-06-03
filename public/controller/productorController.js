@@ -24,19 +24,19 @@ $scope.province = province;
 $scope.productor = productor;
 
 $scope.myFilter = function(item,type){
-    if(type === 'district'){
-      $.each($scope.province,function(v,k){
-        if(k.name === item){
-            $scope.district.push(k.district)
-        }
-    })  
-    }else{
-        $.each($scope.district[0],function(v,k){
-            if(k.name === item){
-                $scope.corregimiento.push(k.corregimientos)
-            }
-        })   
-    }
+    // if(type === 'district'){
+    //   $.each($scope.province,function(v,k){
+    //     if(k.name === item){
+    //         //$scope.district.push(k.district)
+    //     }
+    // })  
+    // }else{
+    //     $.each($scope.district[0],function(v,k){
+    //         if(k.name === item){
+    //            // $scope.corregimiento.push(k.corregimientos)
+    //         }
+    //     })   
+    // }
     
 }
 

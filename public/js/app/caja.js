@@ -1,20 +1,20 @@
 $(document).ready(function () {
 
-    // DATATABLE CAJA
-    // -------------------------------------------------------------------------------- * -->
-    $('#DT')
-        .dataTable({
-            iDisplayLength: 3,
-            sDom: "<'row-fluid' <'widget-header' <'span4'l> <'span8'<'table-tool-wrapper'><'table-tool-container'>> > > rti <'row-fluid' <'widget-footer' <'span6' <'table-action-wrapper'>> <'span6'p> >>"
-        });
-    $('#DT_length').css({"display":"none"})
+        // DATATABLE CAJA
+        // -------------------------------------------------------------------------------- * -->
+        $('#DT')
+                .dataTable({
+                        iDisplayLength: 3,
+                        sDom: "<'row-fluid' <'widget-header' <'span4'l> <'span8'<'table-tool-wrapper'><'table-tool-container'>> > > rti <'row-fluid' <'widget-footer' <'span6' <'table-action-wrapper'>> <'span6'p> >>"
+                });
+        $('#DT_length').css({ "display": "none" })
 
 
-    
-				// DATATABLE FACTURA
-				// -------------------------------------------------------------------------------- * -->
-        		$('#DTA')
-                        .dataTable({
+
+        // DATATABLE FACTURA
+        // -------------------------------------------------------------------------------- * -->
+        $('#DTA')
+                .dataTable({
                         oLanguage: {
                                 sSearch: 'Global search:',
                                 sZeroRecords: 'No record found <button class="btn btn-danger resetTable">Reset filter</button>',
@@ -28,29 +28,42 @@ $(document).ready(function () {
                                 [0, 'desc']
                         ],
                         aoColumnDefs: [{
-                            "aTargets": [0],
-                            'bSortable': false
-                    }, {
-                            "aTargets": [1],
-                            'sClass': 'bold',
-                    }, {
-                            "aTargets": [2],
-                            'sClass': 'hidden-phone hidden-tablet'
-                    }, {
-                            "aTargets": [3],
-                    }, {
-                            "aTargets": [4],
-                            'sClass': 'text-right'
-                    }],
+                                "aTargets": [0],
+                                'bSortable': false
+                        }, {
+                                "aTargets": [1],
+                                'sClass': 'bold',
+                        }, {
+                                "aTargets": [2],
+                                'sClass': 'hidden-phone hidden-tablet'
+                        }, {
+                                "aTargets": [3],
+                        }, {
+                                "aTargets": [4],
+                                'sClass': 'text-right'
+                        }],
                         sDom: "<'row-fluid'<'widget-header'<'span6'l><'span6'f>>>rt<'row-fluid'<'widget-footer'<'span6'><'span6'p>>"
 
                 });
-				$('#DTA_length select').select2({
-						minimumResultsForSearch: 6,
-						width: "off"
-                                });
-                                
+        $('#DTA_length select').select2({
+                minimumResultsForSearch: 6,
+                width: "off"
+        });
 
-                                
+        setTimeout(function () {
+                var StartCaja = parseInt($("#startCashier").val())
+                if (StartCaja === 0) {
+                        $("#openCashier").modal("show")
+                } else {
+                        $(".openCashier").addClass("hidden")
+                }
+        }, 200)
 
+
+        // SOLO PERMITE NUMEROS
+        $("input[id*=num_]").keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                        return false;
+                }
+        });
 });

@@ -69,3 +69,39 @@
     padding: 0px !important;
     background-color: #373b3e !important;
 }
+.hidden{
+  display:none !important;
+}
+.alertify-notifier {
+  z-index: 99999;
+}
+.float-rigth{
+  float: right;
+}
+.fa-add{
+  font-size: 12px;
+  padding: 0px 11px 0px;
+  background: #2ba5af;
+  color: #fff;
+}
+
+td.action {
+  text-align: left;
+}
+#TabTop3 input[type="sipText"]{
+  border: none;
+    border-color: none;
+    border-bottom: 1px solid #000;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none ;
+    background: #f9f9f900
+}
+
+.fix-element{
+  position: absolute;
+  width: 67%;
+}

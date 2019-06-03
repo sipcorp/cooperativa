@@ -1,16 +1,30 @@
-$(document).ready(function() {
-    // selec2 tagging support demo  
-    $("#metaArticleKeywords").select2({
-        tags: [],
-        tokenSeparators: [","]
+$(document).ready(function () {
+    $(".mat-input").focus(function () {
+        $(this).parent().addClass("is-active is-completed");
     });
 
-    var navListItems = $('ul.setup-panel li a'),
-        allWells = $('.setup-content');
+    $(".mat-input").focusout(function () {
+        if ($(this).val() === "")
+            $(this).parent().removeClass("is-completed");
+        $(this).parent().removeClass("is-active");
+    })
+
+    // selec2 tagging support demo  
+    $(".selecttwo").select2({
+        minimumResultsForSearch: 6
+    });
+   
+    // $("#metaArticleKeywords").select2({
+    //     tags: [],
+    //     tokenSeparators: [","]
+    // });
+
+    var navListItems = $('ul.step-anchor li a'),
+        allWells = $('.step-content');
 
     allWells.hide();
 
-    navListItems.click(function(e) {
+    navListItems.click(function (e) {
         e.preventDefault();
         var $target = $($(this).attr('href')),
             $item = $(this).closest('li'),
@@ -20,9 +34,9 @@ $(document).ready(function() {
             $item.addClass('active');
             allWells.hide();
             $target.show();
-            navForDisabled = $('ul.setup-panel li')
-            $.each(navForDisabled, function(k, m) {
-                if (m.className != 'active') {
+            navForDisabled = $('ul.step-anchor  li')
+            $.each(navForDisabled, function (k, m) {
+                if (m.className.indexOf('active') <= 0) {
                     m.className = 'disabled';
                 }
             })
@@ -32,26 +46,28 @@ $(document).ready(function() {
             $item.removeClass('disabled').addClass('active');
             allWells.hide();
             $target.show();
-            navForDisabled = $('ul.setup-panel li')
-            $.each(navForDisabled, function(k, m) {
+            navForDisabled = $('ul.step-anchor  li')
+            $.each(navForDisabled, function (k, m) {
                 if (m.className != 'active') {
                     m.className = 'disabled';
                 }
             })
         }
+
+
     });
-   
-    $('ul.setup-panel li.active a').trigger('click');
+
+    $('ul.step-anchor  li.active a').trigger('click');
 
     // DEMO ONLY //
-    $('button').on('click', function(e) {
+    $('button').on('click', function (e) {
         var step = e.currentTarget.id === 'next' ? 1 : 2,
-            elemt = $('ul.setup-panel li'),
+            elemt = $('ul.step-anchor li'),
             $target;
         if (step === 1) {
-            $.each(elemt, function(k, v) {
+            $.each(elemt, function (k, v) {
                 var l = v
-                if (l.className === 'active') {
+                if (l.className.indexOf('active') > 0 || l.className ==='active') {
                     $target = l.children[0].hash
                     return false;
                 }
@@ -65,27 +81,28 @@ $(document).ready(function() {
                     $('#alert').css({
                         'display': 'block'
                     })
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#alert').css({
                             'display': 'none'
                         })
                     }, 1500)
                     return false
                 } else {
-                    $('#down-button').css({
-                        'margin-top': '-17px',
-                        'margin-left': '-30px'
-                    })
+                    // $('#down-button').css({
+                    //     'margin-top': '-17px',
+                    //     'margin-left': '-30px'
+                    // })
                     //$('ul.setup-panel li a[href="#step-1"]').addClass('disabled');
-                    $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-                    
+                    $("#previous").removeClass("hidden")
+                    $('ul.step-anchor li a[href="#step-2"]').trigger('click');
+
                     return false;
                 }
             }
             if ($target === '#step-2') {
                 var $categoryList = $('#cotegoryList button.btn'),
                     $categorySelect = false
-                $.each($categoryList, function(k, l) {
+                $.each($categoryList, function (k, l) {
                     if (l.classList[1] === 'active') {
                         $categorySelect = true
                         return false;
@@ -95,7 +112,7 @@ $(document).ready(function() {
                     $('#alert2').css({
                         'display': 'block'
                     })
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('#alert2').css({
                             'display': 'none'
                         })
@@ -103,9 +120,8 @@ $(document).ready(function() {
                     return false
                 } else {
                     //$('ul.setup-panel li a[href="#step-2"]').addClass('disabled');
-                    $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-                    $('#down-button').css({'display':'none'})
-                    $('.up-button').css({'display':'block'})
+                    $('ul.step-anchor  li a[href="#step-3"]').trigger('click');
+
                     $("#rubroList").addClass('selectpicker');
                     $("#rubroList").selectpicker();
                     return false;
@@ -116,3 +132,5 @@ $(document).ready(function() {
     })
 
 });
+
+

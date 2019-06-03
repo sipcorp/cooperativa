@@ -1,6 +1,6 @@
 
 /*######################################################## */
-//                  GLOBAL VARS  JS 
+//                  GLOBAL VARS ROLE  JS 
 /*######################################################## */
 const UrlDeleteRole = "/delete/";
 const UrlAddRole = '/add-role';
@@ -22,3 +22,10 @@ var headerAjax = {
 }
 
 
+/*######################################################## */
+//                  GLOBAL VARS CAJA  JS 
+/*######################################################## */
+
+const addCaja = "/add-caja"
+const getCaja = "/get-caja"
+const updateCaja = "/update-caja"

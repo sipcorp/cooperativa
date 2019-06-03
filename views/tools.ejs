@@ -9,7 +9,6 @@
     <!--CONTENIDO-->
     <div id="main-container">
         <!--MENU LEFT-->
-      
         <div id="main-content" class="main-content container-fluid">
             <div class="filler filler"></div>
             <div id="page-content" class="page-content">
@@ -63,76 +62,61 @@
                 <div class="tab-content">
                     <!-- // tab 1 -->
                     <div class="tab-pane" id="TabTop1" ng-controller="proyectController">
-                        <!-- // page head -->
-                        <div class="container">
-                            <form class="form-horizontal span12 m0">
-                                <div class="row form-group">
-                                    <div class="col-xs-12">
-                                        <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                                            <li class="active">
-                                                <a href="#step-1">
-                                                    <h4 class="list-group-item-heading">Generales</h4>
-                                                    <p class="list-group-item-text">Defina las generales del proyecto
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#step-2">
-                                                    <h4 class="list-group-item-heading">Descripción</h4>
-                                                    <p class="list-group-item-text">Detalle de el proyecto</p>
-                                                </a>
-                                            </li>
-                                            <li class="">
-                                                <a href="#step-3">
-                                                    <h4 class="list-group-item-heading">Cronograma de Seguimiento</h4>
-                                                    <p class="list-group-item-text">Favor definir todas las variables
-                                                        necesarias</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                        <div id="smartwizard" class="sw-main sw-theme-default">
+                            <ul class="nav nav-tabs step-anchor">
+                                <li class="nav-item active">
+                                    <a href="#step-1" class="nav-link active">Generales<br>
+                                        <small>Defina las generales del proyecto</small>
+                                    </a>
+                                </li>
+                                <li class="nav-item disabled">
+                                    <a href="#step-2" class="nav-link">Descripción<br>
+                                        <small>Detalle de el proyecto</small>
+                                    </a>
+                                </li>
+                                <li class="nav-item disabled">
+                                    <a href="#step-3" class="nav-link">Cronograma de Seguimiento<br>
+                                        <small>Favor definir todas las variables necesarias</small>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="btn-toolbar sw-toolbar sw-toolbar-top justify-content-end">
+                                <div class="btn-group mr-2 sw-btn-group" role="group">
+                                    <button class="btn btn-secondary sw-btn-prev hidden" id="previous"
+                                        type="button">Previous</button>
+                                    <button class="btn btn-secondary sw-btn-next" type="button" id="next">Next</button>
                                 </div>
-                                <div class="row setup-content" id="step-1">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="span12">
-                                                <fieldset>
-                                                    <div class="control-group ">
-                                                        <label class="control-label">Nombre de Proyecto</label>
-                                                        <div class="controls">
-                                                            <input type="text" class="input-block-level span4"
-                                                                id="proyectName" ng-model="nameChange"
-                                                                ng-change="updateModel(1,nameChange,'n')">
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group control-inline">
-                                                        <div class="input-append margin-00">
-                                                            <label class="control-label"
-                                                                style="margin-left: -142px;">Start Date</label>
-                                                            <input id="step1Start" class="input-medium date" type="date"
-                                                                data-date="" data-date-format="dd-mm-yyyy"
-                                                                ng-model="date" ng-change="updateModel(1,date,'ns')">
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group control-inline-inline">
-                                                        <div class="input-append margin-00">
-                                                            <label class="control-label"
-                                                                style="margin-left: -64px;width: 62px;">End Date</label>
-                                                            <input id="end1Start" class="input-medium date" type="date"
-                                                                data-date="" data-date-format="dd/mm/yyyy"
-                                                                ng-model="date2" ng-change="updateModel(1,date2,'ne')">
-                                                        </div>
-                                                    </div>
-                                                    <div class="alert alert-error" id="alert" style="display: none;">
-                                                        <span class="msg">Ups.. Lo sentimos pero algunos de los campos
-                                                            esta vació favor revisar el formulario</span>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
+                                <div class="btn-group mr-2 sw-btn-group-extra hidden" role="group"><button
+                                        class="btn btn-info">Finish</button><button
+                                        class="btn btn-danger">Cancel</button></div>
+                            </div>
+                            <div class="sw-container tab-content" style="min-height: 190.6px;">
+                                <div id="step-1" class="tab-pane step-content">
+                                    <div class="alert alert-error" id="alert">
+                                        <span class="msg">Ups.. Lo sentimos pero algunos de los campos
+                                            esta vació favor revisar el formulario</span>
+                                    </div>
+                                    <div class="wrap">
+                                        <div class="mat-div">
+                                            <label for="first-name" class="mat-label">Nombre de Proyecto</label>
+                                            <input type="text" class="input-block-level mat-input" id="proyectName"
+                                                ng-model="nameChange" ng-change="updateModel(1,nameChange,'n')">
+                                        </div>
+                                        <div class="mat-div">
+                                            <label for="first-name" class="mat-label">Start Date</label>
+                                            <input id="step1Start" class="input-medium date mat-input" type="date"
+                                                data-date="" data-date-format="dd-mm-yyyy" ng-model="date"
+                                                ng-change="updateModel(1,date,'ns')">
+                                        </div>
+                                        <div class="mat-div">
+                                            <label for="address" class="mat-label">End Date</label>
+                                            <input id="end1Start" class="input-medium date mat-input" type="date"
+                                                data-date="" data-date-format="dd/mm/yyyy" ng-model="date2"
+                                                ng-change="updateModel(1,date2,'ne')">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row setup-content" id="step-2">
+                                <div id="step-2" class="tab-pane step-content">
                                     <div class="col-xs-12" style="margin-top: -28px;">
                                         <div id="page-content" class="page-content tab-content overflow-y">
                                             <div class="row-fluid">
@@ -222,24 +206,77 @@
                                                                                     <!-- // form item -->
                                                                                     <div class="control-group">
                                                                                         <label for="accountGender"
-                                                                                            class="control-label">Rubros</label>
+                                                                                            class="control-label">Rubro</label>
                                                                                         <div
                                                                                             class="controls controls-row">
-                                                                                            <input
-                                                                                                id="metaArticleKeywords"
-                                                                                                class="span9"
-                                                                                                type="text"
-                                                                                                name="metaArticleKeywords"
+
+                                                                                            <select multiple="multiple"
+                                                                                                class="selecttwo"
                                                                                                 ng-model="rubroChange"
-                                                                                                ng-change="updateModel(2,rubroChange,'rubro')" />
-                                                                                            <span
-                                                                                                class="help-block">Escriba
-                                                                                                o seleccione una
-                                                                                                etiqueta y presione
-                                                                                                "enter" o "coma" para
-                                                                                                agregarlos.</span>
+                                                                                                ng-change="updateModel(2,rubroChange,'rubro')">
+                                                                                                <option value=""
+                                                                                                    selected disabled>
+                                                                                                    Seleccione rubro
+                                                                                                </option>
+                                                                                                <option
+                                                                                                    ng-repeat="itemsRubro in RubroList">
+                                                                                                    {{itemsRubro.name}}
+                                                                                                </option>
+                                                                                            </select>
                                                                                         </div>
                                                                                     </div>
+                                                                                    <!-- // form item -->
+                                                                                    <!-- <div class="control-group">
+                                                                     <label for="accountGender"
+                                                                         class="control-label">Categoria de Rubro</label>
+                                                                     <div class="controls controls-row">
+                                                                         <select>
+                                                                             <option selected disabled>Seleccione categoria</option>
+                                                                             <option></option>
+                                                                             <option></option>
+                                                                             <option></option>
+                                                                             <option></option>
+                                                                         </select>
+                                                                     
+                                                                         <label for="accountGender" class="control-label">Rubros</label>
+                                                                     <div
+                                                                     
+                                                                     <input
+                                                                         id="metaArticleKeywords"
+                                                                         class="span9"
+                                                                         type="text"
+                                                                         name="metaArticleKeywords"
+                                                                         ng-model="rubroChange"
+                                                                         ng-change="updateModel(2,rubroChange,'rubro')" />
+                                                                     <span
+                                                                         class="help-block">Escriba
+                                                                         o seleccione una
+                                                                         etiqueta y presione
+                                                                         "enter" o "coma" para
+                                                                         agregarlos.</span>
+                                                                     
+                                                                     </div>
+                                                                     </div> -->
+                                                                                    <!-- // form item -->
+                                                                                    <!-- <div class="control-group">
+                                                                     <label for="accountGender" class="control-label">Rubros</label>
+                                                                     <div
+                                                                         class="controls controls-row">
+                                                                         <input
+                                                                             id="metaArticleKeywords"
+                                                                             class="span9"
+                                                                             type="text"
+                                                                             name="metaArticleKeywords"
+                                                                             ng-model="rubroChange"
+                                                                             ng-change="updateModel(2,rubroChange,'rubro')" />
+                                                                         <span
+                                                                             class="help-block">Escriba
+                                                                             o seleccione una
+                                                                             etiqueta y presione
+                                                                             "enter" o "coma" para
+                                                                             agregarlos.</span>
+                                                                     </div>
+                                                                     </div> -->
                                                                                 </fieldset>
                                                                             </ul>
                                                                         </fieldset>
@@ -256,7 +293,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row setup-content" id="step-3">
+                                <div id="step-3" class="tab-pane step-content">
                                     <div class="span12" style="margin-top: -28px;">
                                         <div id="page-content" class="page-content tab-content">
                                             <div class="row-fluid" ng-repeat="models in bitacoraModels">
@@ -268,19 +305,8 @@
                                                                     <div class="form-dark">
                                                                         <fieldset>
                                                                             <legend class="section-form"> Rubro:
-                                                                                {{models.name}} </legend>
-                                                                            <div class="form-actions thumbnail up-button"
-                                                                                ng-show="$index === 0">
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary">Previous</button>
-                                                                                <button type="button"
-                                                                                    class="btn btn-danger">Cancel</button>
-                                                                                <button type="button"
-                                                                                    class="btn btn-wordpress"
-                                                                                    ng-click="addProject()"><i
-                                                                                        class="fontello-icon-publish"></i>
-                                                                                    Save</button>
-                                                                            </div>
+                                                                                {{models.name}}
+                                                                            </legend>
                                                                             <ul
                                                                                 class="form-list label-left list-bordered dotted">
                                                                                 <fieldset>
@@ -288,7 +314,8 @@
                                                                                             class="btn btn-mini pull-right margin-0s txt-r"
                                                                                             data-icon="&#xf067;"
                                                                                             ng-click="addCiclo(models.$$hashKey)">Agregar
-                                                                                            task</a> </legend>
+                                                                                            task</a>
+                                                                                    </legend>
                                                                                     <ul
                                                                                         class="form-list label-left list-bordered dotted">
                                                                                         <li class="control-group"
@@ -387,29 +414,22 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                            <div class="form-actions thumbnail m1" id="down-button">
-                                <button type="submit" class="btn btn-primary">Previous</button>
-                                <button type="button" class="btn btn-danger">Cancel</button>
-                                <button type="submit" id="next" class="btn btn-primary">Next</button>
                             </div>
                         </div>
-                        <!-- // page content -->
                     </div>
-
                     <!-- // tab 2 -->
                     <div class="tab-pane" id="TabTop2" ng-controller="productorController">
                         <section>
                             <div class="row-fluid">
                                 <form class="form-horizontal span12">
-                                    <legend class="margin-03"><i class="fontello-icon-quote-left-alt"></i>
+                                    <legend class="margin-03">
+                                        <i class="fontello-icon-quote-left-alt"></i>
                                         <span>Agregar Productores</span>
                                         <div class="form-actions-s">
                                             <button type="submit" class="btn btn-blue">Submit &amp; Validate</button>
                                             <button class="btn cancel">Cancel</button>
                                         </div>
                                     </legend>
-
                                     <fieldset>
                                         <h4 style="color:#569da3;"><i class="booico-user txt-r"></i>Informacion general
                                         </h4>
@@ -423,7 +443,6 @@
                                                 </div>
                                             </li>
                                             <!-- // form item -->
-
                                             <li class="control-group">
                                                 <label for="wzNewFirstName" class="control-label">Nombre completo<span
                                                         class="required">*</span></label>
@@ -469,7 +488,6 @@
                                                 </div>
                                             </li>
                                             <!-- // form item -->
-
                                             <li class="control-group">
                                                 <label for="wzNewGenderInput" class="control-label">Genero</label>
                                                 <div class="controls">
@@ -487,7 +505,6 @@
                                                 </div>
                                             </li>
                                             <!-- // form item -->
-
                                             <li class="control-group">
                                                 <label for="wzNewDob" class="control-label">Fecha de nacimiento <span
                                                         class="required">*</span></label>
@@ -497,7 +514,6 @@
                                                 </div>
                                             </li>
                                             <!-- // form item -->
-
                                             <li class="control-group">
                                                 <label for="wzNewAge" class="control-label">Edad</label>
                                                 <div class="controls">
@@ -565,288 +581,263 @@
                                                         <option value="" selected disabled>Seleccione un corregimiento
                                                         </option>
                                                         <option ng-repeat="corregimiento in corregimiento">{{corregimiento.name}</option>
-                                                        </select>
-                                                    </div>
-                                                </li>
-                                                <!-- // form item -->
-                                        </ul>
-                                    </fieldset>
-
-                                </form>
-                                <!-- // FORM Input fields -->
-                            </div>
-                        </section>
-                    </div>
-
-                    <!-- // tab 3 -->
-                    <div class="tab-pane" id="TabTop3">
-                        <section>
-                            <div class="row-fluid">
-                                <form class="form-horizontal span12">
-                                    <fieldset>
-                                        <legend class="margin-00"><i class="fontello-icon-quote-left-alt"></i>
-                                            <span>Agregar Producto</span>
-                                            <div class="form-actions-s">
-                                                <button type="submit" class="btn btn-blue">Submit &amp;
-                                                    Validate</button>
-                                                <button class="btn cancel">Cancel</button>
-                                            </div>
-                                        </legend>
-                                        <ul class="form-list list-bordered dotted">
-                                            <li class="control-group">
-                                                <label for="limiteChar" class="control-label">Nombre:</label>
-                                                <div class="controls">
-                                                    <input id="limiteChar" class="span6 limiteChar15 clear-field"
-                                                        type="text">
-                                                    <div id="limiteChar_counter">
-                                                        <span id="limiteChar_count"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="limiteWords" class="control-label">Descripcion:</label>
-                                                <div class="controls">
-                                                    <textarea id="limiteWords" rows="3"
-                                                        class="span6 limiteWords15 clear-field"></textarea>
-                                                    <div id="limiteWords_counter">
-                                                        <span id="limiteWords_count"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Precio:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text"
-                                                        placeholder="enter text and clear">
-                                                </div>
-                                            </li>
-
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Unit:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text"
-                                                        placeholder="enter text and clear">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Alerta:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text"
-                                                        placeholder="enter text and clear">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-                                        </ul>
-                                    </fieldset>
-                                </form>
-                                <!-- // FORM Input fields -->
-                            </div>
-                        </section>
-                    </div>
-
-                    <!-- // tab 4 -->
-                    <div class="tab-pane" id="TabTop4">
-                        <section>
-                            <div class="row-fluid">
-                                <form class="form-horizontal span12">
-                                    <fieldset>
-                                        <legend class="margin-00"><i class="fontello-icon-quote-left-alt"></i>
-                                            <span>Agregar Insumos</span>
-                                            <div class="form-actions-s">
-                                                <button type="submit" class="btn btn-blue">Submit &amp;
-                                                    Validate</button>
-                                                <button class="btn cancel">Cancel</button>
-                                            </div>
-                                        </legend>
-                                        <ul class="form-list list-bordered dotted">
-                                            <li class="control-group">
-                                                <label for="limiteChars" class="control-label">Nombre:</label>
-                                                <div class="controls">
-                                                    <input id="limiteChars" class="span6 limiteChar15-s clear-field"
-                                                        type="text">
-                                                    <div id="limiteChar_counter">
-                                                        <span id="limiteChar_count"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="limiteWordss" class="control-label">Descripcion:</label>
-                                                <div class="controls">
-                                                    <textarea id="limiteWordss" rows="3"
-                                                        class="span6 limiteWords15 clear-field"></textarea>
-                                                    <div id="limiteWords_counter">
-                                                        <span id="limiteWords_count"></span>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearTexts" class="control-label">Precio:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearTexts" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Unit:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Costo:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Proovedor:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Retencion:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-                                            <li class="control-group">
-                                                <label for="regularClearText" class="control-label">Alerta:</label>
-                                                <div class="controls">
-                                                    <input id="regularClearText" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-                                        </ul>
-                                    </fieldset>
-                                </form>
-                                <!-- // FORM Input fields -->
-                            </div>
-                        </section>
-                    </div>
-
-                    <!-- // tab 5 -->
-                    <div class="tab-pane" id="TabTop5">
-                        <section>
-                            <div class="row-fluid">
-                                <form class="form-horizontal span12">
-                                    <fieldset>
-                                        <legend class="margin-00"><i class="fontello-icon-quote-left-alt"></i>
-                                            <span>Agregar Cliente</span>
-                                            <div class="form-actions-s">
-                                                <button type="submit" class="btn btn-blue">Submit &amp;
-                                                    Validate</button>
-                                                <button class="btn cancel">Cancel</button>
-                                            </div>
-                                        </legend>
-                                        <ul class="form-list list-bordered dotted">
-                                            <li class="control-group">
-                                                <label for="custmerName" class="control-label">Nombre completo:</label>
-                                                <div class="controls">
-                                                    <input id="custmerName" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="cedula" class="control-label">Cedula:</label>
-                                                <div class="controls">
-                                                    <input id="cedula" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="address" class="control-label">Direccion:</label>
-                                                <div class="controls">
-                                                    <textarea id="address" rows="3"
-                                                        class="span6 clear-field"></textarea>
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="movile" class="control-label">Movile:</label>
-                                                <div class="controls">
-                                                    <input id="movile" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="phone" class="control-label">Telefono:</label>
-                                                <div class="controls">
-                                                    <input id="phone" class="span6 clear-field" type="text">
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                            <li class="control-group">
-                                                <label for="obser" class="control-label">Observacion:</label>
-                                                <div class="controls">
-                                                    <textarea id="obser" rows="3"
-                                                        class="span6 obser clear-field"></textarea>
-                                                </div>
-                                            </li>
-                                            <!-- // control group -->
-
-                                        </ul>
-                                    </fieldset>
-                                </form>
-                                <!-- // FORM Input fields -->
-                            </div>
-                        </section>
-                    </div>
-
-                    <!-- // tab 6 -->
-                    <div class="tab-pane" id="TabTop6">
-
-                    </div>
-                </div>
+                                          </select>
+                                       </div>
+                                    </li>
+                                    <!-- // form item -->
+                                 </ul>
+                              </fieldset>
+                           </form>
+                           <!-- // FORM Input fields -->
+                        </div>
+                     </section>
+                  </div>
+                  <!-- // tab 3 -->
+                  <div class="tab-pane" id="TabTop3">
+                     <section>
+                        <div class="row-fluid">
+                           <form class="form-horizontal span12">
+                              <fieldset>
+                                 <legend class="margin-00">
+                                    <i class="fontello-icon-quote-left-alt"></i>
+                                    <span>Agregar Producto</span>
+                                    <div class="form-actions-s">
+                                       <button type="submit" class="btn btn-blue">Submit &amp;
+                                       Validate</button>
+                                       <button class="btn cancel">Cancel</button>
+                                    </div>
+                                 </legend>
+                                 <ul class="form-list list-bordered dotted">
+                                    <li class="control-group">
+                                       <label for="limiteChar" class="control-label">Nombre:</label>
+                                       <div class="controls">
+                                          <input id="limiteChar" class="span6 limiteChar15 clear-field"
+                                             type="text">
+                                          <div id="limiteChar_counter">
+                                             <span id="limiteChar_count"></span>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="limiteWords" class="control-label">Descripcion:</label>
+                                       <div class="controls">
+                                          <textarea id="limiteWords" rows="3"
+                                             class="span6 limiteWords15 clear-field"></textarea>
+                                          <div id="limiteWords_counter">
+                                             <span id="limiteWords_count"></span>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Precio:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text"
+                                             placeholder="enter text and clear">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Unit:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text"
+                                             placeholder="enter text and clear">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Alerta:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text"
+                                             placeholder="enter text and clear">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                 </ul>
+                              </fieldset>
+                           </form>
+                           <!-- // FORM Input fields -->
+                        </div>
+                     </section>
+                  </div>
+                  <!-- // tab 4 -->
+                  <div class="tab-pane" id="TabTop4">
+                     <section>
+                        <div class="row-fluid">
+                           <form class="form-horizontal span12">
+                              <fieldset>
+                                 <legend class="margin-00">
+                                    <i class="fontello-icon-quote-left-alt"></i>
+                                    <span>Agregar Insumos</span>
+                                    <div class="form-actions-s">
+                                       <button type="submit" class="btn btn-blue">Submit &amp;
+                                       Validate</button>
+                                       <button class="btn cancel">Cancel</button>
+                                    </div>
+                                 </legend>
+                                 <ul class="form-list list-bordered dotted">
+                                    <li class="control-group">
+                                       <label for="limiteChars" class="control-label">Nombre:</label>
+                                       <div class="controls">
+                                          <input id="limiteChars" class="span6 limiteChar15-s clear-field"
+                                             type="text">
+                                          <div id="limiteChar_counter">
+                                             <span id="limiteChar_count"></span>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="limiteWordss" class="control-label">Descripcion:</label>
+                                       <div class="controls">
+                                          <textarea id="limiteWordss" rows="3"
+                                             class="span6 limiteWords15 clear-field"></textarea>
+                                          <div id="limiteWords_counter">
+                                             <span id="limiteWords_count"></span>
+                                          </div>
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearTexts" class="control-label">Precio:</label>
+                                       <div class="controls">
+                                          <input id="regularClearTexts" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Unit:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Costo:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Proovedor:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Retencion:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="regularClearText" class="control-label">Alerta:</label>
+                                       <div class="controls">
+                                          <input id="regularClearText" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                 </ul>
+                              </fieldset>
+                           </form>
+                           <!-- // FORM Input fields -->
+                        </div>
+                     </section>
+                  </div>
+                  <!-- // tab 5 -->
+                  <div class="tab-pane" id="TabTop5">
+                     <section>
+                        <div class="row-fluid">
+                           <form class="form-horizontal span12">
+                              <fieldset>
+                                 <legend class="margin-00">
+                                    <i class="fontello-icon-quote-left-alt"></i>
+                                    <span>Agregar Cliente</span>
+                                    <div class="form-actions-s">
+                                       <button type="submit" class="btn btn-blue">Submit &amp;
+                                       Validate</button>
+                                       <button class="btn cancel">Cancel</button>
+                                    </div>
+                                 </legend>
+                                 <ul class="form-list list-bordered dotted">
+                                    <li class="control-group">
+                                       <label for="custmerName" class="control-label">Nombre completo:</label>
+                                       <div class="controls">
+                                          <input id="custmerName" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="cedula" class="control-label">Cedula:</label>
+                                       <div class="controls">
+                                          <input id="cedula" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="address" class="control-label">Direccion:</label>
+                                       <div class="controls">
+                                          <textarea id="address" rows="3"
+                                             class="span6 clear-field"></textarea>
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="movile" class="control-label">Movile:</label>
+                                       <div class="controls">
+                                          <input id="movile" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="phone" class="control-label">Telefono:</label>
+                                       <div class="controls">
+                                          <input id="phone" class="span6 clear-field" type="text">
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                    <li class="control-group">
+                                       <label for="obser" class="control-label">Observacion:</label>
+                                       <div class="controls">
+                                          <textarea id="obser" rows="3"
+                                             class="span6 obser clear-field"></textarea>
+                                       </div>
+                                    </li>
+                                    <!-- // control group -->
+                                 </ul>
+                              </fieldset>
+                           </form>
+                           <!-- // FORM Input fields -->
+                        </div>
+                     </section>
+                  </div>
+                  <!-- // tab 6 -->
+                  <div class="tab-pane" id="TabTop6">
+                  </div>
+               </div>
             </div>
             <!-- // page content -->
-        </div>
-    </div>
-    <!--CONTENIDO-->
-    <% include ./partials/footer %>
-    <% include ./partials/script %>
-
-    <script src="plugin/pl-form/jquery.counter/js/jquery.counter.min.js"></script>
-    <script src="plugin/pl-form/jquery.elastic/js/jquery.elastic.js"></script>
-    <script src="plugin/pl-content/bootstrap-wizard/js/jquery.bootstrap.wizard.js"></script>
-    <script src="plugin/pl-content/bootstrap-wizard-2/js/bwizard.js"></script>
-    <script src="plugin/pl-form/jquery.validation/js/jquery.validate.js"></script>
-    <script src="js/app/tools.js"></script>
-    <script src="plugin/pl-form/bootstrap-select/js/bootstrap-select.js"></script>
-    <script src="plugin/pl-form/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
-    <script src="plugin/pl-form/select2/js/select2.js"></script>
-    <script src="./js/app/proyecto.js"></script>
-    <script src="./controller/proyectController.js"></script>
-    <script src="./json/json.js"></script>
-    <script src="./controller/productorController.js"></script>
-</body>
-
+         </div>
+      </div>
+      <!--CONTENIDO-->
+      <% include ./partials/footer %>
+      <% include ./partials/script %>
+      <script src="plugin/pl-form/jquery.counter/js/jquery.counter.min.js"></script>
+      <script src="plugin/pl-form/jquery.elastic/js/jquery.elastic.js"></script>
+      <script src="plugin/pl-content/bootstrap-wizard/js/jquery.bootstrap.wizard.js"></script>
+      <script src="plugin/pl-content/bootstrap-wizard-2/js/bwizard.js"></script>
+      <script src="plugin/pl-form/jquery.validation/js/jquery.validate.js"></script>
+      <script src="js/app/tools.js"></script>
+      <script src="plugin/pl-form/bootstrap-select/js/bootstrap-select.js"></script>
+      <script src="plugin/pl-form/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+      <script src="plugin/pl-form/select2/js/select2.js"></script>
+      <script src="./js/app/proyecto.js"></script>
+      <script src="./json/json.js">
+    </script><script src="./controller/proyectController.js"></script>
+      <script src="./controller/productorController.js"></script>
+   </body>
 </html>

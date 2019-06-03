@@ -7,7 +7,7 @@ const CajaSchema = mongoose.Schema({
    endDate:{type:Date,require:true},
    userCode:{type:String,require:true},
    faltante:{type:Number,require:false},
-   sobrante:{type:Boolean,require:false},
+   sobrante:{type:Number,require:false},
    cashCount:{type:Array,require:true}
 },{collection:'caja'})
 

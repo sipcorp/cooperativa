@@ -118,9 +118,30 @@
     color: red;
     cursor: pointer;
 }
-[type="date"] {
-    background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
-    cursor: pointer;
+input[type="date"] {
+    position: relative;
+    padding: 10px;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+  }
+  
+  input[type="date"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: 'FontAwesome';
+    content: '\f073';
+    /* This is the calendar icon in FontAwesome */
+    width: 15px;
+    height: 20px;
+    position: absolute;
+    top: 12px;
+    right: 6px;
+    color: #999;
   }
   [type="date"]::-webkit-inner-spin-button {
     display: none;
@@ -166,9 +187,11 @@
     right: 276px;
 }
 .form-actions {
-    margin-top: 180px;
+    position: absolute;
+    margin-top: 470px;
+    /* margin-top: 180px;
     z-index: 100;
-    height: -1px;
+    height: -1px; */
 }
 .fix-control-row{
     margin-right: 64px;
@@ -233,3 +256,64 @@
 .margin-0s {
     margin-right: 28px !important;
 }
+
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover {
+    background-color: #31bcc8;
+    border: 1px solid #babec4;
+    border-bottom-color: #2c2c2c00;
+    color:#fff
+}
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {
+    color: #ffffff;
+    cursor: default;
+    background-color: #31bcc8;
+    border: 1px solid #babec4;
+    border-bottom-color: transparent;
+}
+
+
+.wrap {
+    width: 450px;
+    margin: 0 auto;
+  }
+  .hidden{
+      display: none;
+  }
+  .mat-label {
+    display: block;
+    font-size: 16px;
+    transform: translateY(32px);
+    color: #000;
+    transition: all 0.5s;
+    margin-left: 14px;
+  }
+  
+  .mat-input {
+    position: relative !important;
+    background: transparent !important;
+    width: 100% !important;
+    border: none !important;
+    outline: none !important;
+    padding: 8px 0 !important;
+    font-size: 16px !important;
+    text-align: center !important;
+  }
+  #alert{
+      display: none;
+  }
+  .mat-div {
+    position: relative;
+  }
+  
+  .is-active::after {
+    transform: scaleX(1);
+  }
+  
+  .is-active .mat-label {
+    color: #8E8DBE;
+  }
+  
+  .is-completed .mat-label {
+    font-size: 12px;
+    transform: translateY(0);
+  }

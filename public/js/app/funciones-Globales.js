@@ -51,7 +51,10 @@ function currentDate(type,format) {
         tempDate = new Date(newDay)
         dateFormat = tempDate.toLocaleDateString("es-ES", options)
     }
-
+    if(type === 3 && format === 3){
+        
+        dateFormat = date.getFullYear() + "-" + ((date.getMonth()+1) < 10 ? "0"+(date.getMonth()+1) : (date.getMonth()+1)) + "-" + date.getDate()+ "T05:00:00.000+00:00"
+    }
     return dateFormat;
 };
 function currentHours(){
