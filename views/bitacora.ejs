@@ -1,259 +1,207 @@
 <!DOCTYPE html>
 <html>
 <% include ./partials/head %>
-<link id="linkCss" href="css/bitacora/bitacora.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<body class="header-sticky sidebar-hidden" ng-app="startAPP" class="ng-cloak">
-   <% include ./partials/header %>
-   <!--CONTENIDO-->
-   <div id="main-container" ng-controller="bitacoraController" class="ng-cloak">
-      <div id="main-content" class="main-content container-fluid">
-         <div class="filler"></div>
-         <div id="page-content" class="page-content">
-            <nav>
-               <ul class="btn-toolbar page-nav margin-btn">
-                  <li>
-                     <h2 class="page-title heading-icon">
-                        <p class="btn btn-well btn-glyph">
-                           <i class="fontello-icon-user f20"></i>
-                        </p>
-                        Bienvenido <small>Jose Alberto Reyes</small>
-                     </h2>
-                  </li>
-               </ul>
-               <hr class="margin-0x">
-            </nav>
-            <section>
-               <div class="card card-fix" style="height: 590px;">
-                  <div class="card card7 card-left">
-                     <div class="card-header card-header-style">
-                        <ul class="btn-toolbar page-nav margin-btn btn-toolbar-fix">
-                           <li><a class="btn btn-well btn-well-m btn-glyph" href="#" style="width: 80px"><i
-                                    class="fontello-icon-check f18"></i><span class="block">DETALLES</span></a></li>
-                           <li><a class="btn btn-well btn-well-m btn-glyph" href="#updateModal" style="width: 80px"
-                                 data-toggle="modal"><i class="fontello-icon-comment-4 f18"></i><span
-                                    class="block">COMENTARIO</span></a></li>
-                           <li><a class="btn btn-well btn-well-m btn-glyph" href="#updateModal" style="width: 80px"
-                                 data-toggle="modal"><i class="fontello-icon-back-in-time f18"></i><span
-                                    class="block">EXTENCION</span></a></li>
-                        </ul>
-                     </div>
-                     <div class="card-body">
-                        <table class="table table-bordered table-condensed table-hover bg-white75"
-                           data-provides="rowlink">
-                           <thead>
-                              <tr>
-                                 <th scope="col">ID</th>
-                                 <th scope="col">Nombre</th>
-                                 <th scope="col">Direccion</th>
-                                 <th scope="col">Telefono</th>
-                                 <th scope="col">Progreso</th>
-                                 <th scope="col" class="action">Action</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <tr class="rowlink" ng-repeat="customer in user">
-                                 <td ng-click="show($event)"> {{$index}} </td>
-                                 <td ng-click="show($event)"> {{customer.name}}</td>
-                                 <td ng-click="show($event)"> {{customer.address}} </td>
-                                 <td ng-click="show($event)">
-                                    {{customer.phone}}
-                                 </td>
-                                 <td ng-click="show($event)">
-                                    <div class="progress">
-                                       <div class="progress-bar progress-bar-danger" role="progressbar"
-                                          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                                          style="width:{{customer.progress}}%">
-                                          <strong class="progress-bar-tittle"> {{customer.progress}}% </strong>
-                                       </div>
+<link rel="stylesheet" href="css/bitacora/bitacora.css">
+<body ng-app="startAPP" class="ng-cloak" ng-controller="bitacoraController">
+   <nav class="navbar navbar-dark navbar-expand-md bg-dark navigation-clean dark-nav-cus">
+      <div class="container-fluid"><a class="navbar-brand" href="#"><img
+               src="data:image/png;base64,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" /></a>
+         <div class="row">
+            <div class="col-auto">
+               <div class="text-monospace text-uppercase btn-group btn-group-toggle" data-toggle="buttons"
+                  style="height: 32px;"><label class="btn btn-secondary active btn-lik">Contactos<input type="radio"
+                        name="options" checked /></label><label class="btn btn-secondary btn-lik">Notas<input
+                        type="radio" name="options" checked /></label><label class="btn btn-secondary btn-lik"><input
+                        type="radio" name="options" checked /><i class="fab fa-rocketchat"></i> Chat</label></div>
+            </div>
+         </div>
+      </div>
+   </nav>
+   <fieldset class="btn-well">
+      <div class="row">
+         <div class="col">
+            <legend><span class="dark-title"><i class="far fa-user"></i></span><span> Jose Alberto Perea</span></legend>
+         </div>
+         <div class="col-auto">
+            <div class="text-monospace text-uppercase btn-group btn-group-toggle" data-toggle="buttons"
+               style="height: 32px;"><label class="btn btn-secondary active btn-lik"
+                  style="background: orange;color: #ffffff;"><a href="/insumos">Insumos</a></label><label
+                  class="btn btn-secondary btn-lik disabled" style="background: rgba(51,51,51,0.39);"><i
+                     class="far fa-bell" style="color: red;font-weight: 800;"></i></label></div>
+         </div>
+      </div>
+   </fieldset>
+   <div class="text-center justify-content-md-center card-header-style">
+      <ul class="list-inline mt-2">
+         <li class="list-inline-item text-white btn-wells"
+            style="border-top-left-radius: 12px;border-bottom-left-radius: 12px;"><a data-toggle="modal"
+               data-target="#pDetails" hrf="#">DETALLES</a></li>
+         <li class="list-inline-item text-white btn-wells"><a href="#">COMENTARIO</a></li>
+         <li class="list-inline-item text-white btn-wells"><a href="#">BITACORA</a></li>
+         <li class="list-inline-item text-white btn-wells"
+            style="border-top-right-radius: 12px;border-bottom-right-radius: 12px;"><a href="#">EXTENCION</a></li>
+      </ul>
+   </div>
+   <div id="generalInfo">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-12">
+               <div>
+                  <div class="table-responsive">
+                     <table class="table table-hover table-sm">
+                        <thead>
+                           <tr class="text-center">
+                              <th>ID</th>
+                              <th>Productor</th>
+                              <th>Telefono</th>
+                              <th>Progreso</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>15264</td>
+                              <td>Jose Rojas Pardines</td>
+                              <td>785-9699</td>
+                              <td>
+                                 <div class="progress bg-dark border rounded shadow-sm">
+                                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated"
+                                       aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0%
                                     </div>
-                                 </td>
-                                 <td class="action" ng-click="show($event)">
-                                    <a class="icon"></a>
-                                 </td>
-                              </tr>
-                           </tbody>
-                        </table>
-                     </div>
+                                 </div>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
                   </div>
-                  <div class="card card3 card-right">
-                     <div class="span5">
-                        <div class="well well-box well-nice well-left">
-                           <!-- // navbar -->
-                           <div class="section-content item">
-                              <ul class="btn-toolbar page-nav margin-btn">
-                                 <li>
-                                    <a class="btn btn-well btn-glyph fxBt">
-                                       <span class="block">BITACORA </span>
-                                    </a>
-
-
-                                 </li>
-                                 <li>
-                                    <a class="btn btn-well-s btn-glyph">
-                                       <span><strong style="color: white"> {{userSelect}} </strong></span>
-                                    </a>
-
-
-                                 </li>
-                              </ul>
-                           </div>
-                           <!-- // content item -->
-                           <div class="span5s span-fix">
-
-                              <div class="widget" ng-if="showItem === false">
-                                 <div class="widget-header">
-                                    <h4 class="fxH4"><i class="fontello-icon-window"></i>No record found</h4>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="bg-white shadow widget widget-simple" style="display: none;">
+      <div class="widget-header">
+         <div class="details">
+            <p>Preparacion y Adecuacion del Suelo</p><small>Start Date: 04/17/2019</small>
+            <div class="split"></div><small> End Date: 04/19/2019</small>
+         </div>
+         <div class="widget-tool"><a class="btn" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-2"
+               href="#collapse-2" role="button"><i class="fas fa-expand-arrows-alt"></i></a>
+            <div class="collapse" id="collapse-2">
+               <div class="widget-body">
+                  <div class="bg-white shadow widget widget-simple">
+                     <div class="widget-header">
+                        <div class="details">
+                           <p>Preparacion y Adecuacion del Suelo</p><small>Start Date: 04/17/2019</small>
+                           <div class="split"></div><small> End Date: 04/19/2019</small>
+                        </div>
+                        <div class="widget-tool"><a href="#"><i class="fa fa-expand"></i></a></div>
+                     </div>
+                     <div class="widget-content collapse">
+                        <div class="container-fluid">
+                           <div class="row">
+                              <div class="col-12">
+                                 <div class="card mt-2" style="background: rgba(204,204,204,0.17);">
+                                    <div class="card-header"><span><i class="far fa-newspaper"></i> Comentario</span>
+                                       <h5 class="text-monospace"></h5>
+                                       <h6 class="text-muted"><span>By: Jose Reyes </span><span
+                                             class="split"></span><span> 04/19/2019</span></h6><small
+                                          class="br">updated: <strong>6:25 PM</strong> (5 hours ago)</small>
+                                    </div>
+                                    <div class="card-body">
+                                       <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
+                                          justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
+                                          porta gravida at eget metus.</p>
+                                       <div role="group" class="btn-group btn-group-sm"><button class="btn btn-info"
+                                             type="button" disabled>Approved</button><button class="btn btn-secondary"
+                                             type="button">or</button></div>
+                                    </div>
                                  </div>
                               </div>
-                              <!-- // Widget -->
-
-                              <div class="widget widget-simple widget-collapsible" ng-repeat="task in list"
-                                 ng-if="showItem === true">
-                                 <div class="widget-header">
-                                    <div class="details">
-                                       <p class='tittle'>{{task.name}}</p>
-
-                                       <small>Start Date: {{task.startDate}}</small>
-                                       <div class="split"></div>
-                                       <small>End Date: {{task.endDate}}</small>
-                                    </div>
-                                    <div class="widget-tool"><a
-                                          class="btn btn-glyph btn-link widget-toggle fontello-icon-publish"
-                                          data-toggle="collapse" data-target="#{{$index}}"
-                                          href="javascript:void(0);"></a></div>
-                                 </div>
-                                 <div id="{{$index}}" class="widget-content collapse" style="height: none;">
-                                    <div class="widget-body">
-                                       <div class="widget widget-simple widget-collapsible step-style"
-                                          ng-repeat="steps in task.step">
-                                          <div class="widget-header">
-                                             <div class="details">
-                                                <p class='tittle'>{{steps.name}} </p>
-                                                <small>Start Date: {{steps.startDate}} </small>
-                                                <div class="split"></div>
-                                                <small>End Date: {{steps.endDate}}</small>
-                                             </div>
-                                             <div class="widget-tool">
-                                                <a style="color:white"
-                                                   class="btn btn-glyph btn-link widget-toggle fontello-icon-publish"
-                                                   data-toggle="collapse" data-target="#{{steps.$$hash}}"
-                                                   href="javascript:void(0);"></a>
-                                             </div>
-                                          </div>
-                                          <div id="{{steps.$$hash}}" class="widget-content collapse"
-                                             style="height: none;">
-                                             <div class="widget-body">
-                                                <div class="span4">
-                                                   <div class="widget widget-recent ws recent">
-                                                      <div class="widget-header">
-                                                         <h4><i class="fontello-icon-article-alt-1"></i>Ultimo
-                                                            Comentario</h4>
-                                                      </div>
-                                                      <div class="widget-content">
-                                                         <div class="widget-body">
-                                                            <ul class="widget-list wlf">
-                                                               <li class="media media-overflow"
-                                                                  ng-repeat="comments in steps.comments">
-                                                                  <div class="media-right">
-                                                                     <div class="quick-menu">
-                                                                        <div class="btn-group">
-                                                                           <a class="btn btn-mini btn-primary"
-                                                                              href="javascript:void(0);">Approve</a> <a
-                                                                              data-toggle="dropdown"
-                                                                              class="btn btn-mini dropdown-toggle">or&nbsp;
-                                                                              <span class="caret"></span></a>
-                                                                           <ul class="dropdown-menu pull-right">
-                                                                              <li><a href="javascript:void(0);"><i
-                                                                                       class="icon-pencil"></i><span
-                                                                                       class="divider-text"></span>Edit</a>
-                                                                              </li>
-                                                                              <li class="divider"></li>
-                                                                              <li><a href="javascript:void(0);"><i
-                                                                                       class="icon-trash"></i><span
-                                                                                       class="divider-text"></span>Delete</a>
-                                                                              </li>
-                                                                           </ul>
-                                                                        </div>
-                                                                     </div>
-                                                                  </div>
-                                                                  <div class="media-body">
-                                                                     <ul class="data inline">
-                                                                        <li><i class="fontello-icon-feather"></i>By: <a
-                                                                              href="#"><strong>J.Reyes</strong></a></li>
-                                                                        <li class="divider-vertical"></li>
-                                                                        <li><strong> {{comments.postDate}} </strong>,
-                                                                           09:27 AM</li>
-                                                                        <li class="divider-vertical"></li>
-                                                                        <li>updated: <strong>6:25 PM</strong> (5 hours
-                                                                           ago)</li>
-                                                                     </ul>
-                                                                     <!-- <h4 class="media-heading"><a href="javascript:void(0);">Aliquam facilisis enim et elit tincidunt Suspendisse</a></h4> -->
-                                                                     <p class="data"> {{comments.comment}} </p>
-                                                                  </div>
-                                                               </li>
-                                                            </ul>
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                   <!-- // Widget -->
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <!-- // Widget -->
-
                            </div>
-                           <!-- // table-content -->
                         </div>
                      </div>
                   </div>
                </div>
-            </section>
-         </div>
-         <!-- // page content -->
-      </div>
-      <!-- // main-content -->
-   </div>
-   <!--CONTENIDO-->
-   <!-- You can put your modal definitions here but it is not required -->
-   <div id="myModal" class="modal hide fade" tabindex="-1">
-      <div class="modal-header">
-         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-         <h4><i class="fontello-icon-mail-4"></i>New Message</h4>
-      </div>
-      <div class="modal-body">
-         <div class="row-fluid">
-            <form id="formNotes" class="span12 form-dark">
-               <fieldset>
-                  <label for="mailTo" class="control-label">To</label>
-                  <input id="mailTo" class="input-block-level" type="text" value="Colin Nixon - semper@diamSeddiam.edu">
-                  <label for="mailSubject" class="control-label">Subjest</label>
-                  <input id="mailSubject" class="input-block-level" type="text">
-                  <label for="mailMessage">Note Text:</label>
-                  <textarea id="mailMessage" class="input-block-level auto" rows="5"
-                     style="min-height: 130px"></textarea>
-               </fieldset>
-               <!-- // fieldset Input -->
-            </form>
+            </div>
          </div>
       </div>
-      <div class="modal-footer">
-         <button type="button" data-dismiss="modal" class="btn btn-boo">Cancel</button>
-         <button type="button" class="btn btn-green">Send message</button>
+   </div>
+   <!--MODAL-->
+   <div role="dialog" tabindex="-1" class="modal fade border rounded" id="pDetails">
+      <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title text-black-50">Jose Rojas Pardinie</h5><button type="button" class="close"
+                  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="modal-body">
+               <div class="row-1">
+                  <div class="row Ctr-streaps">
+                     <div class="col-12 text-center border">
+                        <h6>Projecto</h6>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-12 text-center"><span>Auto - Consumo</span></div>
+                  </div>
+               </div>
+               <div class="row-2">
+                  <div class="row Ctr-streaps">
+                     <div class="col-12 text-center border">
+                        <h6>Direccion</h6>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-12 text-center"><span>Chirqui Alenje despues de la finca Potros</span></div>
+                  </div>
+               </div>
+               <div class="row-3">
+                  <div class="row Ctr-streaps">
+                     <div class="col-12 text-center border">
+                        <h6>Rubro</h6>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-12 text-center"><span>Pollo de Engorde</span></div>
+                  </div>
+               </div>
+               <div class="row-4">
+                  <div class="row Ctr-streaps">
+                     <div class="col-12 text-center border">
+                        <h6>Insumos</h6>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-12 text-center">
+                        <div class="mb-1"><a class="btn btn-info btn-block btn-sm" data-toggle="collapse"
+                              aria-expanded="false" aria-controls="collapse-1" href="#collapse-1"
+                              role="button">Task1</a>
+                           <div class="collapse" id="collapse-1">
+                              <p>Collapse content.</p>
+                           </div>
+                        </div>
+                        <div class="mb-1"><a class="btn btn-info btn-block btn-sm" data-toggle="collapse"
+                              aria-expanded="false" aria-controls="collapse-2" href="#collapse-2"
+                              role="button">Task2</a>
+                           <div class="collapse" id="collapse-2">
+                              <p>Collapse content.</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer"><button class="btn btn-light" type="button"
+                  data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+         </div>
       </div>
    </div>
-   <!-- // sample modal - custom manager  -->
-   <% include ./partials/script %>
-   <script src="plugin/bootstrap-jasny/js/bootstrap-rowlink.js"></script>
+
+
    <script src="controller/bitacoraController.js"></script>
-   <!-- <script src="plugin/pl-table/datatables/js/jquery.dataTables.js"></script>
-         <script src="plugin/pl-table/datatables/js/jquery.dataTables.plugins.js"></script>
-         <script src="plugin/pl-table/datatables/js/jquery.dataTables.columnFilter.js"></script> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+   <script src="./js/bitacora.js"></script>
 </body>
 
 </html>

@@ -39,6 +39,7 @@ app.set('view engine', 'ejs');
 require('./api/role/config-role')(app)
 require('./api/user/user-api')(app)
 require('./api/caja/config-caja')(app)
+require('./api/project/project')(app)
 app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/routesSession')(app, passport, LocalStrategy)
 require('./session/api-session')(passport)

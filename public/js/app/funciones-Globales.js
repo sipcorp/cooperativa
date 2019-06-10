@@ -111,13 +111,19 @@ function formatNumber(n) {
     return n === '' ? n : Number(n).toLocaleString();
 }
     
-function dateFormat(target){
+function dateFormat(target,type){
+    if(type === 1){
     var options = {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     };
-    return target.toLocaleDateString("es-ES", options)
+    return target.toLocaleDateString("es-ES", options)    
+    }
+    if(type === 2){
+      return  target.getFullYear() + "-" + ((target.getMonth()+1) < 10 ? "0"+(target.getMonth()+1) : (target.getMonth()+1)) + "-" + (target.getDate() < 10 ? "0"+target.getDate() : target.getDate() )+ "T05:00:00.000+00:00"
+         
+    }
 }
 function currency(value, decimals, separators) {
     // var decimals = 2;

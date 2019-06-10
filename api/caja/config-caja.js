@@ -7,9 +7,9 @@ module.exports = (app) => {
 
   app.get("/get-caja", function (req, res) {
     let date = new Date();
-    let start = date.getFullYear() + "-" + ((date.getMonth()+1) < 10 ? "0"+(date.getMonth()+1) : (date.getMonth()+1)) + "-" + date.getDate()+ "T05:00:00.000+00:00"
-   console.log(start)
-    let query = {startDate: {$gte: start} };
+    let start = date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + date.getDate() + "T05:00:00.000+00:00"
+    console.log(start)
+    let query = { startDate: { $gte: start } };
     //muestra los modulos segun el role
     Caja.find(query).exec((err, caja) => {
       if (err) {
@@ -70,32 +70,31 @@ module.exports = (app) => {
     let endDate = body.endDate
     Caja.update(
       {
-        "_id":id
-      },{
-        $addToSet : {
+        "_id": id
+      }, {
+        $addToSet: {
           cashCount: {
-          $each : objB,objCo,objC
+            $each: objB, objCo, objC
           }
         }
-      },{
-        $set:{
+      }, {
+        $set: {
           faltante: faltante,
           sobrante: sobrante,
           endDate: endDate
         }
       }).WriteResult({
-        "nMatched" : 0,
-        "nUpserted" : 0,
-        "nModified" : 0,
-        "writeError" : {
-           "code" : 7,
-           "errmsg" : "could not contact primary for replica set shard-a"
+        "nMatched": 0,
+        "nUpserted": 0,
+        "nModified": 0,
+        "writeError": {
+          "code": 7,
+          "errmsg": "could not contact primary for replica set shard-a"
         }
-     })
+      })
   });
 
 }
 
 
 
-  

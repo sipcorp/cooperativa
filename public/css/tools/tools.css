@@ -16,7 +16,46 @@
 }
 .c00{
     margin-top: -30px;
-    padding-left: 574px;
+    padding-left: 654px;
+}
+.float-right{
+    float: right;
+}
+.step-title{
+    font-size: 15px;
+    margin-bottom: auto;
+    display: block;
+    min-height: 20px;
+    font-weight: bold;
+}
+.items{
+    margin-bottom: 20px;
+}
+.form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+.well {
+    border-color: #d3d5d900;
+    background-color: #f6f7fe00;
+    color: #333333;
+}
+input[type="sip"]{
+    min-height: 26px !important;
+    border-color: #f0f8ff00 !important;
+    -webkit-border-radius: 1px !important;
+    -moz-border-radius: 1px !important;
+    border-radius: 1px !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    background: none !important;
+    border-bottom: 1px solid #000 !important; 
 }
 .well-xb{
     border-color: #ffffff00;
@@ -67,7 +106,8 @@
 }
 
 .tab-content {
-    margin-bottom: 0px;
+    margin-bottom: 16px;
+    padding: 0 !important;
 }
 
 .ml-00{

@@ -29,3 +29,10 @@ var headerAjax = {
 const addCaja = "/add-caja"
 const getCaja = "/get-caja"
 const updateCaja = "/update-caja"
+
+
+/*######################################################## */
+//                  GLOBAL VARS PROJECT JS 
+/*######################################################## */
+const addProject = "/add-project"
+const getProject = "/get-project"
