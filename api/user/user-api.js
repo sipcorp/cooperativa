@@ -1,4 +1,3 @@
-const User = require('../../models/user');
 const Users = require('../../models/user');
 module.exports = (app) => {
   /*############################################### */

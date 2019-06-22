@@ -662,3 +662,21 @@ getRubroInfo = {
 
 	}
 }
+
+getTypeProveedor = {
+	proveedor: function(){
+		return [{
+			id:1,
+			name:"Producto"
+		},{
+			id:2,
+			name:"Servicios",
+		},{
+			id:3,
+			name:"Maquinaria"
+		},{
+			id:4,
+			name:"Insumos"
+		}]
+	}
+}

@@ -27,21 +27,27 @@
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph" href="#TabTop3" data-toggle="tab" style="width: 80px"
+                     <a class="btn btn-well btn-glyph step1" href="#TabTop3" data-toggle="tab" style="width: 90px">
+                        <i class="fontello-icon-user-add f30"></i>
+                        <span class="block">PROVEEDORES</span>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="btn btn-well btn-glyph" href="#TabTop4" data-toggle="tab" style="width: 80px"
                         data-toggle="modal">
                         <i class="fontello-icon-leaf-1 f30"></i>
                         <span class="block">PRODUCTOS</span>
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph" href="#TabTop4" data-toggle="tab" style="width: 80px"
+                     <a class="btn btn-well btn-glyph" href="#TabTop5" data-toggle="tab" style="width: 80px"
                         data-toggle="modal">
                         <i class="fontello-icon-water f30"></i>
                         <span class="block">INSUMOS</span>
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph" href="#TabTop5" data-toggle="tab" style="width: 80px"
+                     <a class="btn btn-well btn-glyph" href="#TabTop6" data-toggle="tab" style="width: 80px"
                         data-toggle="modal">
                         <i class="fontello-icon-users-2 f30"></i>
                         <span class="block">CLIENTES</span>
@@ -332,7 +338,8 @@
                               <i class="fontello-icon-quote-left-alt"></i>
                               <span>Agregar Productores</span>
                               <div class="form-actions-s">
-                                 <button type="submit" class="btn btn-blue">Submit &amp; Validate</button>
+                                 <button type="button" ng-click="save()" class="btn btn-blue">Submit &amp;
+                                    Validate</button>
                                  <button class="btn cancel">Cancel</button>
                               </div>
                            </legend>
@@ -344,7 +351,7 @@
                                     <label for="wzNewPrefix" class="control-label">Prefix</label>
                                     <div class="controls">
                                        <input id="wzNewPrefix" class="span3" type="text" value="" name="wzNewPrefix"
-                                          ng-model="changePrefix" ng-change="createObj(changePrefix,'x')">
+                                          readonly ng-model="changePrefix" ng-change="createObj(changePrefix,'x')">
                                     </div>
                                  </li>
                                  <!-- // form item -->
@@ -360,18 +367,17 @@
                                  <li class="control-group">
                                     <label for="wzNewProject" class="control-label">Proyecto<span
                                           class="required">*</span></label>
-                                    <div class="controls">
-                                       <select id="wzNewProject" class="span6" type="text" name="wzNewProject"
+                                    <div class="controls select">
+                                       <select id="wzNewProject" class="span2" type="text" name="wzNewProject"
                                           ng-model="changeProject" ng-blur="createObj(changeProject,'pj')">
                                           <option value="" disabled>Seleccione projecto</option>
                                           <option value="{{projects._id}}" ng-repeat="projects in project[0]">
                                              {{projects.name}}</option>
                                        </select>
                                     </div>
-                                    <label for="wzNewRubro" class="control-labels" ng-show="showRubro">Rubro<span
-                                          class="required">*</span></label>
-                                    <div class="controls c00" ng-show="showRubro">
-                                       <select id="wzNewRubro" class="span6" type="text" name="wzNewRubro"
+
+                                    <div class="controls c00 select" ng-show="showRubro">
+                                       <select id="wzNewRubro" class="span2" type="text" name="wzNewRubro"
                                           ng-model="selectedObj" ng-blur="createObj(selectedObj,'rb')">
                                           <option value="" disabled>Seleccione un rubro</option>
                                           <option value="{{rubros.name}}" ng-repeat="rubros in rubro[0]">{{rubros.name}}
@@ -388,11 +394,11 @@
                               <ul class="form-list label-left list-bordered dotted">
                                  <!-- // form item -->
                                  <li class="control-group">
-                                    <label for="wzNewFirstName" class="control-label">Hectarias / Cantidad<span
+                                    <label for="wzNewHect" class="control-label">Hectarias / Cantidad<span
                                           class="required">*</span></label>
                                     <div class="controls">
-                                       <input id="wzNewFirstName" class="span3" type="text" name="wzNewFirstName"
-                                          ng-model="changeName" ng-blur="createObj(changeName,'nm')">
+                                       <input id="wzNewHect" class="span3" type="text" name="wzNewHect"
+                                          ng-model="hectChange" ng-blur="createObj(hectChange,'ha')">
                                     </div>
                                  </li>
                                  <!-- // form item -->
@@ -413,16 +419,16 @@
                                                    <div class="form-inline">
                                                       <div class="form-group">
                                                          <label for="exampleInputName">Insumo</label>
-                                                         <input type="text" class="form-control" id="exampleInputName"
+                                                         <input type="text" class="form-control insumoName"
                                                             ng-model="name" placeholder="Name">
                                                       </div>
                                                       <div class="form-group">
                                                          <label for="exampleInputage">Cantidad</label>
-                                                         <input type="number" class="form-control" id="exampleInputAge"
+                                                         <input type="number" class="form-control qtyName"
                                                             ng-model="qty" placeholder="qty" />
                                                       </div>
                                                       <button type="button" class="btn btn-primary"
-                                                         ng-click="addRow(step.hash,name,qty)"><i
+                                                         ng-click="addRow(step.hash,name,qty,bit.name,step.name)"><i
                                                             class="glyphicon glyphicon-plus"></i>&nbsp;Add Row</button>
                                                    </div>
                                                 </fieldset>
@@ -437,7 +443,7 @@
                                                    </tr>
                                                 </thead>
                                                 <tbody id="{{step.hash}}">
-                                                  
+
                                                 </tbody>
                                              </table>
                                           </div>
@@ -483,15 +489,17 @@
                                     <label for="wzNewDob" class="control-label">Fecha de nacimiento <span
                                           class="required">*</span></label>
                                     <div class="controls">
-                                       <input id="wzNewDob" class="span6" type="text" name="wzNewDob"
-                                          ng-model="changeDob" ng-blur="createObj(changeDob,'dob')">
+                                       <input id="wzNewDob" class="span4" type="text" name="wzNewDob"
+                                          pattern="^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"
+                                          placeholder="MM/DD/YYYY" ng-model="changeDob"
+                                          ng-blur="createObj(changeDob,'dob')">
                                     </div>
                                  </li>
                                  <!-- // form item -->
                                  <li class="control-group">
                                     <label for="wzNewAge" class="control-label">Edad</label>
                                     <div class="controls">
-                                       <input id="wzNewAge" class="span4" type="text" name="wzNewAge">
+                                       <input id="wzNewAge" class="span4" type="text" name="wzNewAge" readonly>
                                     </div>
                                  </li>
                                  <!-- // form item -->
@@ -511,8 +519,329 @@
                      </div>
                   </section>
                </div>
-               <!-- // tab 3 -->
-               <div class="tab-pane" id="TabTop3">
+               <!--// Tab 3--->
+               <div class="tab-pane" id="TabTop3" ng-controller="proveedorController">
+                  <section>
+                     <div class="row-fluid">
+                        <form class="form-horizontal span12">
+                           <legend class="margin-03">
+                              <i class="fontello-icon-quote-left-alt"></i>
+                              <span>Agregar Proveedor</span>
+                              <div class="form-actions-s">
+                                 <button type="button" ng-click="" class="btn btn-blue">Submit &amp; Validate</button>
+                                 <button class="btn cancel">Cancel</button>
+                              </div>
+                           </legend>
+                           <fieldset>
+                              <h4 style="color:#569da3;"><i class="booico-user txt-r"></i>Informacion general
+                              </h4>
+                              <ul class="form-list label-left list-bordered dotted">
+                                 <li class="control-group">
+                                    <label for="wzNewPrefixProveedor" class="control-label">Prefix</label>
+                                    <div class="controls">
+                                       <input id="wzNewPrefixProveedor" class="span3" type="text" value=""
+                                          name="wzNewPrefixProveedor" readonly ng-model="changePrefixProv" ng-change="">
+                                    </div>
+                                 </li>
+                                 <!-- // form item -->
+                                 <li class="control-group">
+                                    <label for="wzPvName" class="control-label">Nombre completo<span
+                                          class="required">*</span></label>
+                                    <div class="controls">
+                                       <input id="wzPvName" class="span6" type="text" name="wzPvName"
+                                          ng-model="changeNamePv" ng-blur="createProveedorObj('nm',changeNamePv)">
+                                    </div>
+                                 </li>
+                                 <li class="control-group">
+                                    <label for="wzNewAddress" class="control-label">Tipo de Proveedor<span
+                                          class="required">*</span></label>
+                                    <div class="controls">
+                                       <select name="" id="" ng-model="typeChange" ng-change="showSecction(typeChange)">
+                                          <option value="" label="Seleccione un tipo" disabled selected></option>
+                                          <option value="{{type.id}}" label="{{type.name}}"
+                                             ng-repeat="type in typeProveedor track by $index"></option>
+                                       </select>
+                                    </div>
+                                 </li>
+
+                                 <fieldset ng-show="showProduct">
+                                    <!-- // form item -->
+                                    <li class="control-group">
+                                       <label for="wzNewProjectp" class="control-label">Proyecto<span
+                                             class="required">*</span></label>
+                                       <div class="controls select">
+                                          <select id="wzNewProjectp" type="text" name="wzNewProjectp"
+                                             ng-model="changeProjects" ng-change="createProveedorObj('pj',changeProjects)">
+                                             <option value="" disabled>Seleccione projecto</option>
+                                             <option ng-repeat="p in project" value="{{p.name}}">{{p.name}}</option>
+                                          </select>
+                                       </div>
+                                    </li>
+                                    <!-- // form item -->
+                                    <li class="control-group">
+
+                                       <div class="controls">
+                                          <input placeholder="Rubro" type="text" ng-model="changeRubros" ng-change="createProveedorObj('pjR',changeRubros)"/>
+                                          <input placeholder="Hectaria" type="text" class="w70" ng-model="changeHeact" ng-change="createProveedorObj('pjH',changeHeact)"/>
+                                          <input placeholder="UMA" type="text" class="w70" ng-model="changeUMA" ng-change="createProveedorObj('pjU',changeUMA)" />
+                                          <input placeholder="Produccion" type="text" class="w232ex" ng-model="changeProducts" ng-change="createProveedorObj('pjP',changeProducts)" />
+                                       </div>
+
+
+                                    </li>
+                                    <!-- // form item -->
+                                 </fieldset>
+                                 <fieldset ng-show="showService">
+                                    <!-- // form item -->
+                                    <li class="control-group">
+                                       <label for="typeService" class="control-label">Servicio<span
+                                             class="required">*</span></label>
+                                       <div class="controls">
+                                          <input class="span3" type="text" name="typeService" />
+                                       </div>
+                                    </li>
+                                    <!-- // form item -->
+                                 </fieldset>
+                                 <fieldset ng-show="showMaquinaria">
+                                    <div class="step">
+                                       <h4 class="text-center" style="margin-bottom: -10px;">Equipos</h4>
+                                       <div class="itemStep">
+                                          <div class="items">
+                                             <div class="insumoItems mt-1">
+                                                <div class="well well-sm clearfix">
+                                                   <fieldset class="scheduler-border" style="text-align: center;">
+                                                      <legend class="scheduler-border">{{step.name}}</legend>
+                                                      <div class="form-inline">
+                                                         <div class="form-group">
+                                                            <label for="exampleInputName">Marca</label>
+                                                            <input type="text" class="form-control" ng-model="brand"
+                                                               placeholder="Marca">
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label for="exampleInputage">Tipo</label>
+                                                            <input type="text" class="form-control" ng-model="type"
+                                                               placeholder="Clase" />
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label for="exampleInputage">Modelo</label>
+                                                            <input type="text" class="form-control" ng-model="modelo"
+                                                               placeholder="Clase" />
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label for="exampleInputage">Capacidad</label>
+                                                            <input type="text" class="form-control" ng-model="modelo"
+                                                               placeholder="Clase" />
+                                                         </div>
+                                                         <button type="button" class="btn btn-primary"
+                                                            ng-click="addRow(step.hash,name,qty,bit.name,step.name)"><i
+                                                               class="glyphicon glyphicon-plus"></i>&nbsp;Add
+                                                            Row</button>
+                                                      </div>
+                                                   </fieldset>
+                                                </div>
+
+                                                <table class="table table-bordered">
+                                                   <thead>
+                                                      <tr>
+                                                         <th style="width: 362px;">Marca</th>
+                                                         <th>Tipo</th>
+                                                         <th>Modelo</th>
+                                                         <th>Capacidad</th>
+                                                         <th style="width: 30px;"></th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody id="{{step.hash}}">
+
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </fieldset>
+                                 <fieldset ng-show="showInsumo">
+                                    <div class="step">
+                                       <h4 class="text-center" style="margin-bottom: -10px;">Insumos</h4>
+                                       <div class="itemStep">
+                                          <div class="items">
+
+                                             <div class="insumoItems mt-1">
+
+                                                <div class="well well-sm clearfix">
+                                                   <fieldset class="scheduler-border">
+                                                      <legend class="scheduler-border"></legend>
+                                                      <div class="form-inline">
+                                                         <div class="form-group">
+                                                            <label for="exampleInputName">Marca</label>
+                                                            <input type="text" class="form-control" ng-model="name"
+                                                               placeholder="Marca">
+                                                         </div>
+                                                         <div class="form-group">
+                                                            <label for="exampleInputage">Nombre</label>
+                                                            <input type="text" class="form-control" ng-model="qty"
+                                                               placeholder="Nombre" />
+                                                         </div>
+                                                         <button type="button" class="btn btn-primary"
+                                                            ng-click="addRow(step.hash,name,qty,bit.name,step.name)"><i
+                                                               class="glyphicon glyphicon-plus"></i>&nbsp;Add
+                                                            Row</button>
+                                                      </div>
+                                                   </fieldset>
+                                                </div>
+
+                                                <table class="table table-bordered" id="tbl_employees"
+                                                   style="width: 50%;">
+                                                   <thead>
+                                                      <tr>
+                                                         <th style="width: 362px;">Insumo</th>
+                                                         <th>Cantidad</th>
+                                                         <th style="width: 30px;"></th>
+                                                      </tr>
+                                                   </thead>
+                                                   <tbody id="{{step.hash}}">
+
+                                                   </tbody>
+                                                </table>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </fieldset>
+                              </ul>
+                           </fieldset>
+                           <fieldset ng-show="showRubro">
+                              <h4 style="color:#569da3;"> {{selectedObj}} - Datos de Insumos</h4>
+                              <ul class="form-list label-left list-bordered dotted">
+                                 <!-- // form item -->
+                                 <li class="control-group">
+                                    <label for="wzNewHect" class="control-label">Hectarias / Cantidad<span
+                                          class="required">*</span></label>
+                                    <div class="controls">
+                                       <input id="wzNewHect" class="span3" type="text" name="wzNewHect"
+                                          ng-model="hectChange" ng-blur="createObj(hectChange,'ha')">
+                                    </div>
+                                 </li>
+                                 <!-- // form item -->
+
+                                 <!--Cantidad de insumo por STEP-->
+
+                                 <!-- // form item -->
+                                 <div class="step" ng-repeat="bit in rubroBitacora">
+                                    <h4 class="text-center">{{bit.name}}</h4>
+                                    <div class="itemStep">
+                                       <div class="items" ng-repeat="step in bit.step">
+
+                                          <div class="insumoItems mt-1">
+
+                                             <div class="well clearfix">
+                                                <fieldset class="scheduler-border">
+                                                   <legend class="scheduler-border">{{step.name}}</legend>
+                                                   <div class="form-inline">
+                                                      <div class="form-group">
+                                                         <label for="exampleInputName">Insumo</label>
+                                                         <input type="text" class="form-control insumoName"
+                                                            ng-model="name" placeholder="Name">
+                                                      </div>
+                                                      <div class="form-group">
+                                                         <label for="exampleInputage">Cantidad</label>
+                                                         <input type="number" class="form-control qtyName"
+                                                            ng-model="qty" placeholder="qty" />
+                                                      </div>
+                                                      <button type="button" class="btn btn-primary"
+                                                         ng-click="addRow(step.hash,name,qty,bit.name,step.name)"><i
+                                                            class="glyphicon glyphicon-plus"></i>&nbsp;Add Row</button>
+                                                   </div>
+                                                </fieldset>
+                                             </div>
+
+                                             <table class="table table-bordered" id="tbl_employees" style="width: 50%;">
+                                                <thead>
+                                                   <tr>
+                                                      <th style="width: 362px;">Insumo</th>
+                                                      <th>Cantidad</th>
+                                                      <th style="width: 30px;"></th>
+                                                   </tr>
+                                                </thead>
+                                                <tbody id="{{step.hash}}">
+
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+
+                                 <!-- // form item -->
+
+                              </ul>
+
+                           </fieldset>
+                           <fieldset>
+                              <h4 style="color:#569da3;"><i class="booico-vcard txt-r"></i>Datos personales
+                              </h4>
+                              <ul class="form-list label-left list-bordered dotted">
+                                 <li class="control-group">
+                                    <label for="wzNewMaritalStatus" class="control-label">Cedula</label>
+                                    <div class="controls">
+                                       <input id="wzNewMaritalStatus" class="span3" type="text"
+                                          name="wzNewMaritalStatus" ng-model="changeCedula"
+                                          ng-blur="createObj(changeCedula,'cd')">
+                                    </div>
+                                 </li>
+                                 <!-- // form item -->
+                                 <li class="control-group">
+                                    <label for="wzNewGenderInput" class="control-label">Genero</label>
+                                    <div class="controls">
+                                       <input id="wzNewGenderInput" type="hidden" name="wzNewGender">
+                                       <div id="wzNewGender" class="btn-group change" data-toggle="buttons-radio"
+                                          data-target="wzNewGenderInput">
+                                          <button type="button" class="btn" class-toggle="btn-green" name="wzNewGender"
+                                             value="male" ng-click="createObj($event.currentTarget,'gr')">&nbsp; Male
+                                             &nbsp;</button>
+                                          <button type="button" class="btn" class-toggle="btn-green" name="wzNewGender"
+                                             value="female"
+                                             ng-click="createObj($event.currentTarget,'gr')">Female</button>
+                                       </div>
+                                    </div>
+                                 </li>
+                                 <!-- // form item -->
+                                 <li class="control-group">
+                                    <label for="wzNewDob" class="control-label">Fecha de nacimiento <span
+                                          class="required">*</span></label>
+                                    <div class="controls">
+                                       <input id="wzNewDob" class="span4" type="text" name="wzNewDob"
+                                          pattern="^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"
+                                          placeholder="MM/DD/YYYY" ng-model="changeDob"
+                                          ng-blur="createObj(changeDob,'dob')">
+                                    </div>
+                                 </li>
+                                 <!-- // form item -->
+                                 <li class="control-group">
+                                    <label for="wzNewAge" class="control-label">Edad</label>
+                                    <div class="controls">
+                                       <input id="wzNewAge" class="span4" type="text" name="wzNewAge" readonly>
+                                    </div>
+                                 </li>
+                                 <!-- // form item -->
+                                 <li class="control-group">
+                                    <label for="wzNewAddress" class="control-label">Direccion completa <span
+                                          class="required">*</span></label>
+                                    <div class="controls">
+                                       <input id="wzNewAddress" class="span6" type="text" name="wzNewAddress"
+                                          ng-model="changeFullAddress" ng-blur="createObj(changeFullAddress,'fa')">
+                                    </div>
+                                 </li>
+
+                              </ul>
+                           </fieldset>
+                        </form>
+                        <!-- // FORM Input fields -->
+                     </div>
+                  </section>
+
+               </div>
+               <!-- // tab 4 -->
+               <div class="tab-pane" id="TabTop4">
                   <section>
                      <div class="row-fluid">
                         <form class="form-horizontal span12">
@@ -579,8 +908,8 @@
                      </div>
                   </section>
                </div>
-               <!-- // tab 4 -->
-               <div class="tab-pane" id="TabTop4">
+               <!-- // tab 5 -->
+               <div class="tab-pane" id="TabTop5">
                   <section>
                      <div class="row-fluid">
                         <form class="form-horizontal span12">
@@ -665,8 +994,8 @@
                      </div>
                   </section>
                </div>
-               <!-- // tab 5 -->
-               <div class="tab-pane" id="TabTop5">
+               <!-- // tab 6 -->
+               <div class="tab-pane" id="TabTop6">
                   <section>
                      <div class="row-fluid">
                         <form class="form-horizontal span12">
@@ -730,8 +1059,8 @@
                      </div>
                   </section>
                </div>
-               <!-- // tab 6 -->
-               <div class="tab-pane" id="TabTop6">
+               <!-- // tab 7 -->
+               <div class="tab-pane" id="TabTop7">
                </div>
             </div>
          </div>
@@ -754,6 +1083,7 @@
    <script src="./json/json.js"></script>
    <script src="./controller/proyectController.js"></script>
    <script src="./controller/productorController.js"></script>
+   <script src="./controller/proveedorController.js"></script>
 </body>
 
 </html>

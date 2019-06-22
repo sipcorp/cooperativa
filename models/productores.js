@@ -3,13 +3,13 @@ const { Schema } = mongoose;
 
 const ProductoSchema = mongoose.Schema({
    prefix: {type:String, require:true},
-   name: {type: Number, require:true},
+   name: {type: String, require:true},
    project: {type:Array,require:true},
    documentID:{type:String,require:true},
-   gender:{type:Number,require:true},
-   birthdate:{type:String,require:true},
+   gender:{type:String,require:true},
+   birthdate:{type:Date,require:true},
    age:{type:Number,require:true},
-   address:{type:Array,require:true}
+   address:{type:String,require:true}
 },{collection:'productor'})
 
 module.exports = mongoose.model('productor', ProductoSchema);

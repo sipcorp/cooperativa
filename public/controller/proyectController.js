@@ -47,7 +47,7 @@ app.controller('proyectController', ['$scope', '$timeout', '$http', function ($s
             }
         })
 
-        console.log($scope.cicloList)
+       // console.log($scope.cicloList)
     }
     // DEL
     $scope.delCiclo = function (parent, target) {
@@ -60,7 +60,7 @@ app.controller('proyectController', ['$scope', '$timeout', '$http', function ($s
                 })
             }
         });
-        console.log($scope.bitacoraModels)
+       // console.log($scope.bitacoraModels)
     }
 
     /**************************************************************************/
@@ -188,8 +188,8 @@ app.controller('proyectController', ['$scope', '$timeout', '$http', function ($s
                     }
 
 
-                    console.log($scope.bitacoModels)
-                    console.log($scope.proyect)
+                    //console.log($scope.bitacoModels)
+                    //console.log($scope.proyect)
                 }
             }, 600)
 
@@ -231,10 +231,10 @@ app.controller('proyectController', ['$scope', '$timeout', '$http', function ($s
                     })
 
                 }
-                console.log($scope.bitacoraModels)
+                //console.log($scope.bitacoraModels)
             })
         }
-        console.log($scope.proyect)
+        //console.log($scope.proyect)
     }
     /**************************************************************************/
     /**************************************************************************/
@@ -246,7 +246,6 @@ app.controller('proyectController', ['$scope', '$timeout', '$http', function ($s
         objProject = JSON.parse(objProject)
         $scope.proyect[0].bitacoraModel.push(objProject)
      
-        console.log($scope.proyect)
         var obj = JSON.stringify($scope.proyect)
         $.ajax({
             url: addProject,

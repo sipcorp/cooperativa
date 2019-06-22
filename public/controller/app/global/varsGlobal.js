@@ -36,3 +36,8 @@ const updateCaja = "/update-caja"
 /*######################################################## */
 const addProject = "/add-project"
 const getProject = "/get-project"
+
+/*######################################################## */
+//                  GLOBAL VARS PRODUCTOR JS 
+/*######################################################## */
+const addProductor = "/add-productor"

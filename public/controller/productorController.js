@@ -6,7 +6,11 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
             name: '',
             project: [{
                 name: '',
-                rubro: '',
+                hectaria:"",
+                rubro: [{
+                    name: "",
+                    rubroInsumo: []
+                }],
                 bitacora: []
             }],
             documentID: '',
@@ -16,7 +20,7 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
             address: ""
         }
     ]
-
+    var insumoDetails = []
     var project = [];
     var rubros = [];
     var bitacora = []
@@ -25,7 +29,8 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
     $scope.project = project;
     $scope.rubro = rubros;
     $scope.showRubro = false;
-    $scope.rubroBitacora = []
+    $scope.rubroBitacora = [];
+    $scope.productor = productor;
     /***********************************************************/
     //                  GET PROJECT INFO                      //
     /**********************************************************/
@@ -37,7 +42,6 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
             success: function (data) {
                 project.push(data.project)
                 $scope.$digest();
-                console.log(project)
             }
         });
     }
@@ -63,27 +67,40 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
         // LOAD PROJECT AND RUBRO
         if (type === 'pj') {
             // LOAD PROJECT
-            var id = data
-            var name = ""
+            var id = data;
+            var name = "";
+            var objBit;
             $.each($scope.project, function (d, l) {
                 if (id === l[d]._id && l[d].categoria === cat) {
-                    name = l.name;
+                    name = l[d].name;
+                    productor[0].project[0].name = name
                     $scope.rubro.push(l[d].rubros);
-                    bitacora.push(l[d].bitacoraModel[0]);
+                    objBit = angular.toJson(l[d].bitacoraModel[0])
+                    objBit = JSON.parse(objBit)
+                    bitacora.push(objBit);
                     console.log(bitacora)
                     $scope.showRubro = true
                 }
             })
-            productor[0].project[0].name = name
+
         }
+
         if (type === 'rb') {
-            productor[0].project[0].rubro = data
+            productor[0].project[0].rubro[0].name = data
             $.each($scope.bitacora, function (s, l) {
                 if (data === l[s].name) {
                     $scope.rubroBitacora.push(l[s].task[0])
-                    console.log($scope.rubroBitacora)
+                    var objBits = angular.toJson($scope.rubroBitacora[0])
+                    objBits = JSON.parse(objBits)
+                    productor[0].project[0].bitacora.push(objBits)
                 }
             })
+        }
+
+
+        // LOAD INSUMOS DETAILS
+        if (type === 'ins') {
+            productor[0].project[0].rubro[0].rubroInsumo.push(data)
         }
 
         // LOAD CEDULA
@@ -98,31 +115,168 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
 
         // LOAD FECHA DE NACIMIENTP
         if (type === 'dob') {
-            productor[0].birthdate = data
+            var d = new Date(data),
+                n = new Date(),
+                year = n.getFullYear() - d.getFullYear()
+            $("#wzNewAge").val(year)
+            productor[0].birthdate = dateFormat(d,2);
+            productor[0].age = year
         }
-
+        if (type === 'fa') {
+            productor[0].address = data
+        }
+        if(type === 'ha'){
+            productor[0].project[0].hectaria = data
+        }
         console.log($scope.productor)
     }
-    $scope.addRow = function (id, name, qty) {
-        var $elem = '<tr id="idx' + id + '">' +
+
+    /****************************************************************************************************************/
+    // ADD ROW
+    $scope.addRow = function (id, name, qty, taskName, stepName) {
+        var Objects = {}, index = Math.floor(Math.random() * (15 - 8 + 1) + 8);
+        if (qty == undefined) {
+            qty = 1
+        }
+        var $elem = '<tr id="idx' + index + id + '">' +
             '<td>' + name + '</td>' +
             '<td>' + qty + '</td>' +
             '<td><a class="btn btn-xs delete-record"' +
-            'ng-click="delRow($event)"><i class="fontello-icon-trash"></i></a></td>' +
+            'ng-click="delRow($event)"><i class="fontello-icon-trash"></i>' +
+            '<input type="hidden" redonly value="' + taskName + '">' +
+            '<input type="hidden" redonly value="' + stepName + '">' +
+            '</a></td>' +
             '</tr>'
         var newRow = $compile($elem)($scope);
         $("tbody[id=" + id + "]").append(newRow)
-        $("#exampleInputName").val("")
-        $("#exampleInputAge").val("")
-    }
-    $scope.delRow = function (index) {
-        var id = index.currentTarget.offsetParent.parentElement.id
-        $scope.table = $("tbody[id=" + index.currentTarget.offsetParent.parentElement.id.replace("idx", "").trim() + "]")
+        $(".insumoName").val("")
+        $(".qtyName").val("")
 
+        // Load Insumos Details
+        if (insumoDetails.length == 0) {
+            Objects = {
+                task: taskName,
+                step: [{
+                    name: stepName,
+                    insumos: [{
+                        name: name,
+                        qty: qty
+                    }]
+                }]
+            }
+            insumoDetails.push(Objects)
+        } else {
+            var taskExist = false,
+                stepExists = false,
+                insumoExists = false,
+                stepIndex,
+                taskIndex;
+            $.each(insumoDetails, function (s, v) {
+                if (v.task === taskName) {
+                    taskExist = true;
+                    taskIndex = s;
+                }
+                for (let i = 0; i < insumoDetails[s].step.length; i++) {
+                    if (insumoDetails[s].step[i].name == stepName) {
+                        stepExists = true;
+                        stepIndex = i;
+                        return false;
+                    }
+                }
+                if (stepExists == true) {
+                    for (let index = 0; index < insumoDetails[s].step[stepIndex].insumos.length; index++) {
+                        if (insumoDetails[s].step[stepIndex].insumos[index].name == name) {
+                            insumoExists = true;
+                        }
+                    }
+                }
+
+            });
+
+            if (taskExist == false) {
+                Objects = {
+                    task: taskName,
+                    step: [{
+                        name: stepName,
+                        insumos: [{
+                            name: name,
+                            qty: qty
+                        }]
+                    }]
+                }
+                insumoDetails.push(Objects)
+                Objects = {}
+            } else {
+
+                // CHECK STEP 
+                if (stepExists == false) {
+                    Objects = {
+                        name: stepName,
+                        insumos: [{
+                            name: name,
+                            qty: qty
+                        }]
+                    }
+                    insumoDetails[taskIndex].step.push(Objects)
+                    Objects = {}
+                } else {
+                    if (insumoExists == false) {
+                        Objects = {
+                            name: name,
+                            qty: qty
+                        }
+                        insumoDetails[taskIndex].step[stepIndex].insumos.push(Objects)
+                        Objects = {}
+                    }
+                }
+
+            }
+        }
+        console.log(insumoDetails)
+    }
+    // DELETE ROW
+    $scope.delRow = function (index) {
+        var id = index.currentTarget.offsetParent.parentElement.id,
+            taskName = index.currentTarget.children[1].value,
+            stepName = index.currentTarget.children[2].value,
+            insumoName = index.currentTarget.offsetParent.parentElement.children[0].innerText;
+
+        $scope.table = $("tbody[id=" + index.currentTarget.offsetParent.parentElement.parentElement.id.trim() + "]")
+        // DELETE ROW 
         $.each($scope.table[0].children, function (v, l) {
             if (l.id === id) {
                 l.remove()
+                return false;
             }
         })
+        // DELETE FIELD IN ARRAY
+        $.each(insumoDetails, function (v, l) {
+            if (l.task === taskName) {
+                if (l.step[v].name == stepName) {
+                    if (l.step[v].insumos[v].name == insumoName) {
+                        l.step[v].insumos.splice(v, 1)
+                        console.log(insumoDetails)
+                    }
+                }
+            }
+        })
+    }
+    /************************************************************************************/
+    //                                SAVE PRODUCTOR
+    /***********************************************************************************/
+    $scope.save = function(){
+        productor[0].project[0].rubro[0].rubroInsumo.push(insumoDetails);
+        var obj = JSON.stringify(productor[0]);
+        $.ajax({
+            url: addProductor,
+            headers: headerAjax,
+            method: 'POST',
+            dataType: 'json',
+            data: obj,
+            success: function (data) {
+                window.location.reload();
+                console.log(data)
+            }
+        });
     }
 }]);

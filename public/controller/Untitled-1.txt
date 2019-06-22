@@ -1,0 +1,40 @@
+  for (let i = 0; i < insumoDetails[s].step.length; i++) {
+                        if (insumoDetails[s].step[i].name == stepName) {
+                            for (let index = 0; index < insumoDetails[s].step[i].insumos.length; index++) {
+                                if (insumoDetails[s].step[index].insumos[index].name != name) {
+                                    // Objects = {
+                                    //     name: name,
+                                    //     qty: qty
+                                    // }
+                                    // insumoDetails[s].step[index].insumos.push(Objects)
+                                    // return false;
+                                }
+                            }
+                        }else{
+                            // if(insumoDetails[s].step[i].name != stepName){
+                            //  Objects = {
+                            //     name:stepName,
+                            //     insumo:[{
+                            //         name:name,
+                            //         qty:qty
+                            //     }]
+                            // }
+                            // insumoDetails[s].step.push(Objects)
+                            // return false;   
+                            // }  
+                        }
+                    }
+                }else{
+                    Objects = {
+                        task: taskName,
+                        step: [{
+                            name: stepName,
+                            insumos: [{
+                                name: name,
+                                qty: qty
+                            }]
+                        }]
+                    }
+                    insumoDetails.push(Objects)
+                }
+            })

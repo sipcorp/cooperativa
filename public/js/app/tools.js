@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+   
     // FORM - LIMITER
     // ------------------------------------------------------------------------------------------------ * -->
     // Content/plugins/pl-form/counter/js/jquery.counter.js
@@ -94,9 +94,10 @@ $(document).ready(function () {
     });
 
 
-    // PREFIX
+    // PREFIX PRODUCTOR
     $("#wzNewPrefix").val(rand_code(2, 7, ""))
-    
+    // PREFIX PROVEEDOR
+    $("#wzNewPrefixProveedor").val(rand_code(2, 7, ""))
     // form validate
     var $rule1 = $('#wizard-progress').validate({
         ignore: "",
