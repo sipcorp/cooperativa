@@ -5,7 +5,7 @@
 <link href="css/proyecto/proyecto.css" rel="stylesheet">
 
 <body class="header-sticky sidebar-left sidebar-hidden ng-cloak" ng-app="startAPP">
-  <% include ./partials/header %>
+  <% include ./partials/header%>
   <!--CONTENIDO-->
   <div id="main-container">
     <!--MENU LEFT-->
@@ -455,11 +455,11 @@
             <!-- // Example row -->
           </div>
           <!-- // tab 5 -->
-          <div class="tab-pane" id="TabTop5">
+          <div class="tab-pane" id="TabTop5" ng-controller="configController">
             <div class="row-fluid">
               <div class="span12">
                 <div class="span12">
-                  <form id="accounForm" class="form-horizontal form-condensed" method="" action="">
+                  <form id="contactForm" class="form-horizontal form-condensed">
                     <div class="row-fluid">
                       <div class="span9">
                         <div class="control-group no-margin-bottom">
@@ -469,7 +469,7 @@
                         </div>
                       </div>
                       <div class="span3 well-small" style="padding-left: 99px;">
-                        <button type="submit" class="btn btn-primary">Save Contact</button>
+                        <button  class="btn btn-primary" ng-click="saveContact()">Save Contact</button>
                         <button class="btn btn-danger cancel">Cancel</button>
                       </div>
                     </div>
@@ -491,18 +491,18 @@
                                   </li>
                                   <!-- // section form divider -->
                                   <li class="control-group">
-                                    <label for="accountTitle" class="control-label">Empresa <span
+                                    <label for="Company" class="control-label">Empresa <span
                                         class="required">!</span></label>
                                     <div class="controls">
-                                      <input id="accountTitle" class="span8" type="text" value="" name="accountTitle" />
+                                      <input id="accountTitle" class="span8" type="text" value="" name="Company" />
                                     </div>
                                   </li>
                                   <!-- // form item -->
                                   <li class="control-group">
-                                    <label for="accountFirstName" class="control-label">Nombre
+                                    <label for="Name" class="control-label">Nombre
                                       completo <span class="required">!</span></label>
                                     <div class="controls">
-                                      <input class="span8" type="text" name="accountFirstName" value="" />
+                                      <input class="span8" type="text" name="Name" value="" />
                                     </div>
                                   </li>
                                   <!-- // form item -->
@@ -511,27 +511,27 @@
                                   </li>
                                   <!-- // section form divider -->
                                   <li class="control-group">
-                                    <label for="accountEmail" class="control-label">Email <span
+                                    <label for="Email" class="control-label">Email <span
                                         class="required">!</span></label>
                                     <div class="controls">
-                                      <input class="span8" type="text" name="accountEmail" value="" />
+                                      <input class="span8" type="email" name="Email" value="" />
                                     </div>
                                   </li>
                                   <!-- // form item -->
                                   <li class="control-group">
-                                    <label for="accountPhoneNumber" class="control-label">Telefono
+                                    <label for="contactTel" class="control-label">Telefono
                                       <span class="required">!</span></label>
                                     <div class="controls controls-row">
-                                      <input class="span7 maskPhone margin-right5" type="text" name="accountPhoneNumber"
+                                      <input class="span7 maskPhone margin-right5" type="text" name="Tel"
                                         value="" />
 
                                     </div>
                                   </li>
                                   <!-- // form item -->
                                   <li class="control-group">
-                                    <label for="accountFaxNumber" class="control-label">Movile</label>
+                                    <label for="Movile" class="control-label">Movile</label>
                                     <div class="controls controls-row">
-                                      <input class="span7 maskPhone margin-right5" type="text" name="accountFaxNumber"
+                                      <input class="span7 maskPhone margin-right5" type="text" name="Movile"
                                         value="" />
                                       <select id="accountFaxType" class="selectpicker" data-style="btn-info"
                                         name="accountFaxType">
@@ -555,11 +555,11 @@
                                   </li>
                                   <!-- // section form divider -->
                                   <li class="control-group">
-                                    <label for="" class="control-label">Direccion
+                                    <label for="address" class="control-label">Direccion
                                       <span class="required">!</span></label>
                                     <div class="controls controls-row">
                                       <input class="span6 margin-right5" type="text" value=""
-                                        name="accountAddressStreet" />
+                                        name="address" />
                                     </div>
                                   </li>
                                   <!-- // form item -->
@@ -571,7 +571,9 @@
                                       <select id="accountAddressCity" class="selectpicker span6s"
                                         name="accountAddressCity">
                                         <option value="">Seleccione pais</option>
+                                        <option value="Panamá">Panamá</option>
                                       </select>
+
                                     </div>
                                   </li>
                                   <!-- // form item -->
@@ -579,12 +581,21 @@
                                     <label for="accountAddressState" class="control-label">Provincia
                                       <span class="required">!</span></label>
                                     <div class="controls">
-                                      <select id="accountAddressState" class="selectpicker span6s"
-                                        name="accountAddressState">
-                                        <option value="">Seleccione provincia</option>
-                                      </select>
+                                      <select class="selectpicker span6s" name="provincesName" id="selectProvince"   ng-options="option.name for option in provinces.Panama track by option.name"
+                                        ng-model="provinces.selectedOption" ng-change="province()">                       
+                                       </select>
                                     </div>
                                   </li>
+                                  <li class="control-group">
+                                      <label for="" class="control-label">Distito
+                                        <span class="required">!</span></label>
+                                      <div class="controls">
+                                        <select  name="distitoName" id="selectdistrict"  ng-options="option.name for option in setDistrict.Panama track by option.name"
+                                          ng-model="setDistrict.selectedOption" ng-change="distric()">                       
+                                         </select>
+                                      </div>
+                                    </li>
+                                   
                                   <!-- // form item -->
 
                                   <li class="control-group">
@@ -593,9 +604,10 @@
                                     <div class="controls">
                                       <input id="accountAddressCountryData" type="hidden" value=""
                                         name="accountAddressCountry">
-                                      <select id="accountAddressCountry" class="selectpicker span6s"
-                                        name="accountAddressCountry">
-                                        <option value="">Seleccione un corregimiento</option>
+                                      <select class="" id="accountAddressCountry" 
+                                        name="corregimiento" ng-options="option.name for option in corregimiento.Panama track by option.name"
+                                        ng-model="corregimiento.selectedOption" ng-change="corregimiento()">
+                                       
                                       </select>
                                     </div>
                                   </li>
