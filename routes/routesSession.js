@@ -64,7 +64,7 @@ module.exports = (app, passport, LocalStrategy) => {
       name:"bitacora"
     });
   });
-  app.get('/config', (req, res) => {
+  app.get('/config',isAuthenticated, (req, res) => {
     res.render('config.ejs', {
       titulo: "SIP-config",
       name: "config"

@@ -2,20 +2,20 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
     var roleModel = {
         name: '',
         module: []
-      }
-      var $obj = [];
-      var $sub = [];
-      var moduleName = "";
-      var isExistsAction = false;
-      var isExists = false;
-      var isExistsSub = false;
-      var modules = []
-      var id = "";
-      var obj = [];
-    
+    }
+    var $obj = [];
+    var $sub = [];
+    var moduleName = "";
+    var isExistsAction = false;
+    var isExists = false;
+    var isExistsSub = false;
+    var modules = []
+    var id = "";
+    var obj = [];
     /*######################################################## */
     //                  GLOBAL VARS ANGULAR JS 
     /*######################################################## */
+    $scope.searchProvince = objProvince;
     $scope.empty = false;
     $scope.showDetails = false;
     $scope.showError = false;
@@ -28,7 +28,7 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
     $scope.newRole = true;
     $scope.showRoles = true;
     $scope.error = '';
-
+    $scope.provinces = provinces;
     /*######################################################## */
     //                FUNCTION DIV HIDE AND SHOW 
     /*######################################################## */
@@ -98,79 +98,79 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
         var elem = event.currentTarget
         var isActive = elem.className.indexOf("active") > 0 ? false : true
         if (isActive && elem.id != "formA05") {
-                moduleName = elem.offsetParent.parentNode.parentNode.parentNode.id
-                $.each(roleModel.module, function (v, k) {
-                    if (k.name === moduleName) {
-                        isExists = true
+            moduleName = elem.offsetParent.parentNode.parentNode.parentNode.id
+            $.each(roleModel.module, function (v, k) {
+                if (k.name === moduleName) {
+                    isExists = true
+                    return false;
+                }
+            })
+            if (isExists === false) {
+                $obj = {
+                    name: moduleName,
+                    action: [{
+                        name: elem.name
+                    }],
+                    sub: [{
+                        name: elem.dataset.parent,
+                        action: [{
+                            name: elem.name
+                        }]
+                    }]
+                }
+                roleModel.module.push($obj)
+                $obj = {}
+            } else {
+                $obj = {
+                    name: elem.name
+                };
+                $sub = {
+                    name: elem.dataset.parent,
+                    action: [{
+                        name: elem.name
+                    }]
+                }
+                var actionINS = false
+                $.each(roleModel.module[0].action, function (v, k) {
+                    if (k.name === elem.name) {
+                        actionINS = true;
                         return false;
                     }
                 })
-                if (isExists === false) {
-                    $obj = {
-                        name: moduleName,
-                        action: [{
-                            name: elem.name
-                        }],
-                        sub: [{
-                            name: elem.dataset.parent,
-                            action: [{
-                                name: elem.name
-                            }]
-                        }]
+                if (actionINS === false) {
+                    roleModel.module[0].action.push($obj)
+                }
+                $.each(roleModel.module[0].sub, function (v, k) {
+                    if (k.name === elem.dataset.parent) {
+                        isExistsSub = true
+                        return false;
                     }
-                    roleModel.module.push($obj)
-                    $obj = {}
+                })
+                if (isExistsSub === false) {
+                    roleModel.module[0].sub.push($sub)
                 } else {
                     $obj = {
                         name: elem.name
                     };
-                    $sub = {
-                        name: elem.dataset.parent,
-                        action: [{
-                            name:elem.name
-                        }]
-                    }
-                    var actionINS = false
-                    $.each(roleModel.module[0].action,function(v,k){
-                        if(k.name === elem.name){
-                            actionINS = true;
-                            return false;
-                        }
-                    })
-                    if(actionINS === false){
-                        roleModel.module[0].action.push($obj) 
-                    }
                     $.each(roleModel.module[0].sub, function (v, k) {
                         if (k.name === elem.dataset.parent) {
-                            isExistsSub = true
-                            return false;
+                            roleModel.module[0].sub[v].action.push($obj)
                         }
                     })
-                    if (isExistsSub === false) {
-                        roleModel.module[0].sub.push($sub)
-                    } else {
-                        $obj = {
-                            name: elem.name
-                        };
-                        $.each(roleModel.module[0].sub,function(v,k){
-                            if(k.name === elem.dataset.parent){
-                                roleModel.module[0].sub[v].action.push($obj)
-                            }
-                        })
-                    }
-                    $obj = {}
-                    $sub = {}
-                    isExistsSub = false;
                 }
+                $obj = {}
+                $sub = {}
+                isExistsSub = false;
             }
+        }
         if (elem.id === "formA05") {
             roleModel.name = elem.value
         }
         console.log($scope.roleModel)
     }
-    
+
     /*######################################################## */
-    //                           DELETE ROLE
+    //                      DELETE ROLE
     /*######################################################## */
     $scope.modalVerify = function (id, name) {
         $('#ModalDelete').modal('show')
@@ -213,6 +213,109 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
             $scope.modules = [];
         });
     }
+
+
+    /*###################################################### */
+    //        PROVINCE,DISTRITO AND CORREGIMIENTO  
+    /*###################################################### */
+    $scope.province = function () {
+        funcInitializeObjDistrito();
+        var province = document.getElementById('selectProvince').value;
+        $scope.provincespanama = province;
+        /*=====================================================
+            buscando el distrito de la provincia  selecionada 
+          =====================================================*/
+        for (const key in $scope.searchProvince.provincia) {
+            if ($scope.searchProvince.provincia[key].name === province.toUpperCase()) {
+                var district = $scope.searchProvince.provincia[key];
+                for (const key in district.distritos) {
+                    $scope.setDistrict.Panama.push({
+                        id: district.distritos[key].id,
+                        name: district.distritos[key].name
+                    });
+                }
+            }
+        }
+    }
+
+    $scope.distric = function () {
+        funcInitializeObjCorregimiento();
+        /*=====================================================
+          buscando el corregimiento de la provincia  selecionada 
+          =====================================================*/
+        var distritros = document.getElementById('selectdistrict').value;
+        for (const key in $scope.searchProvince.provincia) {
+            if ($scope.searchProvince.provincia[key].name === $scope.provincespanama.toUpperCase()) {
+                var district = $scope.searchProvince.provincia[key].distritos;
+                for (const i in district) {
+                    if (district[i].name === distritros) {
+                        for (const b in district[i].corregimientos) {
+                            $scope.corregimiento.Panama.push({
+                                id: district[i].corregimientos[b].id,
+                                name: district[i].corregimientos[b].name
+                            })
+                        }
+                        console.log($scope.corregimiento)
+                    }
+                }
+            }
+        }
+    }
+
+    $scope.saveContact = function () {
+        form = $("#contactForm").serializeArray();
+        obj = new Object();
+        for (const i in form) {
+            obj[form[i].name] = form[i].value;
+        }
+        sendDataContact(obj)
+    }
+
+    function sendDataContact(obj) {
+        $.ajax({
+            type: "POST",
+            url: '/add-contact',
+            timeout: 2000,
+            data: obj,
+            success: function (data) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success('El contacto fue   guardada correctamente');
+            },
+            error: function (textStatus, err) {
+                console.log(textStatus + "" + err);
+            }
+        });
+    }
+
+    function funcInitializeObjDistrito() {
+        $scope.setDistrict = {
+            Panama: [{
+                id: 'district',
+                name: 'Selecione un Distrito'
+            }, ],
+            selectedOption: {
+                id: 'district',
+                name: 'Selecione un Distrito'
+            }
+        }
+    }
+
+    function funcInitializeObjCorregimiento() {
+        $scope.corregimiento = {
+            Panama: [{
+                id: '00',
+                name: 'Selecione un corregimiento'
+            }, ],
+            selectedOption: {
+                id: '00',
+                name: 'Selecione un corregimiento'
+            }
+        }
+    }
+
+    // llamadas de las funcione principales 
     loadModules()
     getRole()
+    funcInitializeObjDistrito()
+    funcInitializeObjCorregimiento()
 }]);
