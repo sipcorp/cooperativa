@@ -88,6 +88,12 @@ module.exports = (app, passport, LocalStrategy) => {
       name:"caja"
     });
   });
+  app.get('/productores', isAuthenticated, (req, res) => {
+    res.render('productor.ejs', {
+      titulo: "SIP-Productores",
+      name:"productores"
+    });
+  });
   /*
 #######################################################
                  CLOSE SESSION

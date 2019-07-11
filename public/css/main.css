@@ -111,3 +111,7 @@
             transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
         }
     }
+
+.form-inline{
+    margin-bottom: 10px
+}

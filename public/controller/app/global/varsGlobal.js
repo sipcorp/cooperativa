@@ -41,3 +41,4 @@ const getProject = "/get-project"
 //                  GLOBAL VARS PRODUCTOR JS 
 /*######################################################## */
 const addProductor = "/add-productor"
+const getProductorFilter = "/get-productorFilter"

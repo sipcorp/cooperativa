@@ -6,7 +6,7 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
             name: '',
             project: [{
                 name: '',
-                hectaria:"",
+                hectaria: "",
                 rubro: [{
                     name: "",
                     rubroInsumo: []
@@ -29,8 +29,12 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
     $scope.project = project;
     $scope.rubro = rubros;
     $scope.showRubro = false;
+    $scope.showInfo = false;
     $scope.rubroBitacora = [];
     $scope.productor = productor;
+    $scope.filterInfo = [];
+    $scope.v1;
+    $scope.type;
     /***********************************************************/
     //                  GET PROJECT INFO                      //
     /**********************************************************/
@@ -119,13 +123,13 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
                 n = new Date(),
                 year = n.getFullYear() - d.getFullYear()
             $("#wzNewAge").val(year)
-            productor[0].birthdate = dateFormat(d,2);
+            productor[0].birthdate = dateFormat(d, 2);
             productor[0].age = year
         }
         if (type === 'fa') {
             productor[0].address = data
         }
-        if(type === 'ha'){
+        if (type === 'ha') {
             productor[0].project[0].hectaria = data
         }
         console.log($scope.productor)
@@ -264,7 +268,7 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
     /************************************************************************************/
     //                                SAVE PRODUCTOR
     /***********************************************************************************/
-    $scope.save = function(){
+    $scope.save = function () {
         productor[0].project[0].rubro[0].rubroInsumo.push(insumoDetails);
         var obj = JSON.stringify(productor[0]);
         $.ajax({
@@ -278,5 +282,55 @@ app.controller('productorController', ['$scope', '$http', '$timeout', '$compile'
                 console.log(data)
             }
         });
+    }
+
+
+    /************************************************************************************/
+    //                                FILTER INFO
+    /***********************************************************************************/
+    $scope.addValueFilter = function (value, type) {
+        if (value != null) {
+            $scope.v1 = value
+            $scope.type = type
+            if (type == 'v1') {
+                $(".v2").attr("disabled", true)
+                $(".v3").attr("disabled", true)
+            }
+            if (type == 'v2') {
+                $(".v1").attr("disabled", true)
+                $(".v3").attr("disabled", true)
+            }
+            if (type == 'v3') {
+                $(".v2").attr("disabled", true)
+                $(".v1").attr("disabled", true)
+            }
+        }
+    }
+    $scope.filter = function (v1,type) {
+        var data 
+        if (v1 == null || v1 == undefined) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Los campos de filttros no pueden estar vacios');
+        } else { 
+            data = {
+                val:v1,
+                type:type
+            }
+            $scope.filterInfo = []
+            data = JSON.stringify(data)
+            $.ajax({
+                url: getProductorFilter,
+                headers: headerAjax,
+                method: 'GET',
+                dataType: 'json',
+                data: data,
+                success: function (data) {
+                    console.log(data)
+                    $scope.filterInfo = data.productor
+                   $scope.showInfo = true;
+                   $scope.$digest();
+                }
+            });
+        }
     }
 }]);
