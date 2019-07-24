@@ -562,101 +562,201 @@ getRubroInfo = {
 	catRubro: function () {
 		return [
 			{
-				name: "Arroz a chuzo con tecnología"
+				name: "Arroz a chuzo con tecnología",
+				ha:55,
+				precio:17
 			},{
-				name: "Arroz mecanizado bajo riesgo"
+				name: "Arroz mecanizado bajo riesgo",
+				ha:100,
+				precio:17
 			},{
-				name: "Arroz mecanizado en secano"
+				name: "Arroz mecanizado en secano",
+				ha:100,
+				precio:17
 			},{
-				name: "Arroz para semilla bajo riesgo"
+				name: "Arroz para semilla bajo riesgo",
+				ha:70,
+				precio:50
 			},{
-				name: "Frijol"
+				name: "Frijol de Bejuco",
+				ha:0,
+				precio:45
 			},{
-				name: "Guandu nuevo a chuzo con tecnología"
+				name: "Guandu nuevo a chuzo con tecnología Desgranado",
+				ha:18,
+				precio:180
 			},{
-				name: "Guandu seco a chuzo con tecnología"
+				name: "Guandu seco a chuzo con tecnología Desgranado",
+				ha:18,
+				precio:55
 			},{
-				name: "Maíz a chuzo con tecnología"
+				name: "Guandu nuevo a chuzo con tecnología Cascara",
+				ha:60,
+				precio:30
 			},{
-				name: "Maíz a mínima labranza"
+				name: "Maíz a chuzo con tecnología",
+				ha:80,
+				precio:18.50
 			},{
-				name: "Maíz mecanizado"
+				name: "Maíz a mínima labranza",
+				ha:105,
+				precio:18.50
 			},{
-				name: "Poroto"
+				name: "Maíz mecanizado",
+				ha:105,
+				precio:17.25
 			},{
-				name: "Apio"
+				name: "Poroto",
+				ha:0,
+				precio:0
 			},{
-				name: "Brócoli"
+				name: "Apio",
+				ha:0,
+				precio:0
 			},{
-				name: "Coliflor"
+				name: "Brócoli",
+				ha:0,
+				precio:0
 			},{
-				name: "Cebolla"
+				name: "Coliflor",
+				ha:0,
+				precio:0
 			},{
-				name: "Lechuga"
+				name: "Cebolla",
+				ha:0,
+				precio:0
 			},{
-				name: "Pepino"
+				name: "Lechuga",
+				ha:0,
+				precio:0
 			},{
-				name: "Pimentón"
+				name: "Pepino",
+				ha:0,
+				precio:0
 			},{
-				name: "Remolacha"
+				name: "Pimentón",
+				ha:0,
+				precio:0
 			},{
-				name: "Repollo"
+				name: "Remolacha",
+				ha:0,
+				precio:0
+			},{
+				name: "Repollo",
+				ha:0,
+				precio:0
 			}, {
-				name: "Tomate Industrial"
+				name: "Tomate Industrial",
+				ha:0,
+				precio:0
 			},{
-				name: "Tomate de Mesa"
+				name: "Tomate de Mesa",
+				ha:0,
+				precio:0
 			}, {
-				name: "Zanahoria"
+				name: "Zanahoria",
+				ha:0,
+				precio:0
 			}, {
-				name: "Aji"
+				name: "Aji",
+				ha:0,
+				precio:0
 			}, {
-				name: "Berenjena"
+				name: "Berenjena",
+				ha:0,
+				precio:0
 			},{
-				name: "Aguacate"
+				name: "Aguacate",
+				ha:0,
+				precio:0
 			}, {
-				name: "Guanábana"
+				name: "Guanábana",
+				ha:0,
+				precio:0
 			}, {
-				name: "Guayaba"
+				name: "Guayaba",
+				ha:0,
+				precio:0
 			}, {
-				name: "Limon"
+				name: "Limon",
+				ha:0,
+				precio:0
 			}, {
-				name: "Maracuya"
+				name: "Maracuya",
+				ha:0,
+				precio:0
 			}, {
-				name: "Naranja"
+				name: "Naranja",
+				ha:0,
+				precio:0
 			}, {
-				name: "Piña"
+				name: "Piña",
+				ha:0,
+				precio:0
 			}, {
-				name: "Papaya"
+				name: "Papaya",
+				ha:0,
+				precio:0
 			}, {
-				name: "Cacao"
+				name: "Cacao",
+				ha:0,
+				precio:0
 			},{
-				name: "Chayote"
+				name: "Chayote",
+				ha:0,
+				precio:0
 			}, {
-				name: "Ñame Diamante"
+				name: "Ñame Diamante",
+				ha:0,
+				precio:0
 			}, {
-				name: "Ñampi"
+				name: "Ñampi",
+				ha:0,
+				precio:0
 			}, {
-				name: "Otoe"
+				name: "Otoe",
+				ha:0,
+				precio:0
 			}, {
-				name: "Papa"
+				name: "Papa",
+				ha:0,
+				precio:0
 			}, {
-				name: "Yuca"
+				name: "Yuca",
+				ha:0,
+				precio:0
 			},{
-				name: "Melon"
+				name: "Melon",
+				ha:0,
+				precio:0
 			}, {
-				name: "Sandia"
+				name: "Sandia",
+				ha:0,
+				precio:0
 			}, {
-				name: "Zapallo"
+				name: "Zapallo",
+				ha:0,
+				precio:0
 			},{
-				name: "Banano"
+				name: "Banano",
+				ha:0,
+				precio:0
 			}, {
-				name: "Palatano"
+				name: "Palatano",
+				ha:0,
+				precio:0
 			}, {
-				name: "Cafe"
+				name: "Cafe",
+				ha:0,
+				precio:0
 			},{
-				name: "Pollo de Engorde"
+				name: "Pollo de Engorde",
+				ha:0,
+				precio:0
 			}, {
-				name: "Gallina Ponedora"
+				name: "Gallina Ponedora",
+				ha:0,
+				precio:0
 			}
 		]
 

@@ -386,7 +386,6 @@
                                     </div>
                                  </li>
                                  <!-- // form item -->
-
                               </ul>
                            </fieldset>
                            <fieldset ng-show="showRubro">
@@ -452,7 +451,6 @@
                                  </div>
 
                                  <!-- // form item -->
-
                               </ul>
 
                            </fieldset>
@@ -470,11 +468,11 @@
                                  </li>
                                  <!-- // form item -->
                                  <li class="control-group">
-                                    <label for="wzNewGenderInput" class="control-label">Genero</label>
+                                    <label for="contacPerson" class="control-label">Genero</label>
                                     <div class="controls">
-                                       <input id="wzNewGenderInput" type="hidden" name="wzNewGender">
+                                       <input id="contacPerson" type="hidden" name="wzNewGender">
                                        <div id="wzNewGender" class="btn-group change" data-toggle="buttons-radio"
-                                          data-target="wzNewGenderInput">
+                                          data-target="contacPerson">
                                           <button type="button" class="btn" class-toggle="btn-green" name="wzNewGender"
                                              value="male" ng-click="createObj($event.currentTarget,'gr')">&nbsp; Male
                                              &nbsp;</button>
@@ -486,10 +484,10 @@
                                  </li>
                                  <!-- // form item -->
                                  <li class="control-group">
-                                    <label for="wzNewDob" class="control-label">Fecha de nacimiento <span
+                                    <label for="wzPrice" class="control-label">Fecha de nacimiento <span
                                           class="required">*</span></label>
                                     <div class="controls">
-                                       <input id="wzNewDob" class="span4" type="text" name="wzNewDob"
+                                       <input id="wzPrice" class="span4" type="text" name="wzPrice"
                                           pattern="^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"
                                           placeholder="MM/DD/YYYY" ng-model="changeDob"
                                           ng-blur="createObj(changeDob,'dob')">
@@ -528,7 +526,7 @@
                               <i class="fontello-icon-quote-left-alt"></i>
                               <span>Agregar Proveedor</span>
                               <div class="form-actions-s">
-                                 <button type="button" ng-click="" class="btn btn-blue">Submit &amp; Validate</button>
+                                 <button type="button" ng-click="addProveedor()" class="btn btn-blue">Submit &amp; Validate</button>
                                  <button class="btn cancel">Cancel</button>
                               </div>
                            </legend>
@@ -571,7 +569,8 @@
                                              class="required">*</span></label>
                                        <div class="controls select">
                                           <select id="wzNewProjectp" type="text" name="wzNewProjectp"
-                                             ng-model="changeProjects" ng-change="createProveedorObj('pj',changeProjects)">
+                                             ng-model="changeProjects"
+                                             ng-change="createProveedorObj('pj',changeProjects)">
                                              <option value="" disabled>Seleccione projecto</option>
                                              <option ng-repeat="p in project" value="{{p.name}}">{{p.name}}</option>
                                           </select>
@@ -581,11 +580,56 @@
                                     <li class="control-group">
 
                                        <div class="controls">
-                                          <input placeholder="Rubro" type="text" ng-model="changeRubros" ng-change="createProveedorObj('pjR',changeRubros)"/>
-                                          <input placeholder="Hectaria" type="text" class="w70" ng-model="changeHeact" ng-change="createProveedorObj('pjH',changeHeact)"/>
-                                          <input placeholder="UMA" type="text" class="w70" ng-model="changeUMA" ng-change="createProveedorObj('pjU',changeUMA)" />
-                                          <input placeholder="Produccion" type="text" class="w232ex" ng-model="changeProducts" ng-change="createProveedorObj('pjP',changeProducts)" />
+                                          <select name="rubro" id="rubro" ng-model="changeRubros" ng-change="createProveedorObj('pjR',changeRubros)">
+                                           <option value="" disabled>Seleccione rubro</option>
+                                           <option ng-repeat="r in rubro">{{r.name}}</option>
+                                          </select>
+                                          <!-- <input placeholder="Rubro" type="text" ng-model="changeRubros"
+                                             ng-change="createProveedorObj('pjR',changeRubros)" /> -->
+                                          <input placeholder="{{ha}}" type="text" class="w70" ng-model="changeHeact" 
+                                             ng-blur="createProveedorObj('pjH',changeHeact)" />
+                                          <input placeholder="{{u}}" type="text" class="w70" ng-model="changeUMA" 
+                                             ng-blur="createProveedorObj('pjU',changeUMA)" />
+                                          <input placeholder="Cantidad Produccion" type="text" class="w232ex" value="{{cantidad | number}} {{unidad}}" disabled/>
                                        </div>
+                                       <br />
+                                       <div class="controls">
+                                          <div class="span6" style="width: 49.6%;">
+                                             <div class="">
+                                                <div class="alert alert-error" id="alert" style="display: none;">
+                                                   <span class="msg">Oh snap!</span> </div>
+                                                <table class="table">
+                                                   <thead>
+                                                      <tr>
+                                                         <th style="background: transparent !important; border: none !important;">
+                                                            <div class="mat-div">
+                                                               <label for="first-name" class="mat-label">Siembra</label>
+                                                               <input id="step1Start"
+                                                                  class="input-medium date mat-input" type="date"
+                                                                  data-date="" data-date-format="dd-mm-yyyy"
+                                                                  ng-model="dateS" ng-change="createProveedorObj('pSD',dateS)">
+                                                            </div>
+
+                                                         </th>
+                                                         <th style="background: transparent !important; border: none !important;">
+                                                               
+                                                            <div class="mat-div">
+                                                               <label for="address" class="mat-label">Cosecha</label>
+                                                               <input id="end1Start" class="input-medium date mat-input"
+                                                                  type="date" data-date="" data-date-format="dd/mm/yyyy"
+                                                                  ng-model="dateE"
+                                                                  ng-change="createProveedorObj('pED',dateE)">
+                                                            </div>
+                                                         </th>
+                                                      </tr>
+                                                   </thead>
+                                                </table>
+                                             </div>
+                                             <!-- // datepicker DATE VALUES -->
+                                          </div>
+                                       </div>
+
+
 
 
                                     </li>
@@ -781,54 +825,59 @@
                               </h4>
                               <ul class="form-list label-left list-bordered dotted">
                                  <li class="control-group">
-                                    <label for="wzNewMaritalStatus" class="control-label">Cedula</label>
+                                    <label for="wzNewMaritalStatus" class="control-label">Cedula / RUC
+                                          <span
+                                          class="required">*</span>
+                                    </label>
                                     <div class="controls">
                                        <input id="wzNewMaritalStatus" class="span3" type="text"
                                           name="wzNewMaritalStatus" ng-model="changeCedula"
-                                          ng-blur="createObj(changeCedula,'cd')">
+                                          ng-blur="createProveedorObj('cd',changeCedula)">
                                     </div>
                                  </li>
                                  <!-- // form item -->
                                  <li class="control-group">
-                                    <label for="wzNewGenderInput" class="control-label">Genero</label>
+                                    <label for="contacPerson" class="control-label">Persona de Contacto
+                                          <span
+                                          class="required">*</span>
+                                    </label>
                                     <div class="controls">
-                                       <input id="wzNewGenderInput" type="hidden" name="wzNewGender">
-                                       <div id="wzNewGender" class="btn-group change" data-toggle="buttons-radio"
-                                          data-target="wzNewGenderInput">
-                                          <button type="button" class="btn" class-toggle="btn-green" name="wzNewGender"
-                                             value="male" ng-click="createObj($event.currentTarget,'gr')">&nbsp; Male
-                                             &nbsp;</button>
-                                          <button type="button" class="btn" class-toggle="btn-green" name="wzNewGender"
-                                             value="female"
-                                             ng-click="createObj($event.currentTarget,'gr')">Female</button>
-                                       </div>
+                                       <input id="contacPerson" type="text" name="contacPerson" ng-model="changePerson"
+                                       ng-blur="createProveedorObj('cP',changePerson)">
                                     </div>
                                  </li>
+                                 <li class="control-group">
+                                       <label for="wzMovile" class="control-label">Movil</label>
+                                       <div class="controls">
+                                          <input id="wzMovile" type="text" name="wzMovile" ng-model="changeMovile"
+                                          ng-blur="createProveedorObj('mV',changeMovile)">
+                                       </div>
+                                    </li>
+                                    <li class="control-group">
+                                          <label for="wzPhone" class="control-label">Fijo</label>
+                                          <div class="controls">
+                                             <input id="wzPhone" type="text" name="wzPhone" ng-model="changePhone"
+                                             ng-blur="createProveedorObj('ph',changePhone)">
+                                          </div>
+                                       </li>
                                  <!-- // form item -->
                                  <li class="control-group">
-                                    <label for="wzNewDob" class="control-label">Fecha de nacimiento <span
+                                    <label for="wzPrice" class="control-label">Precio <span
                                           class="required">*</span></label>
                                     <div class="controls">
-                                       <input id="wzNewDob" class="span4" type="text" name="wzNewDob"
-                                          pattern="^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"
-                                          placeholder="MM/DD/YYYY" ng-model="changeDob"
-                                          ng-blur="createObj(changeDob,'dob')">
+                                       <input id="wzPrice" class="span4" type="text" name="wzPrice"
+                                          placeholder="Precio" value="{{suggestedPrice | currency}}" disabled/>
                                     </div>
                                  </li>
-                                 <!-- // form item -->
-                                 <li class="control-group">
-                                    <label for="wzNewAge" class="control-label">Edad</label>
-                                    <div class="controls">
-                                       <input id="wzNewAge" class="span4" type="text" name="wzNewAge" readonly>
-                                    </div>
-                                 </li>
+                                
+                              
                                  <!-- // form item -->
                                  <li class="control-group">
                                     <label for="wzNewAddress" class="control-label">Direccion completa <span
                                           class="required">*</span></label>
                                     <div class="controls">
                                        <input id="wzNewAddress" class="span6" type="text" name="wzNewAddress"
-                                          ng-model="changeFullAddress" ng-blur="createObj(changeFullAddress,'fa')">
+                                          ng-model="changeFullAddress" ng-blur="createProveedorObj('fa',changeFullAddress)">
                                     </div>
                                  </li>
 

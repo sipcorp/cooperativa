@@ -1,5 +1,31 @@
 $(document).ready(function () {
-   
+    var startDate = new Date();
+    var endDate = new Date();
+    $('#DTP1').datepicker()
+        .on('changeDate', function (ev) {
+            /*if(ev.date.valueOf() > endDate.valueOf()) {
+                    $('#alert').show().find('.msg').text('La fecha Desde no puede ser mayor a la fecha Hasta.');
+            } else {*/
+            //$('#alert').hide();
+            startDate = ev.date;
+            $('#startDate').text(dateFormat(startDate,1));
+            //}
+            $('#DTP1').datepicker('hide');
+        });
+
+    // bootstrap datepicker demo
+    $('#DTP2').datepicker()
+        .on('changeDate', function (ev) {
+            /*if(ev.date.valueOf() < startDate.valueOf()) {
+                    $('#alert').show().find('.msg').text('La fecha Hasta no puede ser mayor a la fecha Desde.');
+            } else {*/
+            $('#alert').hide();
+            endDate = ev.date;
+            $('#endDate').text(dateFormat(endDate,1));
+            //}
+            $('#DTP2').datepicker('hide');
+        });
+
     // FORM - LIMITER
     // ------------------------------------------------------------------------------------------------ * -->
     // Content/plugins/pl-form/counter/js/jquery.counter.js
@@ -143,7 +169,7 @@ $(document).ready(function () {
         },
         success: function (label) {
             $(label).text('OK!').addClass('valid')
-                    .closest('.control-group').addClass('success');
+                .closest('.control-group').addClass('success');
         },
         errorPlacement: function (error, label) {
             $(label).closest('.controls').append(error);
