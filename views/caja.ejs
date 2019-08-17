@@ -165,25 +165,6 @@
                                         <span>$250.00</span>
                                     </div>
                                 </div>
-                                <!-- // Column -->
-                                <div class="span2 well well-black well-small inline">
-                                    <div class="">
-                                        <span>Sobrante: </span>
-                                        <span>
-                                            <input type="text" class='number' value="$ 0.00">
-                                        </span>
-                                    </div>
-                                </div>
-                                <!-- // Column -->
-                                <div class="span2 well well-black well-small inline">
-                                    <div class="">
-                                        <span>Faltante: </span>
-                                        <span>
-                                            <input type="text" class='number' value="$ 0.00">
-                                        </span>
-                                    </div>
-                                </div>
-                                <!-- // Column -->
                                 <button class="btn btn-primary  float-rigth" ng-click="save()">
                                     <i class="fas fa-wallet"></i>
                                     <span>Salvar</span>
@@ -203,32 +184,38 @@
                                         <tbody>
                                             <tr id="DataRow0">
                                                 <td class="bold"><span>$1</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="dolarChange" ng-blur="createCashier('1',dolarChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="dolarChange" id="num_1"
+                                                        ng-blur="createCashier('1',dolarChange,'dtB')"></td>
                                                 <td class="text-right">{{dolarChange | currency}}</td>
                                             </tr>
                                             <tr id="DataRow1">
                                                 <td class="bold"><span>$5</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="cincoChange" ng-blur="createCashier('5',cincoChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="cincoChange" id="num_2"
+                                                        ng-blur="createCashier('5',cincoChange,'dtB')"></td>
                                                 <td class="text-right">{{cincoChange * 5 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow2">
                                                 <td class="bold"><span>$10</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="tenChange" ng-blur="createCashier('10',tenChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="tenChange" id="num_3"
+                                                        ng-blur="createCashier('10',tenChange,'dtB')"></td>
                                                 <td class="text-right">{{tenChange * 10 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow3">
                                                 <td class="bold"><span>$20</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="twoChange" ng-blur="createCashier('20',twoChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="twoChange" id="num_4"
+                                                        ng-blur="createCashier('20',twoChange,'dtB')"></td>
                                                 <td class="text-right">{{twoChange * 20 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow4">
                                                 <td class="bold"><span>$50</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="fiveChange" ng-blur="createCashier('50',fiveChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="fiveChange" id="num_5"
+                                                        ng-blur="createCashier('50',fiveChange,'dtB')"></td>
                                                 <td class="text-right">{{fiveChange * 50 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow5">
                                                 <td class="bold"><span>$100</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="Change" ng-blur="createCashier('100',Change,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="Change" id="num_6"
+                                                        ng-blur="createCashier('100',Change,'dtB')"></td>
                                                 <td class="text-right">{{Change * 100 | currency}}</td>
                                             </tr>
                                         </tbody>
@@ -249,32 +236,39 @@
                                         <tbody>
                                             <tr id="DataRow0">
                                                 <td class="bold"><span>$0.01</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="centChange" ng-blur="createCashier('0.01',centChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="centChange" id="num_7"
+                                                        ng-blur="createCashier('0.01',centChange,'dtCo')"></td>
                                                 <td class="text-right">{{centChange * 0.01 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow1">
                                                 <td class="bold"><span>$0.05</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="fivesChange" ng-blur="createCashier('0.05',fivesChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="fivesChange" id="num_8"
+                                                        ng-blur="createCashier('0.05',fivesChange,'dtCo')"></td>
                                                 <td class="text-right">{{fivesChange * 0.05 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow2">
                                                 <td class="bold"><span>$0.10</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="diezChange" ng-blur="createCashier('0.10',diezChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="diezChange" id="num_9"
+                                                        ng-blur="createCashier('0.10',diezChange,'dtCo')"></td>
                                                 <td class="text-right">{{diezChange * 0.10 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow3">
                                                 <td class="bold"><span>$0.25</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="twofiveChange" ng-blur="createCashier('0.25',twofiveChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value=""
+                                                        ng-model="twofiveChange" id="num_10"
+                                                        ng-blur="createCashier('0.25',twofiveChange,'dtCo')"></td>
                                                 <td class="text-right">{{twofiveChange * 0.25 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow4">
                                                 <td class="bold"><span>$0.50</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="fivelChange" ng-blur="createCashier('0.50',fivelChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="fivelChange" id="num_11"
+                                                        ng-blur="createCashier('0.50',fivelChange,'dtCo')"></td>
                                                 <td class="text-right">{{fivelChange * 0.50 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow5">
                                                 <td class="bold"><span>$1</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="theBoos" ng-blur="createCashier('1',theBoos,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="theBoos" id="num_12"
+                                                        ng-blur="createCashier('1',theBoos,'dtCo')"></td>
                                                 <td class="text-right">{{theBoos | currency}}</td>
                                             </tr>
                                         </tbody>
@@ -305,9 +299,11 @@
                                                         </a>
                                                     </span>
                                                 </td>
-                                                <td><input type="sipText" class="span12" value="{{cheque.cheque}}" ng-model="numq" ng-blur="createCashier('numCheq',numq,'dtC')" ></td>
-                                                <td><input type="sipText" class="span12" value="{{cheque.banco}}" ng-model="nameCheq" ng-blur="createCashier('nameCheq',nameCheq,'dtC')"></td>
-                                                <td><input type="sipText" class="span12" value="{{cheque.total | currency}}" ng-model="total" ng-blur="createCashier('totalCheq',total,'dtC')"></td>
+                                                <td><input type="sipText" class="span12" ng-model="numq" id="numq_{{$index}}"></td>
+                                                <td><input type="sipText" class="span12" ng-model="nameCheq"></td>
+                                                <td><input type="sipText" class="span12" format="currency"
+                                                        ng-model="total" ng-blur="createChequeObj(numq,nameCheq,total)">
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -22,6 +22,7 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
     $scope.showAdd = false;
     $scope.NewUser = false;
     $scope.modules = modules;
+    $scope.modulesActive = []
     $scope.roleModel = roleModel;
     $scope.subChange = false;
     $scope.parentChange = false;
@@ -43,6 +44,14 @@ app.controller('configController', ['$scope', '$http', 'Dataservice', function (
     function loadModules() {
         $http(settings).then(function mySuccess(response) {
             $scope.modules = response.data.data;
+            $.each($scope.modules,function(d,s){
+                $.each(s.name,function(r,k){
+                    if(k.status == "A"){
+                        $scope.modulesActive.push(k)
+                    }
+                })
+            })
+            console.log($scope.modulesActive)
         }, function myError(response) {
             $scope.modules = [];
         });

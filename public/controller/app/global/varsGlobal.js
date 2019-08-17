@@ -47,3 +47,4 @@ const getProductorFilter = "/get-productorFilter"
 //                  GLOBAL VARS PROVEEDOR JS 
 /*######################################################## */
 const addProveedor = "/add-proveedor"
+const getProveedor = "/get-proveedorFilter"

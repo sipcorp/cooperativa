@@ -1,0 +1,17 @@
+@media print {
+  
+
+    .printhide {
+        visibility: hidden !important; 
+    }
+
+    #page-wrapper * {
+        visibility: visible; 
+        text-align: left;
+        -webkit-print-color-adjust: exact !important;
+    }
+    .printTop{
+        position: relative;
+        top: -100px !important;
+    }
+}

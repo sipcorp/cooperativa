@@ -26,7 +26,7 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
     $scope.Cashier = cajaModal;
     $scope.cajero = "";
     $scope.date = "";
-    $scope.cajaID =""
+    $scope.cajaID = ""
     $scope.chequeArray = [
 
     ]
@@ -40,11 +40,13 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
             headers: headerAjax,
             method: 'GET',
             success: function (data) {
-                $scope.startCashier = data.caja[0].amountStart;
-                $scope.cajero = data.caja[0].userCode;
-                $scope.date = data.caja[0].startDate;
-                $scope.cajaID = data.caja[0]._id;
-                $scope.$digest();
+                if (data.caja[0].endDate == null) {
+                    $scope.startCashier = data.caja[0].amountStart;
+                    $scope.cajero = data.caja[0].userCode;
+                    $scope.date = data.caja[0].startDate;
+                    $scope.cajaID = data.caja[0]._id;
+                    $scope.$digest();
+                }
             }
         });
     }
@@ -55,7 +57,7 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
      *******************************************************************************/
     var obj = {}
     $scope.createCashier = function (denomination, value, type) {
-            var object = {},
+        var object = {},
             currentUser = $("#user").val();
 
         // SE CREA LA CAJA INCIAL DEL DIA SI NO EXISTE    
@@ -148,58 +150,57 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
             }
             object = {}
         }
-
-        // ---- CHEQUE OBJ
-        if (type === "dtC") {
-            if (jQuery.isEmptyObject(obj) === true) {
-                if (denomination === "numCheq") {
-                    obj = {
-                        chequeNum: value,
-                        banco: "",
-                        total: ""
-                    }
-                }
-                if (denomination === "nameCheq") {
-                    obj = {
-                        chequeNum: "",
-                        banco: value,
-                        total: ""
-                    }
-                }
-                if (denomination === "total") {
-                    obj = {
-                        chequeNum: "",
-                        banco: "",
-                        total: value
-                    }
-                }
-            }else{
-                if (denomination === "numCheq") {
-                    obj.chequeNum = value
-                }
-                if (denomination === "nameCheq") {
-                    obj.banco = value 
-                }
-                if (denomination === "totalCheq") {
-                    obj.total = value
-                }
-            }
-
-        }
-        console.log(obj)
     }
+
+
+    // SE CREA EL CIERRE DE LA CAJA //
+    // ---- MONEDAS OBJ
+    //-----------------------------//
+    var objs = {}
+    $scope.createChequeObj = function (numCheq, nameCheq, total) {
+        var isExists = false;
+
+        if (jQuery.isEmptyObject(objs) === true) {
+            objs = {
+                chequeNum: numCheq,
+                banco: nameCheq,
+                total: total
+            }
+            isExists = true;
+            $("#numq").prop("disabled", "true")
+        } else {
+            $.each(objs, function (d, s) {
+                if (numCheq === s) {
+                    objs.banco = nameCheq
+                    objs.total = total.replace("$", "").trim()
+                } else {
+                    objs = {
+                        chequeNum: numCheq,
+                        banco: nameCheq,
+                        total: total
+                    }
+                    isExists = true;
+                    $("#numq").prop("disabled", "true")
+                }
+            })
+        }
+        if (isExists) {
+            objC[0].type = "Cheque"
+            objC[0].count.push(objs)
+        }
+    }
+
+
 
     /*******************************************************************************
     //------------------------------  ADD CIERRE DE CAJA ---------------------------
     *******************************************************************************/
-    $scope.save = function(){
-        var Objectz ={
-            id:$("#cajaId").val(),
-            faltante:"",
-            sobrante:"",
-            objB:objB,
-            objC:obj,
-            objCo:objCo,
+    $scope.save = function () {
+        var Objectz = {
+            id: $("#cajaId").val(),
+            objB: objB,
+            objC: objC,
+            objCo: objCo,
             endDate: new Date()
         }
         var object = JSON.stringify(Objectz)
@@ -210,6 +211,7 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
             dataType: 'json',
             data: object,
             success: function (data) {
+                window.location.reload();
                 console.log(data)
             }
         });
@@ -222,9 +224,24 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
         var ong = {
             cheque: "",
             banco: "",
-            total: ""
+            total: 0
         }
         $scope.chequeArray.push(ong)
     }
-    console.log($scope.Cashier)
+}]).directive('format', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+            ctrl.$formatters.unshift(function (a) {
+                return $filter(attrs.format)(ctrl.$modelValue)
+            });
+
+            elem.bind('blur', function (event) {
+                var plainNumber = elem.val().replace(/[^\d|\-+|\.+]/g, '');
+                elem.val($filter(attrs.format)(plainNumber));
+            });
+        }
+    };
 }]);

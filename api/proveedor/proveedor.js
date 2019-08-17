@@ -39,7 +39,37 @@ module.exports = (app) => {
     //                 GET PRODUCTOR
     /*############################################### */
 
-    app.get("/get-productorFilter", function (req, res) {
-
+    app.post("/get-proveedorFilter", function (req, res) {
+        let query = { };
+        let body = req.body;
+        var project = body.project;
+        var memberNum = body.memberNum;
+        var documentID = body.documentID;
+        //console.log(req.headers)
+        if(project != undefined){
+            query = {'content.project':project}
+        }
+        if(memberNum != undefined){
+            query = {prefix:memberNum}
+        }
+        if(documentID != undefined){
+            query = {documentID:documentID}
+        }
+        //console.log(project)
+        //console.log(memberNum)
+        //console.log(documentID)
+        //console.log(body)
+        Proveedor.find(query).exec((err, data) => {
+            if (err) {
+              return res.status(400).json({
+                ok: false,
+                err
+              });
+            }
+            res.json({
+              ok: err,
+              data
+            });
+          });
     })
 };

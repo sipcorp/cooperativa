@@ -94,6 +94,18 @@ module.exports = (app, passport, LocalStrategy) => {
       name:"productores"
     });
   });
+  app.get('/proveedor', isAuthenticated, (req, res) => {
+    res.render('proveedor.ejs', {
+      titulo: "SIP-Proveedor",
+      name:"proveedor"
+    });
+  });
+  app.get('/print-invoice', isAuthenticated, (req, res) => {
+    res.render('print-invoice.ejs', {
+      titulo: "SIP-print-invoice",
+      name:"print-invoice"
+    });
+  });
   /*
 #######################################################
                  CLOSE SESSION

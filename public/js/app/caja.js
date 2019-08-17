@@ -66,4 +66,9 @@ $(document).ready(function () {
                         return false;
                 }
         });
+        $(document).keypress("input[id*=numq_]",function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                        return false;
+                }
+        });
 });

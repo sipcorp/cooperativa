@@ -360,7 +360,7 @@ tfoot td {
 .alert-customer{
     position: absolute;
     top: -19px;
-    left: 243px;
+    left: 355px;
 }
 .alert-item{
     position: absolute;
@@ -506,7 +506,7 @@ form {
     left: 3px;
   }
 .fix-top{
-    margin-top: 18px;
+    margin-top: 16px;
 }
 .table thead th {
     background: #ffffff;
@@ -1612,10 +1612,10 @@ tr td p {
 .top-meta-row {
     border-bottom: 10px solid #3A3A3B;
     padding-bottom: 0px;
-    margin-top: 57px;
+    margin-top: 33px;
 }
 .project-meta-row {
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 0px;
     font-weight: 900;
     padding-left: 2px;

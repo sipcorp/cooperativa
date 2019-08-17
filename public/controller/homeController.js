@@ -10,6 +10,7 @@ app.controller('homeController', ['$scope', '$timeout', "$http", 'Dataservice', 
 
     $http(settings).then(function mySuccess(response) {
         $scope.modules = response.data.data;
+        console.log(response.data)
     }, function myError(response) {
         $scope.modules = [];
     });
@@ -20,12 +21,14 @@ app.controller('homeController', ['$scope', '$timeout', "$http", 'Dataservice', 
             var object = {}
             $.each($scope.modules, function (v, k) {
                 for (var i = 0; i < k.name.length; i++) {
-                    object = {
-                        name: k.name[i].name,
-                        font: k.name[i].font,
-                        href: k.name[i].href
+                    if (k.name[i].status == "A") {
+                        object = {
+                            name: k.name[i].name,
+                            font: k.name[i].font,
+                            href: k.name[i].href
+                        }
+                        $scope.module.push(object)
                     }
-                    $scope.module.push(object)
                     object = {}
                 }
             })

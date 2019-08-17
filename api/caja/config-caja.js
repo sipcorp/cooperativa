@@ -10,7 +10,6 @@ module.exports = (app) => {
     let start = date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + date.getDate() + "T05:00:00.000+00:00"
     console.log(start)
     let query = { startDate: { $gte: start } };
-    //muestra los modulos segun el role
     Caja.find(query).exec((err, caja) => {
       if (err) {
         return res.status(400).json({
@@ -59,39 +58,40 @@ module.exports = (app) => {
   /*############################################### */
   //                    UPDATE CAJA CAJA
   /*############################################### */
+
   app.post("/update-caja", function (req, res) {
     let body = req.body;
     let id = body.id;
     let objB = body.objB;
     let objCo = body.objCo;
     let objC = body.objC;
-    let faltante = body.faltante;
-    let sobrante = body.sobrante;
     let endDate = body.endDate
-    Caja.update(
-      {
-        "_id": id
-      }, {
-        $addToSet: {
-          cashCount: {
-            $each: objB, objCo, objC
-          }
+    //console.log(body)
+    //console.log(id)
+    // Caja.update({ _id: id }, {
+    //   $addToSet: {
+    //     cashCount: {
+    //       $each: objB, objCo, objC
+    //     }
+    //   }
+    // }, { multi: true })
+
+    Caja.findOneAndUpdate({ _id: id },
+      { $set: { endDate: endDate,cashCount: {objB,objCo,objC} } },
+      function (err, doc) {
+        if (err) {
+          return res.json({
+            ok: false,
+            message: err
+          });
         }
-      }, {
-        $set: {
-          faltante: faltante,
-          sobrante: sobrante,
-          endDate: endDate
-        }
-      }).WriteResult({
-        "nMatched": 0,
-        "nUpserted": 0,
-        "nModified": 0,
-        "writeError": {
-          "code": 7,
-          "errmsg": "could not contact primary for replica set shard-a"
-        }
-      })
+        res.json({
+          ok: true,
+          message: false,
+          update: doc
+        });
+      }
+    );
   });
 
 }
