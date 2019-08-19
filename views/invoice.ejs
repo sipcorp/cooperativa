@@ -3,26 +3,75 @@
 <% include ./partials/head %>
 <link id="linkCss" href="css/invoice/style.css" rel="stylesheet">
 
-<body class="header-sticky sidebar-left sidebar-hidden" ng-app="startAPP" ng-cloak>
+<body class="header-sticky sidebar-left sidebar-hidden" ng-app="startAPP" ng-cloak ng-controller="invoiceController">
    <div id="page-loader"><span class="preloader-interior"></span></div>
    <div class="page-container">
       <% include ./partials/header %>
       <!--CONTENIDO-->
       <div id="main-container">
          <!--MENU LEFT-->
-         <div class='sidebar'>
-            <h3>Left Sidebar</h3>
-            <ul class="nav nav-tabs nav-stacked">
-              <li><a href='#'>Another Link 1</a></li>
-              <li><a href='#'>Another Link 2</a></li>
-              <li><a href='#'>Another Link 3</a></li>
-            </ul>
+         <div class='sidebar' >
+            <h4 style="margin-top: 55px;">Agregar Cliente</h4>
+            <a class="btn btn-small btn-boo btn-glyph" href="#" ng-click="addCustomer()" style="position: absolute; top: 59px;left: 213px;"><i class="fontello-icon-publish"></i></a>
+            <fieldset>
+               <ul class="form-list list-bordered dotted">
+                  <li class="control-group">
+                     <label for="custmerName" class="control-label">Nombre completo:</label>
+                     <div class="controls">
+                        <input id="custmerName" class="span3x clear-field" type="text" ng-model="customerName"
+                           ng-blur="createObjsCustomer('n',customerName)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="cedula" class="control-label">Cedula / RUC:</label>
+                     <div class="controls">
+                        <input id="cedula" class="span3x clear-field" type="text" ng-model="customerID"
+                           ng-blur="createObjsCustomer('c',customerID)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="address" class="control-label">Direccion:</label>
+                     <div class="controls">
+                        <textarea id="address" rows="3" class="span3x clear-field" ng-model="customerAdrress"
+                           ng-change="createObjsCustomer('a',customerAdrress)"></textarea>
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="movile" class="control-label">Movile:</label>
+                     <div class="controls">
+                        <input id="movile" class="span3x clear-field" type="text" ng-model="customerMovile"
+                           ng-blur="createObjsCustomer('m',customerMovile)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="phone" class="control-label">Telefono:</label>
+                     <div class="controls">
+                        <input id="phone" class="span3x clear-field" type="text" ng-model="customerPhone"
+                           ng-blur="createObjsCustomer('p',customerPhone)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="obser" class="control-label">Observacion:</label>
+                     <div class="controls">
+                        <textarea id="obser" rows="3" class="span3x obser clear-field" ng-model="customerOb"
+                           ng-blur="createObjsCustomer('o',customerOb)"></textarea>
+                     </div>
+                  </li>
+                  <!-- // control group -->
+               </ul>
+            </fieldset>
+             <!-- ends col-12 -->
           </div>
          <div id="main-content" class="main-content container-fluid">
             <!-- <div class="filler filler"></div> -->
             <div id="page-content" class="page-content">
                <!-- BODY CONTENIDO -->
-               <div id="invoicePrint" class="container  ng-cloak" ng-controller="invoiceController">
+               <div id="invoicePrint" class="container  ng-cloak">
                   <div class="row" style="padding-top: 31px;">
                      <div class="row logo-row">
                         <div class="col-xs-9">

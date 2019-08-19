@@ -136,7 +136,8 @@ app.controller('invoiceController', ['$scope', '$timeout', "$http", function ($s
 
     // Add Customer 
     $scope.addCustomer = function () {
-
+        $("body").addClass("sidebar-hidden")
+        
     }
 
     // Recalculate Total

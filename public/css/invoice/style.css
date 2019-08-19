@@ -1980,3 +1980,13 @@ td:first-child {
 
 #btn-menu-secundary-open.menu-secundary-active,
 #btn-menu-secundary-close.menu-secundary-active { display: block; }
+
+@media (min-width: 1200px){
+  .sidebar {
+    padding: 10px;
+}  
+}
+
+input.span3x, textarea.span3x, .uneditable-input.span3x {
+    width: 251px;
+}
