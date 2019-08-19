@@ -2,7 +2,7 @@ function rand_code(string, lon, start) {
     var number = "0123456789",
         numLetra = "0123456789PLIKMNJUYHBVGTRFCXDEWSZAQ",
         lether = "PLIKMNJUYHBVGTRFCXDEWSZAQqazwsxedcrfvtgbyhnujmiklop"
-        lon = lon,
+    lon = lon,
         chars = (string === 1) ? number : ((string === 2) ? numLetra : lether),
         code = start;
     for (x = 0; x < lon; x++) {
@@ -12,13 +12,13 @@ function rand_code(string, lon, start) {
     return code;
 }
 
-function currentDate(type,format) {
-    var options = { year: 'numeric', month: 'short', day: 'numeric' },newDay = null;
-    Date.prototype.mes = function() {
+function currentDate(type, format) {
+    var options = { year: 'numeric', month: 'short', day: 'numeric' }, newDay = null;
+    Date.prototype.mes = function () {
         var m = this.getMonth() + 1; // la funcion getMonth() está basado en cero
         return (m > 9 ? '' : '0') + m;
     };
-    Date.prototype.segundos = function() {
+    Date.prototype.segundos = function () {
         var s = this.getSeconds();
         return (s > 9 ? '' : '0') + s;
     };
@@ -31,55 +31,55 @@ function currentDate(type,format) {
             hour12: true
         });
     //hours = (hours >= 12) ? hours : "0" + hours;
-    if(type === 1 && format === 1 ){
-       var dateFormat = date.mes() + "/" + date.getDate() + "/" +
-                        date.getFullYear() + " " + hours;
-    }
-    if(type === 2 && format === 1){
+    if (type === 1 && format === 1) {
         var dateFormat = date.mes() + "/" + date.getDate() + "/" +
-        date.getFullYear();
+            date.getFullYear() + " " + hours;
     }
-    if(type === 1 && format === 2 ){
+    if (type === 2 && format === 1) {
+        var dateFormat = date.mes() + "/" + date.getDate() + "/" +
+            date.getFullYear();
+    }
+    if (type === 1 && format === 2) {
         var newDay = date.mes() + "/" + date.getDate() + "/" +
-                         date.getFullYear() + " " + hours,
-        tempDate = new Date(newDay)
-         dateFormat = tempDate.toLocaleDateString("es-ES", options)
-     }
-     if(type === 2 && format === 2){
-        var newDay = date.mes() + "/" + date.getDate() + "/" +
-        date.getFullYear(),
-        tempDate = new Date(newDay)
+            date.getFullYear() + " " + hours,
+            tempDate = new Date(newDay)
         dateFormat = tempDate.toLocaleDateString("es-ES", options)
     }
-    if(type === 3 && format === 3){
-        
-        dateFormat = date.getFullYear() + "-" + ((date.getMonth()+1) < 10 ? "0"+(date.getMonth()+1) : (date.getMonth()+1)) + "-" + date.getDate()+ "T05:00:00.000+00:00"
+    if (type === 2 && format === 2) {
+        var newDay = date.mes() + "/" + date.getDate() + "/" +
+            date.getFullYear(),
+            tempDate = new Date(newDay)
+        dateFormat = tempDate.toLocaleDateString("es-ES", options)
+    }
+    if (type === 3 && format === 3) {
+
+        dateFormat = date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + date.getDate() + "T05:00:00.000+00:00"
     }
     return dateFormat;
 };
-function currentHours(){
+function currentHours() {
     var a = new Date;
     let min = 0;
     let hour = 0;
-    a.setDate(a.getDate()),setInterval(function() {
+    a.setDate(a.getDate()), setInterval(function () {
         var a = (new Date).getMinutes(),
-        min = (a < 10 ? "0" : "") + a;
-    }, 1e3), setInterval(function() {
+            min = (a < 10 ? "0" : "") + a;
+    }, 1e3), setInterval(function () {
         var a = (new Date).getHours();
-        
-        if(a <= 12){
-         if(a == '00'){
-            a = '12'
-           }else{
-          a = a
-         }	
-        }else{
-        a  = (a - 12)
+
+        if (a <= 12) {
+            if (a == '00') {
+                a = '12'
+            } else {
+                a = a
+            }
+        } else {
+            a = (a - 12)
         }
-           
+
         hour = (a < 10 ? "0" : "") + a
     }, 1e3)
-return hour +":"+  min
+    return hour + ":" + min
 
 }
 
@@ -110,19 +110,23 @@ function formatNumber(n) {
     n = String(n).replace(/\D/g, "");
     return n === '' ? n : Number(n).toLocaleString();
 }
-    
-function dateFormat(target,type){
-    if(type === 1){
-    var options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    };
-    return target.toLocaleDateString("es-ES", options)    
+
+function digits(c) {
+    return c.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+}
+
+function dateFormat(target, type) {
+    if (type === 1) {
+        var options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        return target.toLocaleDateString("es-ES", options)
     }
-    if(type === 2){
-      return  target.getFullYear() + "-" + ((target.getMonth()+1) < 10 ? "0"+(target.getMonth()+1) : (target.getMonth()+1)) + "-" + (target.getDate() < 10 ? "0"+target.getDate() : target.getDate() )+ "T05:00:00.000+00:00"
-         
+    if (type === 2) {
+        return target.getFullYear() + "-" + ((target.getMonth() + 1) < 10 ? "0" + (target.getMonth() + 1) : (target.getMonth() + 1)) + "-" + (target.getDate() < 10 ? "0" + target.getDate() : target.getDate()) + "T05:00:00.000+00:00"
+
     }
 }
 function currency(value, decimals, separators) {
@@ -186,25 +190,25 @@ function numValidate(numero) {
 //Asesor
 function asesorArray() {
     var asesor = [{
-            id: 1,
-            tag: 'Aksel Kerim'
-        },
-        {
-            id: 2,
-            tag: 'Orville Barret'
-        },
-        {
-            id: 3,
-            tag: 'Jeffry Church'
-        },
-        {
-            id: 4,
-            tag: 'Jewell Rice'
-        },
-        {
-            id: 5,
-            tag: 'Montana Lincoln'
-        }
+        id: 1,
+        tag: 'Aksel Kerim'
+    },
+    {
+        id: 2,
+        tag: 'Orville Barret'
+    },
+    {
+        id: 3,
+        tag: 'Jeffry Church'
+    },
+    {
+        id: 4,
+        tag: 'Jewell Rice'
+    },
+    {
+        id: 5,
+        tag: 'Montana Lincoln'
+    }
     ];
 
     return asesor;
@@ -213,65 +217,65 @@ function asesorArray() {
 // Tipo de identificacion
 function typeidArray() {
     var typeID = [{
-            id: 0,
-            tag: "NIT"
-        },
-        {
-            id: 1,
-            tag: "CC"
-        },
-        {
-            id: 2,
-            tag: "CE"
-        },
-        {
-            id: 3,
-            tag: "RUC"
-        },
-        {
-            id: 4,
-            tag: "RUT"
-        },
-        {
-            id: 5,
-            tag: "RIF"
-        },
-        {
-            id: 6,
-            tag: "RUN"
-        },
-        {
-            id: 7,
-            tag: "NIF"
-        },
-        {
-            id: 8,
-            tag: "NIE"
-        },
-        {
-            id: 9,
-            tag: "RFC"
-        },
-        {
-            id: 10,
-            tag: "CUIT"
-        },
-        {
-            id: 11,
-            tag: "CUIL"
-        },
-        {
-            id: 12,
-            tag: "CPF"
-        },
-        {
-            id: 13,
-            tag: "CNPJ"
-        },
-        {
-            id: 14,
-            tag: "PASAPORTE"
-        }
+        id: 0,
+        tag: "NIT"
+    },
+    {
+        id: 1,
+        tag: "CC"
+    },
+    {
+        id: 2,
+        tag: "CE"
+    },
+    {
+        id: 3,
+        tag: "RUC"
+    },
+    {
+        id: 4,
+        tag: "RUT"
+    },
+    {
+        id: 5,
+        tag: "RIF"
+    },
+    {
+        id: 6,
+        tag: "RUN"
+    },
+    {
+        id: 7,
+        tag: "NIF"
+    },
+    {
+        id: 8,
+        tag: "NIE"
+    },
+    {
+        id: 9,
+        tag: "RFC"
+    },
+    {
+        id: 10,
+        tag: "CUIT"
+    },
+    {
+        id: 11,
+        tag: "CUIL"
+    },
+    {
+        id: 12,
+        tag: "CPF"
+    },
+    {
+        id: 13,
+        tag: "CNPJ"
+    },
+    {
+        id: 14,
+        tag: "PASAPORTE"
+    }
     ];
 
     return typeID;
@@ -280,21 +284,21 @@ function typeidArray() {
 // Metodo de Pago
 function paymentArray() {
     var paymentType = [{
-            id: 0,
-            tag: "Efectivo"
-        },
-        {
-            id: 1,
-            tag: "Tarjeta Credito"
-        },
-        {
-            id: 2,
-            tag: "Tarjeta Debito"
-        },
-        {
-            id: 3,
-            tag: "Cheque"
-        }
+        id: 0,
+        tag: "Efectivo"
+    },
+    {
+        id: 1,
+        tag: "Tarjeta Credito"
+    },
+    {
+        id: 2,
+        tag: "Tarjeta Debito"
+    },
+    {
+        id: 3,
+        tag: "Cheque"
+    }
     ]
 
     return paymentType;
@@ -303,25 +307,25 @@ function paymentArray() {
 //Descuento de factura
 function discountArray() {
     var invoiceDisc = [{
-            id: 0,
-            tag: "5"
-        },
-        {
-            id: 1,
-            tag: "10"
-        },
-        {
-            id: 2,
-            tag: "15"
-        },
-        {
-            id: 3,
-            tag: "20"
-        },
-        {
-            id: 4,
-            tag: "25"
-        }
+        id: 0,
+        tag: "5"
+    },
+    {
+        id: 1,
+        tag: "10"
+    },
+    {
+        id: 2,
+        tag: "15"
+    },
+    {
+        id: 3,
+        tag: "20"
+    },
+    {
+        id: 4,
+        tag: "25"
+    }
     ]
 
     return invoiceDisc;
@@ -337,7 +341,7 @@ function addComents(array, targetID) {
 
     if (sZeroRecords === true) {
         userComments(array, 1);
-        $.each(array, function(index, val) {
+        $.each(array, function (index, val) {
             if (targetID === val.bitacoraID) {
                 let date = val.date;
                 let comments = val.comments;
@@ -391,7 +395,7 @@ function addTimeExtend(data, target) {
         name = null,
         userExten = "Jose Rojas", // se debe optener del currentUser dentro del modelo inicial
         currentStep = null
-    $.each(data, function(i, v) {
+    $.each(data, function (i, v) {
         id = v.id
         if (target === id) {
             name = v.customer;
@@ -409,7 +413,7 @@ function addTimeExtend(data, target) {
 function addAddress(data, target) {
     var id = null,
         html = null;
-    $.each(data, function(i, v) {
+    $.each(data, function (i, v) {
         id = v.id
         if (target === id) {
             if ($("#contacInfo")[0].children.length > 0) {
@@ -440,10 +444,10 @@ function newElemtArray(array1, array2, item, type) {
     if (type == 1) {
         value = $("#" + item).val()
         if (value !== "") {
-            $.each(array1, function(index, val) {
+            $.each(array1, function (index, val) {
                 if (value == val.id) {
                     target = val.country;
-                    $.each(array2, function(index, val) {
+                    $.each(array2, function (index, val) {
                         if (target === val.country) {
                             array.push(array2[index])
                             //delete array[index];
@@ -456,10 +460,10 @@ function newElemtArray(array1, array2, item, type) {
         value = $("#" + item).val()
         value = (value !== "") ? parseInt(value) - parseInt(1) : value
         if (value !== "") {
-            $.each(array1, function(index, val) {
+            $.each(array1, function (index, val) {
                 if (value == index) {
                     target = val.short;
-                    $.each(array2, function(index, val) {
+                    $.each(array2, function (index, val) {
                         if (target === val.short) {
                             array.push(array2[index])
                             //delete array[index];
@@ -503,7 +507,7 @@ function validateCedula(cedula) {
     // 11 - Emberá Wounaan
     // 12 - Ngäbe-Buglé
     // 13 - Panamá Oeste
-    Array.prototype.insert = function(index, item) {
+    Array.prototype.insert = function (index, item) {
         this.splice(index, 0, item);
     };
     var re = /^P$|^(?:PE|E|N|[23456789]|[23456789](?:A|P)?|1[0123]?|1[0123]?(?:A|P)?)$|^(?:PE|E|N|[23456789]|[23456789](?:AV|PI)?|1[0123]?|1[0123]?(?:AV|PI)?)-?$|^(?:PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)-(?:\d{1,4})-?$|^(PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)-(\d{1,4})-(\d{1,5})$/i
@@ -548,7 +552,7 @@ function validateCedula(cedula) {
 //*************************************//
 
 function cancelFullScreen(el) {
-    var requestMethod = el.cancelFullScreen||el.webkitCancelFullScreen||el.mozCancelFullScreen||el.exitFullscreen;
+    var requestMethod = el.cancelFullScreen || el.webkitCancelFullScreen || el.mozCancelFullScreen || el.exitFullscreen;
     if (requestMethod) { // cancel full screen.
         requestMethod.call(el);
     } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
@@ -576,7 +580,7 @@ function requestFullScreen(el) {
 
 function toggleFull() {
     var elem = document.body; // Make the body go full screen.
-    var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) ||  (document.mozFullScreen || document.webkitIsFullScreen);
+    var isInFullScreen = (document.fullScreenElement && document.fullScreenElement !== null) || (document.mozFullScreen || document.webkitIsFullScreen);
 
     if (isInFullScreen) {
         cancelFullScreen(document);

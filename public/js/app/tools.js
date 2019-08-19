@@ -8,7 +8,7 @@ $(document).ready(function () {
             } else {*/
             //$('#alert').hide();
             startDate = ev.date;
-            $('#startDate').text(dateFormat(startDate,1));
+            $('#startDate').text(dateFormat(startDate, 1));
             //}
             $('#DTP1').datepicker('hide');
         });
@@ -21,7 +21,7 @@ $(document).ready(function () {
             } else {*/
             $('#alert').hide();
             endDate = ev.date;
-            $('#endDate').text(dateFormat(endDate,1));
+            $('#endDate').text(dateFormat(endDate, 1));
             //}
             $('#DTP2').datepicker('hide');
         });
@@ -125,55 +125,72 @@ $(document).ready(function () {
     // PREFIX PROVEEDOR
     $("#wzNewPrefixProveedor").val(rand_code(2, 7, ""))
     // form validate
-    var $rule1 = $('#wizard-progress').validate({
-        ignore: "",
-        rules: {
-            accNewFirstName: {
-                required: true,
-                minlength: 4,
-                maxlength: 20
-            }
-        },
-        messages: {
-            accNewFirstName: {
-                required: "Please enter a First Name",
-                minlength: "First Name must be at least 4 characters",
-                maxlength: "First Name must be no more than 20 characters"
-            }
-        },
+    // var $rule1 = $('#wizard-progress').validate({
+    //     ignore: "",
+    //     rules: {
+    //         accNewFirstName: {
+    //             required: true,
+    //             minlength: 4,
+    //             maxlength: 20
+    //         }
+    //     },
+    //     messages: {
+    //         accNewFirstName: {
+    //             required: "Please enter a First Name",
+    //             minlength: "First Name must be at least 4 characters",
+    //             maxlength: "First Name must be no more than 20 characters"
+    //         }
+    //     },
 
-        highlight: function (label) {
-            $(label).closest('.control-group').addClass('error');
-        },
-        errorPlacement: function (error, label) {
-            $(label).closest('.controls').append(error);
-        }
+    //     highlight: function (label) {
+    //         $(label).closest('.control-group').addClass('error');
+    //     },
+    //     errorPlacement: function (error, label) {
+    //         $(label).closest('.controls').append(error);
+    //     }
+    // })
+
+    // // form validate
+    // var $rule2 = $('#wizard-progress').validate({
+    //     ignore: "",
+    //     rules: {
+    //         accNewGenderInput: {
+    //             required: true
+    //         }
+    //     },
+    //     messages: {
+    //         accNewGenderInput: {
+    //             required: "Please enter a gender"
+    //         }
+    //     },
+
+    //     highlight: function (label) {
+    //         $(label).closest('.control-group').addClass('error');
+    //     },
+    //     success: function (label) {
+    //         $(label).text('OK!').addClass('valid')
+    //             .closest('.control-group').addClass('success');
+    //     },
+    //     errorPlacement: function (error, label) {
+    //         $(label).closest('.controls').append(error);
+    //     }
+    // })
+
+
+    // Format Currency
+    $("#priceP").on("blur",function(){
+        var e = $("#priceP").val()
+        $("#priceP").val("$" + formatCurrencyNum(e))
     })
 
-    // form validate
-    var $rule2 = $('#wizard-progress').validate({
-        ignore: "",
-        rules: {
-            accNewGenderInput: {
-                required: true
-            }
-        },
-        messages: {
-            accNewGenderInput: {
-                required: "Please enter a gender"
-            }
-        },
+    $("#stocks").on("blur",function(){
+        var es = $("#stocks").val()
+        $("#stocks").val(digits(es))
+    })
 
-        highlight: function (label) {
-            $(label).closest('.control-group').addClass('error');
-        },
-        success: function (label) {
-            $(label).text('OK!').addClass('valid')
-                .closest('.control-group').addClass('success');
-        },
-        errorPlacement: function (error, label) {
-            $(label).closest('.controls').append(error);
-        }
+    $("#alerts").on("blur",function(){
+        var es = $("#alerts").val()
+        $("#alerts").val(digits(es))
     })
 });
 

@@ -1600,7 +1600,7 @@ tr td p {
 .invoicee-meta {
 	padding-left: 1px;
 	position: relative;
-    top: -48px;
+    top: -28px;
 }
 .nopadding-l {
     padding-left: 0 !important;
@@ -1613,6 +1613,7 @@ tr td p {
     border-bottom: 10px solid #3A3A3B;
     padding-bottom: 0px;
     margin-top: 33px;
+    margin-left: -1px !important;
 }
 .project-meta-row {
     margin-top: 10px;
@@ -1968,3 +1969,14 @@ td:first-child {
         display: none;
     }
 }
+
+#primary { width: auto; }
+#primary.menu-secundary-active { margin-left: 200px; }
+
+#secundary { background: black; width: 200px; height: 100%; position: fixed; overflow-y: auto; margin-left: -200px; padding-top: 50px; }
+#secundary.menu-secundary-active {  margin-left: 0;  }
+
+
+
+#btn-menu-secundary-open.menu-secundary-active,
+#btn-menu-secundary-close.menu-secundary-active { display: block; }

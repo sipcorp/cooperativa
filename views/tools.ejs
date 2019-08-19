@@ -15,50 +15,47 @@
             <nav>
                <ul class="btn-toolbar page-nav margin-btn">
                   <li>
-                     <a class="btn btn-well btn-glyph" href="#TabTop1" data-toggle="tab" style="width: 80px">
+                     <a class="btn btn-well btn-glyph" data-target="#TabTop1" data-toggle="tab" style="width: 80px">
                         <i class="fontello-icon-list-add f30"></i>
                         <span class="block">PROYECTO</span>
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph step1" href="#TabTop2" data-toggle="tab" style="width: 90px">
+                     <a class="btn btn-well btn-glyph step1" data-target="#TabTop2" data-toggle="tab" style="width: 90px">
                         <i class="fontello-icon-vcard f30"></i>
                         <span class="block">PRODUCTORES</span>
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph step1" href="#TabTop3" data-toggle="tab" style="width: 90px">
+                     <a class="btn btn-well btn-glyph step1" data-target="#TabTop3" data-toggle="tab" style="width: 90px">
                         <i class="fontello-icon-user-add f30"></i>
                         <span class="block">PROVEEDORES</span>
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph" href="#TabTop4" data-toggle="tab" style="width: 80px"
-                        data-toggle="modal">
+                     <a class="btn btn-well btn-glyph" data-target="#TabTop4" data-toggle="tab" style="width: 80px">
                         <i class="fontello-icon-leaf-1 f30"></i>
                         <span class="block">PRODUCTOS</span>
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph" href="#TabTop5" data-toggle="tab" style="width: 80px"
-                        data-toggle="modal">
+                     <a class="btn btn-well btn-glyph" data-target="#TabTop5" data-toggle="tab" style="width: 80px">
                         <i class="fontello-icon-water f30"></i>
                         <span class="block">INSUMOS</span>
                      </a>
                   </li>
                   <li>
-                     <a class="btn btn-well btn-glyph" href="#TabTop6" data-toggle="tab" style="width: 80px"
-                        data-toggle="modal">
+                     <a class="btn btn-well btn-glyph" data-target="#TabTop6" data-toggle="tab" style="width: 80px">
                         <i class="fontello-icon-users-2 f30"></i>
                         <span class="block">CLIENTES</span>
                      </a>
                   </li>
-                  <li>
+                  <!-- <li>
                      <a class="btn btn-well btn-glyph" href="#updateModal" style="width: 85px" data-toggle="modal">
                         <i class="fontello-icon-arrows-cw f30"></i>
                         <span class="block">LAST UPDATE</span>
                      </a>
-                  </li>
+                  </li> -->
                </ul>
                <hr class="margin-0x">
             </nav>
@@ -890,7 +887,7 @@
 
                </div>
                <!-- // tab 4 -->
-               <div class="tab-pane" id="TabTop4">
+               <div class="tab-pane" id="TabTop4" ng-controller="productoController">
                   <section>
                      <div class="row-fluid">
                         <form class="form-horizontal span12">
@@ -899,7 +896,7 @@
                                  <i class="fontello-icon-quote-left-alt"></i>
                                  <span>Agregar Producto</span>
                                  <div class="form-actions-s">
-                                    <button type="submit" class="btn btn-blue">Submit &amp;
+                                    <button type="button" class="btn btn-blue" ng-click="validateAndSave()">Submit &amp;
                                        Validate</button>
                                     <button class="btn cancel">Cancel</button>
                                  </div>
@@ -908,7 +905,7 @@
                                  <li class="control-group">
                                     <label for="limiteChar" class="control-label">Nombre:</label>
                                     <div class="controls">
-                                       <input id="limiteChar" class="span6 limiteChar15 clear-field" type="text">
+                                       <input id="limiteChar" class="span6 limiteChar15 clear-field" type="text" ng-model="productoName" ng-blur="createObj('n',productoName)">
                                        <div id="limiteChar_counter">
                                           <span id="limiteChar_count"></span>
                                        </div>
@@ -918,7 +915,7 @@
                                  <li class="control-group">
                                     <label for="limiteWords" class="control-label">Descripcion:</label>
                                     <div class="controls">
-                                       <textarea id="limiteWords" rows="3"
+                                       <textarea id="limiteWords" rows="3" ng-model="productoDescripcion" ng-blur="createObj('d',productoDescripcion)"
                                           class="span6 limiteWords15 clear-field"></textarea>
                                        <div id="limiteWords_counter">
                                           <span id="limiteWords_count"></span>
@@ -927,25 +924,25 @@
                                  </li>
                                  <!-- // control group -->
                                  <li class="control-group">
-                                    <label for="regularClearText" class="control-label">Precio:</label>
+                                    <label for="priceP" class="control-label">Precio:</label>
                                     <div class="controls">
-                                       <input id="regularClearText" class="span6 clear-field" type="text"
+                                       <input id="priceP" class="span6 clear-field" type="text" ng-model="productoPrecio" ng-blur="createObj('p',productoPrecio)"
                                           placeholder="enter text and clear">
                                     </div>
                                  </li>
                                  <!-- // control group -->
                                  <li class="control-group">
-                                    <label for="regularClearText" class="control-label">Unit:</label>
+                                    <label for="stocks" class="control-label">Stock:</label>
                                     <div class="controls">
-                                       <input id="regularClearText" class="span6 clear-field" type="text"
+                                       <input id="stocks" class="span6 clear-field" type="text" ng-model="stock"  ng-blur="createObj('s',stock)"
                                           placeholder="enter text and clear">
                                     </div>
                                  </li>
                                  <!-- // control group -->
                                  <li class="control-group">
-                                    <label for="regularClearText" class="control-label">Alerta:</label>
+                                    <label for="alerts" class="control-label">Alerta:</label>
                                     <div class="controls">
-                                       <input id="regularClearText" class="span6 clear-field" type="text"
+                                       <input id="alerts" class="span6 clear-field" type="text" ng-model="alert" ng-blur="createObj('a',alert)"
                                           placeholder="enter text and clear">
                                     </div>
                                  </li>
@@ -1133,6 +1130,7 @@
    <script src="./controller/proyectController.js"></script>
    <script src="./controller/productorController.js"></script>
    <script src="./controller/proveedorController.js"></script>
+   <script src="./controller/productoController.js"></script>
 </body>
 
 </html>

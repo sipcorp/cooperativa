@@ -48,3 +48,19 @@ const getProductorFilter = "/get-productorFilter"
 /*######################################################## */
 const addProveedor = "/add-proveedor"
 const getProveedor = "/get-proveedorFilter"
+
+
+/*######################################################## */
+//                  GLOBAL VARS PRODUCTO JS 
+/*######################################################## */
+const addProducto = "/add-producto"
+var getProducto = {
+  "async": true,
+  "crossDomain": true,
+  "url": "/get-producto",
+  "method": "GET",
+  "headers": {
+    "Content-Type": "application/json; charset=utf-8",
+    "Cache-Control": "no-cache"
+  }
+};

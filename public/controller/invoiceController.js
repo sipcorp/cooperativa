@@ -1,5 +1,5 @@
 'use strict';
-app.controller('invoiceController', ['$scope', '$timeout', function ($scope, $timeout) {
+app.controller('invoiceController', ['$scope', '$timeout', "$http", function ($scope, $timeout, $http) {
     var companyInfo = [
         {
             name: 'Cooperativa de Servicios Multiples La Alanjeña',
@@ -9,43 +9,38 @@ app.controller('invoiceController', ['$scope', '$timeout', function ($scope, $ti
             phone: '+507 752-9899'
         }
     ]
-    var customerInfo = []
-    var rowProduct = []
-    var tmpCart = [];
-    var tmpInvoice = [
-    ]
-    console.log(tmpInvoice)
-    var productList = [
+    var customerInfo = [
         {
-            name: 'Pollo',
-            price: 2.1,
-            unit: 'Lb',
-            description: 'Pollo tipo panama'
+            name: 'Alberto Perea',
+            address: 'Alanje Finca 6',
+            phone: '+507 6985-9965'
         },
         {
-            name: 'Arroz',
-            price: 3.5,
-            unit: 'Lb',
-            description: 'Arroz pilado de primera'
+            name: 'Jose Aguirre',
+            address: 'Alanje entrando por la funigadora CMD',
+            phone: '+507 6785-8587'
         },
         {
-            name: 'Guandu',
-            price: 1.5,
-            unit: 'Lb',
-            description: 'Guandu grano verde'
+            name: 'Roberto Gonzales',
+            address: 'David, El varital casa 39',
+            phone: '+507 6255-7412'
         },
         {
-            name: 'Guandu Oscuro',
-            price: 1.5,
-            unit: 'Lb',
-            description: 'Guandu grano oscuro'
+            name: 'Luis Pinson',
+            address: 'David, Calle 8tava',
+            phone: '+507 6988-9999'
         }
     ]
+    var rowProduct = []
+    var tmpCart = [];
+    var tmpInvoice = []
+    console.log(tmpInvoice)
+
 
     // variables globales
     //$scope.company = companyInfo;
     $scope.add = rowProduct;
-    $scope.product = productList;
+    $scope.product = [];
     $scope.tmpCart = tmpCart;
     $scope.tmpInvoice = tmpInvoice;
     $scope.due = 0;
@@ -61,6 +56,14 @@ app.controller('invoiceController', ['$scope', '$timeout', function ($scope, $ti
     $scope.customerPhone = '';
     $scope.customerName = '';
     $scope.qtyInit = 0
+
+    // Load Product List
+    $http(getProducto).then(function mySuccess(response) {
+        $scope.product = response.data.producto
+        console.log(response)
+    }, function myError(response) {
+        $scope.product = [];
+    });
 
     // Add item to invoice
     $scope.addItem = function (data) {
@@ -83,7 +86,7 @@ app.controller('invoiceController', ['$scope', '$timeout', function ($scope, $ti
 
             })
             if (exists === false) {
-                angular.forEach(productList, function (value, key) {
+                angular.forEach($scope.product, function (value, key) {
                     if (data === value.name) {
                         $scope.tmpCart = {
                             name: value.name,
@@ -129,6 +132,11 @@ app.controller('invoiceController', ['$scope', '$timeout', function ($scope, $ti
             }
         });
         console.log($scope.tmpInvoice)
+    }
+
+    // Add Customer 
+    $scope.addCustomer = function () {
+
     }
 
     // Recalculate Total
@@ -203,6 +211,38 @@ app.controller('invoiceController', ['$scope', '$timeout', function ($scope, $ti
         console.log($scope.tmpInvoice)
     }
 
+    // Create Objs Customer
+    var objsCustomer = {
+        name: "",
+        documentID: "",
+        direccion: "",
+        movile: "",
+        phone: "",
+        observacion:""
+
+    }
+    $scope.createObjsCustomer = function (type, values) {
+        if (type == 'n') {
+            objsCustomer.name = values
+        }
+        if(type == 'c'){
+            objsCustomer.documentID = values
+        }
+        if(type == 'a'){
+            objsCustomer.direccion = values
+        }
+        if(type == 'm'){
+            objsCustomer.movile = values
+        }
+        if(type == 'p'){
+            objsCustomer.phone = values
+        }
+        if(type == 'o'){
+            objsCustomer.observacion = values
+        }
+
+        console.log(objsCustomer)
+    }
     // PRINT INVOICE
     $scope.printToCart = function () {
         var innerContents = document.getElementById('invoicePrint').innerHTML;
@@ -212,5 +252,5 @@ app.controller('invoiceController', ['$scope', '$timeout', function ($scope, $ti
         popupWinindow.document.close();
     }
 
-
+  
 }]);

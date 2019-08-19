@@ -1,6 +1,6 @@
 <!--========== Third Modal ==========-->
 <!-- Modal -->
-<div class="modal fade" id="products" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
        <div class="modal-content">
           <div class="modal-header modal-header-primary">
@@ -8,40 +8,58 @@
              <h4>PRODUCTOS</h4>
           </div>
           <div class="modal-body" ng-controller="invoiceController">
-             <div class="col-md-12">
-                <div class="table-responsive">
-                   <form action="" method="" name="">
-                      <table class="table table-condensed">
-                         <thead>
-                            <tr>
-                               <th>Product</th>
-                               <th>Quantity</th>
-                            </tr>
-                         </thead>
-                         <tbody>
-                            <tr>
-                               <td class='modalProduct'>
-                                  <div class="delete-wpr">
-                                      <select class="selectpicker" data-live-search="true" ng-model="productSelected" ng-change="qtyIni(index,1)">
-                                            <option value="" disabled>Seleccione un producto</option>
-                                            <option ng-repeat="producto in product">{{producto.name}}</option>
-                                      </select>    
-                                </div>
-                               </td>
-                               <td>
-                                  <input type="text" class="qtyNumberModel"  ng-model="qty"  ng-change="qtyIni(index,qty)" value="{{qtyInit}}"/>
-                               </td>
-                              
-                            </tr>
-                         </tbody>
-                      </table>
-                      <div class="button-group">
-                      <button type="button" class="btn btn-primary pull-right"  ng-click="addItem(productSelected,qtyInit)" data-dismiss="modal">Save</button>
-                      </div>
-                     
-                   </form>
-                </div>
-             </div>
+            <fieldset>
+               <ul class="form-list list-bordered dotted">
+                  <li class="control-group">
+                     <label for="custmerName" class="control-label">Nombre completo:</label>
+                     <div class="controls">
+                        <input id="custmerName" class="span6 clear-field" type="text" ng-model="customerName"
+                           ng-blur="createInvoice('n',customerName)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="cedula" class="control-label">Cedula / RUC:</label>
+                     <div class="controls">
+                        <input id="cedula" class="span6 clear-field" type="text" ng-model="customerID"
+                           ng-blur="createInvoice('c',customerID)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="address" class="control-label">Direccion:</label>
+                     <div class="controls">
+                        <textarea id="address" rows="3" class="span6 clear-field" ng-model="customerAdrress"
+                           ng-change="createInvoice('a',customerAdrress)"></textarea>
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="movile" class="control-label">Movile:</label>
+                     <div class="controls">
+                        <input id="movile" class="span6 clear-field" type="text" ng-model="customerMovile"
+                           ng-blur="createInvoice('m',customerMovile)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="phone" class="control-label">Telefono:</label>
+                     <div class="controls">
+                        <input id="phone" class="span6 clear-field" type="text" ng-model="customerPhone"
+                           ng-blur="createInvoice('p',customerPhone)">
+                     </div>
+                  </li>
+                  <!-- // control group -->
+                  <li class="control-group">
+                     <label for="obser" class="control-label">Observacion:</label>
+                     <div class="controls">
+                        <textarea id="obser" rows="3" class="span6 obser clear-field" ng-model="customerOb"
+                           ng-blur="createInvoice('o',customerOb)"></textarea>
+                     </div>
+                  </li>
+                  <!-- // control group -->
+               </ul>
+            </fieldset>
              <!-- ends col-12 -->
           </div>
           <div class="clearfix"></div>

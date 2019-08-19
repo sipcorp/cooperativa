@@ -10,7 +10,14 @@
       <!--CONTENIDO-->
       <div id="main-container">
          <!--MENU LEFT-->
-
+         <div class='sidebar'>
+            <h3>Left Sidebar</h3>
+            <ul class="nav nav-tabs nav-stacked">
+              <li><a href='#'>Another Link 1</a></li>
+              <li><a href='#'>Another Link 2</a></li>
+              <li><a href='#'>Another Link 3</a></li>
+            </ul>
+          </div>
          <div id="main-content" class="main-content container-fluid">
             <!-- <div class="filler filler"></div> -->
             <div id="page-content" class="page-content">
@@ -45,7 +52,7 @@
                                     </div>
 
                                     <div class="btn-group">
-                                       <a class="btn btn-mini btn-glyph btn-default" href="#">
+                                       <a class="btn btn-mini btn-glyph btn-default" id="showSideBar">
                                           <i class="fontello-icon-plus"></i>
                                        </a>
                                     </div>
@@ -86,8 +93,7 @@
                                        <tr>
                                           <td class='modalProduct'>
                                              <div class="delete-wpr">
-                                                <select id="productSelect" class="selectpicker" data-live-search="true"
-                                                   ng-model="productSelected">
+                                                <select id="productSelect" class="selectpicker" data-live-search="true" ng-model="productSelected">
                                                    <option value="" disabled>Seleccione un producto</option>
                                                    <option ng-repeat="producto in product">{{producto.name}}</option>
                                                 </select>
@@ -169,9 +175,11 @@
                </div>
                <!-- BODY CONTENIDO-->
             </div>
+            
          </div>
-
          <!--CONTENIDO-->
+        
+
          <% include ./partials/footer %>
       </div>
       <% include ./partials/modal %>
@@ -179,6 +187,7 @@
       <!-- Component -->
       <!-- <script src="./js/app/invoice.js"></script> -->
       <script src="./js/app/funciones-Globales.JS"></script>
+      <script src="./js/app/factura.js"></script>
       <script src="controller/invoiceController.js"></script>
       <script src=" plugin/pl-form/bootstrap-select/js/bootstrap-select.js"></script>
 </body>

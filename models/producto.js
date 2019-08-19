@@ -3,10 +3,11 @@ const { Schema } = mongoose;
 
 const ProductoSchema = mongoose.Schema({
    name: {type:String, require:true},
+   code:{type:String, require:true},
    price: {type: Number, require:true},
-   unit: {type:String,require:true},
+   stock: {type:String,require:true},
    description:{type:String,require:true},
-   min:{type:Number,require:true}
-},{collection:'product'})
+   alert:{type:Number,require:true}
+},{collection:'producto'})
 
-module.exports = mongoose.model('product', ProductoSchema);
+module.exports = mongoose.model('producto', ProductoSchema);
