@@ -13,42 +13,7 @@ $(document).ready(function () {
 
         // DATATABLE FACTURA
         // -------------------------------------------------------------------------------- * -->
-        $('#DTA')
-                .dataTable({
-                        oLanguage: {
-                                sSearch: 'Global search:',
-                                sZeroRecords: 'No record found <button class="btn btn-danger resetTable">Reset filter</button>',
-                                oPaginate: {
-                                        sNext: '<i class="arrowicon-r-black"></i>',
-                                        sPrevious: '<i class="arrowicon-l-black"></i>'
-                                }
-                        },
-                        iDisplayLength: 10,
-                        aaSorting: [
-                                [0, 'desc']
-                        ],
-                        aoColumnDefs: [{
-                                "aTargets": [0],
-                                'bSortable': false
-                        }, {
-                                "aTargets": [1],
-                                'sClass': 'bold',
-                        }, {
-                                "aTargets": [2],
-                                'sClass': 'hidden-phone hidden-tablet'
-                        }, {
-                                "aTargets": [3],
-                        }, {
-                                "aTargets": [4],
-                                'sClass': 'text-right'
-                        }],
-                        sDom: "<'row-fluid'<'widget-header'<'span6'l><'span6'f>>>rt<'row-fluid'<'widget-footer'<'span6'><'span6'p>>"
-
-                });
-        $('#DTA_length select').select2({
-                minimumResultsForSearch: 6,
-                width: "off"
-        });
+     
 
         setTimeout(function () {
                 var StartCaja = parseInt($("#startCashier").val())

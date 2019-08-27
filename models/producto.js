@@ -5,7 +5,7 @@ const ProductoSchema = mongoose.Schema({
    name: {type:String, require:true},
    code:{type:String, require:true},
    price: {type: Number, require:true},
-   stock: {type:String,require:true},
+   stock: {type:Number,require:true},
    description:{type:String,require:true},
    alert:{type:Number,require:true}
 },{collection:'producto'})

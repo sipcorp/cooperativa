@@ -1,134 +1,104 @@
-<!DOCTYPE html>
-<html>
-   <% include ./partials/head %>
-   <link id="linkCss" href="css/invoice/style.css" rel="stylesheet">
-   <body class="header-sticky sidebar-left sidebar-hidden" ng-app="startAPP" ng-cloak>
-         <div id="page-loader"><span class="preloader-interior"></span></div>
-      <div class="page-container">
-      <!--CONTENIDO-->
-      <div id="main-container">
-         <!--MENU LEFT-->
-         
-         <div id="main-content" class="main-content container-fluid">
-               <div class="filler filler"></div>
-               <div id="page-content" class="page-content">
-               <!-- BODY CONTENIDO -->
-         <div id="invoicePrint" class="container fix-top ng-cloak" ng-controller="invoiceController" >	
-            <div class="row">
-               <div class="row logo-row">
-                  <div class="col-xs-9">
-                     <i class="fa fa-gear" ></i>
-                  </div>
-                  <div class="col-xs-3 nopadding-lr">
-                     <img id="invoice-logo"  ng-src="../img/invoice-logo.png">
-                  </div>
-               </div>
-               <div class="row top-meta-row">
-                  <div class="col-xs-9 invoicee-meta">
-                     <div class="col-xs-6">
-                        <div class="customer form-inline top-name custom-select">
-                           <label for="customerInfo">Cliente:</label>
-                           <div class="customerSelec">
-                              <select class="selectpicker" data-live-search="true" ng-model="blisterPackTemplateSelected" ng-change="infoCustomer(blisterPackTemplateSelected)">
-                                 <option value="" disabled>Seleccione un cliente</option>
-                                 <option ng-repeat="customers in customer">{{customers.name}}</option>
-                              </select>
-                              <div class="alert alert-danger alert-customer"  ng-show="typeMessage === 1">
-                                    <strong>Ups...</strong> {{errorMessage}}
-                                  </div>
-                           </div>
-                           
-                        </div>
-                        <div class="customer form-inline top-street">
-                           <label for="customerInfo">Direccion:</label>
-                           <span>{{customerAddress}}</span>
-                        </div>
-                        <div class="customer form-inline top-phone">
-                           <label for="customerInfo">Telefono:</label>
-                           <span>{{customerPhone}}</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xs-3 invoicee-meta nopadding-lr">
-                     <p class="our-top-name" editable-text="our_address">Cooperativa de Servicios Multiples La Alanjeña R.L</p>
-                     <p class="our-top-street" editable-text="our_address_linetwo">RES #IPACOOP-PJ-13-91</p>
-                     <div><span class="our-top-city" editable-text="our_city">Provincia de Chiriqui</span> 
-                        <span editable-text="our_state" e-style="width: 50px">Distrito de Alanje,Guarumal</span> <span editable-text="our_zip" e-style="width: 70px">{{our_zip}}</span>
-                     </div>
-                  </div>
-               </div>
-               <div class="project-meta-row">
-                  <div class="col-xs-12 nopadding-lr">
-                     #<span style="color:red;">{{invoiceNum}}</span>  
-                     &nbsp;///&nbsp; <span>{{date | date:'MM/dd/yyyy'}}</span>
-                  </div>
-               </div>
-               <div class="row main-content-row">
-                  <div class="col-xs-12 table-holder nopadding-l">
-                     <p editable-text="lead_in" e-style="width: 300px" class="lead-in-p">{{lead_in}}</p>
-                     <table class="table" ng-model="add">
-                        <thead>
-                           <tr>
-                              <th></th>
-                              <th>Producto</th>
-                              <th>Descripcion</th>
-                              <th>Precio</th>
-                              <th>Cantidad</th>
-                              <th>Total</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                                <div class="alert alert-danger alert-item"  ng-show="typeMessage === 3">
-                                        <strong>Ups...</strong> {{errorMessage}}
-                                    </div>
-                           <tr ng-repeat="products in add">
-                              <td>
-                                 <a class="delete" ng-click="deleteitem($index)" title="Remove row">
-                                 <span class="booico-trash delete-fix"></span>
-                                 </a>
-                              </td>
-                              <td>
-                                 <p>{{products.name}}</p>
-                              </td>
-                              <td>
-                                 <p>{{products.description}}</p>
-                              </td>
-                              <td class="price">
-                                 <p>{{products.cost | currency}}</p>
-                              </td>
-                              <td><input type="text" class="qtyNumber" ng-model="newQty" ng-blur="qtyChange($index,newQty)" value="{{products.qty}}"> </td>
-                              <td> {{ products.price | currency }} </td>
-                           </tr>
-                        </tbody>
+<div id="print-section" class="printSection">
+   <div style="min-width:600px;">
+      <div flex="" layout-padding="">
+         <div class="invoice-box">
+            <table cellpadding="0" cellspacing="0">
+               <tr class="top">
+                  <td colspan="2">
+                     <table>
+                        <tr>
+                           <td class="title">
+                              <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                           </td>
+                           <td>
+                              Invoice #: 123<br>
+                              Created: January 1, 2015<br>
+                              Due: February 1, 2015
+                           </td>
+                        </tr>
                      </table>
-                     <div class="total-meta-holder">
-                        <span class="">Total: </span>
-                        <span class=""><strong>{{ total | currency}}</strong></span>
-                     </div>
-                     <div class="total-meta-holder two">
-                        <span class="">Due By: </span>
-                        <span class="input-group" editable-date="date" e-datepicker-popup="MM-dd-yyyy" datepicker-options="dateOptions" e-ng-required="true" e-style="width: 170px;">
-                        {{date | date:'MM/dd/yyyy' }}
-                        </span>
-                     </div>
-                  </div>
-               </div>
-               <div class="row message-holder-row">
-                  © 2019 <strong>SIP (Sistemas Integrales de Planificación)</strong> 
-               </div>
-            </div>
+                  </td>
+               </tr>
+               <tr class="information">
+                  <td colspan="2">
+                     <table>
+                        <tr>
+                           <td>
+                              Next Step Webs, Inc.<br>
+                              12345 Sunny Road<br>
+                              Sunnyville, TX 12345
+                           </td>
+                           <td>
+                              Acme Corp.<br>
+                              John Doe<br>
+                              john@example.com
+                           </td>
+                        </tr>
+                     </table>
+                  </td>
+               </tr>
+               <tr class="heading">
+                  <td>
+                     Payment Method
+                  </td>
+                  <td>
+                     Check #
+                  </td>
+               </tr>
+               <tr class="details">
+                  <td>
+                     Check
+                  </td>
+                  <td>
+                     1000
+                  </td>
+               </tr>
+               <tr class="heading">
+                  <td>
+                     Item
+                  </td>
+                  <td>
+                     Price
+                  </td>
+               </tr>
+               <tr class="item">
+                  <td>
+                     Website design
+                  </td>
+                  <td>
+                     300
+                  </td>
+               </tr>
+               <tr class="item">
+                  <td>
+                     Hosting (3 months)
+                  </td>
+                  <td>
+                     75
+                  </td>
+               </tr>
+               <tr class="item last">
+                  <td>
+                     Domain name (1 year)
+                  </td>
+                  <td>
+                     10
+                  </td>
+               </tr>
+               <tr class="total">
+                  <td></td>
+                  <td>
+                     Total: $385.00
+                  </td>
+               </tr>
+            </table>
          </div>
-         <!-- BODY CONTENIDO-->
-               </div>
-         </div>   
-         
-         <!--CONTENIDO-->
+
       </div>
-      <% include ./partials/modal %>
-      <% include ./partials/script %>
-      <!-- Component -->
-      <!-- <script src="./js/app/invoice.js"></script> -->
-      <script src="./js/app/funciones-Globales.JS"></script>
-      <script src="controller/invoiceController.js"></script>
-   </body>
-</html>
+   </div>
+   <div class="row">
+      <!-- for demo on how to print see https://jsfiddle.net/ozkary/3zu008ch/ -->
+      <md-button class="md-raised md-primary" ng-click="closeDialog();">Close</md-button>
+      <md-button class="md-raised md-primary" ng-click="print();">Print</md-button>
+   </div>
+</div>

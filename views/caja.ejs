@@ -25,7 +25,8 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="btn btn-well btn-glyph" href="#TabTop2" data-toggle="tab" style="width: 80px">
+                                <a class="btn btn-well btn-glyph" href="#TabTop2" data-toggle="tab" style="width: 80px"
+                                    ng-click="loadInvoice()">
                                     <i class="fas fa-file-invoice-dollar fa-3x"></i>
                                     <span class="block">FACTURAS</span>
                                 </a>
@@ -105,7 +106,7 @@
                                             class="table table-bordered table-condensed table-hover bg-white75"
                                             data-provides="rowlink">
                                             <caption class="date-caption">
-                                                Jueves, 23 de Marzo del 2019
+                                                Facturas por cobrar
                                             </caption>
                                             <thead>
                                                 <tr>
@@ -115,23 +116,26 @@
                                                             class="column-sorter"></span></th>
                                                     <th scope="col">Cliente<span class="column-sorter"></span></th>
                                                     <th scope="col">Total<span class="column-sorter"></span></th>
+                                                    <th scope="col">Fecha<span class="column-sorter"></span></th>
                                                     <th scope="col" style="width: 200px !important">Acciones<span
                                                             class="column-sorter"></span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>2018-001-V00001</td>
-                                                    <td>CARLOS ALFARO</td>
-                                                    <td>106.50</td>
+                                                <tr ng-repeat="facturas in facturaDelDia">
+                                                    <td>{{$index + 1}}</td>
+                                                    <td>{{facturas.invoiceNum}}</td>
+                                                    <td>{{facturas.name}}</td>
+                                                    <td>{{facturas.total | currency}}</td>
+                                                    <td>{{facturas.date | date}}</td>
                                                     <td>
-                                                        <button href="#" class="btn btn-success btn-xs"
+                                                        <!-- <button href="#" class="btn btn-success btn-xs"
                                                             data-toggle="modal" data-target=".bs-example-modal-lg"
                                                             title="Ver Venta">
                                                             <i class="fa fa-search-plus"></i>
-                                                        </button>
+                                                        </button> -->
                                                         <button href="#" class="btn btn-warning btn-xs"
+                                                            ng-click="open(facturas.invoiceNum)"
                                                             title="Factura de Venta">
                                                             <i class="fa fa-print"></i>
                                                         </button>
@@ -184,38 +188,38 @@
                                         <tbody>
                                             <tr id="DataRow0">
                                                 <td class="bold"><span>$1</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="dolarChange" id="num_1"
-                                                        ng-blur="createCashier('1',dolarChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="dolarChange"
+                                                        id="num_1" ng-blur="createCashier('1',dolarChange,'dtB')"></td>
                                                 <td class="text-right">{{dolarChange | currency}}</td>
                                             </tr>
                                             <tr id="DataRow1">
                                                 <td class="bold"><span>$5</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="cincoChange" id="num_2"
-                                                        ng-blur="createCashier('5',cincoChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="cincoChange"
+                                                        id="num_2" ng-blur="createCashier('5',cincoChange,'dtB')"></td>
                                                 <td class="text-right">{{cincoChange * 5 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow2">
                                                 <td class="bold"><span>$10</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="tenChange" id="num_3"
-                                                        ng-blur="createCashier('10',tenChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="tenChange"
+                                                        id="num_3" ng-blur="createCashier('10',tenChange,'dtB')"></td>
                                                 <td class="text-right">{{tenChange * 10 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow3">
                                                 <td class="bold"><span>$20</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="twoChange" id="num_4"
-                                                        ng-blur="createCashier('20',twoChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="twoChange"
+                                                        id="num_4" ng-blur="createCashier('20',twoChange,'dtB')"></td>
                                                 <td class="text-right">{{twoChange * 20 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow4">
                                                 <td class="bold"><span>$50</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="fiveChange" id="num_5"
-                                                        ng-blur="createCashier('50',fiveChange,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="fiveChange"
+                                                        id="num_5" ng-blur="createCashier('50',fiveChange,'dtB')"></td>
                                                 <td class="text-right">{{fiveChange * 50 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow5">
                                                 <td class="bold"><span>$100</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="Change" id="num_6"
-                                                        ng-blur="createCashier('100',Change,'dtB')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="Change"
+                                                        id="num_6" ng-blur="createCashier('100',Change,'dtB')"></td>
                                                 <td class="text-right">{{Change * 100 | currency}}</td>
                                             </tr>
                                         </tbody>
@@ -236,20 +240,23 @@
                                         <tbody>
                                             <tr id="DataRow0">
                                                 <td class="bold"><span>$0.01</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="centChange" id="num_7"
-                                                        ng-blur="createCashier('0.01',centChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="centChange"
+                                                        id="num_7" ng-blur="createCashier('0.01',centChange,'dtCo')">
+                                                </td>
                                                 <td class="text-right">{{centChange * 0.01 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow1">
                                                 <td class="bold"><span>$0.05</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="fivesChange" id="num_8"
-                                                        ng-blur="createCashier('0.05',fivesChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="fivesChange"
+                                                        id="num_8" ng-blur="createCashier('0.05',fivesChange,'dtCo')">
+                                                </td>
                                                 <td class="text-right">{{fivesChange * 0.05 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow2">
                                                 <td class="bold"><span>$0.10</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="diezChange" id="num_9"
-                                                        ng-blur="createCashier('0.10',diezChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="diezChange"
+                                                        id="num_9" ng-blur="createCashier('0.10',diezChange,'dtCo')">
+                                                </td>
                                                 <td class="text-right">{{diezChange * 0.10 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow3">
@@ -261,14 +268,15 @@
                                             </tr>
                                             <tr id="DataRow4">
                                                 <td class="bold"><span>$0.50</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="fivelChange" id="num_11"
-                                                        ng-blur="createCashier('0.50',fivelChange,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="fivelChange"
+                                                        id="num_11" ng-blur="createCashier('0.50',fivelChange,'dtCo')">
+                                                </td>
                                                 <td class="text-right">{{fivelChange * 0.50 | currency}}</td>
                                             </tr>
                                             <tr id="DataRow5">
                                                 <td class="bold"><span>$1</span></td>
-                                                <td><input type="sipText" class="span12" value="" ng-model="theBoos" id="num_12"
-                                                        ng-blur="createCashier('1',theBoos,'dtCo')"></td>
+                                                <td><input type="sipText" class="span12" value="" ng-model="theBoos"
+                                                        id="num_12" ng-blur="createCashier('1',theBoos,'dtCo')"></td>
                                                 <td class="text-right">{{theBoos | currency}}</td>
                                             </tr>
                                         </tbody>
@@ -299,7 +307,8 @@
                                                         </a>
                                                     </span>
                                                 </td>
-                                                <td><input type="sipText" class="span12" ng-model="numq" id="numq_{{$index}}"></td>
+                                                <td><input type="sipText" class="span12" ng-model="numq"
+                                                        id="numq_{{$index}}"></td>
                                                 <td><input type="sipText" class="span12" ng-model="nameCheq"></td>
                                                 <td><input type="sipText" class="span12" format="currency"
                                                         ng-model="total" ng-blur="createChequeObj(numq,nameCheq,total)">
@@ -417,6 +426,106 @@
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!-- FACTURA -->
+                <div class="modal fade bd-example-modal-lg" id="invoiceCashier" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true" data-width="1290">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="toolbar">
+                                <div class="text-right">
+                                    <button ng-click="print();" class="btn btn-info"><i class="fa fa-print"></i>
+                                        Print</button>
+                                    <!-- <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as
+                                        PDF</button> -->
+                                </div>
+                                <hr>
+                            </div>
+                            <div id="invoice">
+                                <div class="invoice overflow-auto">
+                                    <div style="min-width: 600px">
+                                        <header>
+                                            <div class="row-invoice">
+                                                <div class="col">
+                                                    <a target="_blank" href="https://lobianijs.com">
+                                                        <img src="../img/logo2.png" data-holder-rendered="true" />
+                                                    </a>
+                                                </div>
+                                                <div class="col company-details">
+                                                    <h3 class="name">
+                                                        <p>RES #IPACOOP-PJ-13-91</p>
+                                                        <p>Provincia de Chiriqui</p>
+                                                        <p>Distrito de Alanje,Guarumal</p>
+                                                    </h3>
+
+                                                </div>
+                                            </div>
+                                        </header>
+                                        <main>
+                                            <div class="row-invoice contacts">
+                                                <div class="col invoice-to">
+                                                    <div class="text-gray-light">CLIENTE:</div>
+                                                    <h3 class="name">{{currentCustomer}}</h3>
+                                                    <div><i>{{currentAddress}}</i> </div>
+                                                    <div> <i> {{currentPhone}}</i> </div>
+                                                </div>
+                                                <div class="col invoice-details">
+                                                    <h2> FACTURA #: <strong
+                                                            style="color:tomato;">{{currentInvoiceNum}}</strong> </h2>
+                                                    <div class="date">FECHA: {{currentDateInvoice}}</div>
+
+                                                </div>
+                                            </div>
+                                            <table border="0" cellspacing="0" cellpadding="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th class="text-left uppercase">descripción</th>
+                                                        <th class="text-right">PRECIO</th>
+                                                        <th class="text-right">CANTIDAD</th>
+                                                        <th class="text-right">TOTAL</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="info in currentInvoice[0].items">
+                                                        <td class="no">{{$index + 1}}</td>
+                                                        <td class="text-left">
+                                                            <h3>
+                                                                <a> {{info.name}}</a>
+                                                            </h3>
+                                                        </td>
+                                                        <td class="unit">{{info.cost | currency}}</td>
+                                                        <td class="qty">{{info.qty | number}}</td>
+                                                        <td class="unit">{{info.price | currency}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="2"></td>
+                                                        <td colspan="2">SUBTOTAL</td>
+                                                        <td>{{total | currency}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"></td>
+                                                        <td colspan="2">ITBMS</td>
+                                                        <td>$0.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2"></td>
+                                                        <td colspan="2">GRAND TOTAL</td>
+                                                        <td>{{total | currency}}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </main>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.modal -->
 

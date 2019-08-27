@@ -8,7 +8,6 @@ module.exports = (app) => {
   app.get("/get-caja", function (req, res) {
     let date = new Date();
     let start = date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "-" + date.getDate() + "T05:00:00.000+00:00"
-    console.log(start)
     let query = { startDate: { $gte: start } };
     Caja.find(query).exec((err, caja) => {
       if (err) {
@@ -23,7 +22,6 @@ module.exports = (app) => {
       });
     });
   });
-
 
   /*############################################### */
   //                    ADD CAJA
@@ -77,7 +75,7 @@ module.exports = (app) => {
     // }, { multi: true })
 
     Caja.findOneAndUpdate({ _id: id },
-      { $set: { endDate: endDate,cashCount: {objB,objCo,objC} } },
+      { $set: { endDate: endDate, cashCount: { objB, objCo, objC } } },
       function (err, doc) {
         if (err) {
           return res.json({

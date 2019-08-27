@@ -42,6 +42,8 @@ require('./api/project/project')(app);
 require('./api/productor/productor')(app);
 require('./api/producto/producto')(app);
 require('./api/proveedor/proveedor')(app);
+require('./api/cliente/cliente')(app);
+require('./api/invoice/invoice')(app);
 app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/routesSession')(app, passport, LocalStrategy);
 require('./session/api-session')(passport);

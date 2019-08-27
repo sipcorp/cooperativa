@@ -1,9 +1,7 @@
 const Producto = require('../../models/producto');
 module.exports = (app) => {
-    /*############################################### */
-    //                 ADD PRODUCTOR
-    /*############################################### */
 
+    // AGREGAR PRODUCTO
     app.post("/add-producto", function (req, res) {
         let body = req.body;
         let producto = new Producto({
@@ -29,10 +27,11 @@ module.exports = (app) => {
                 save: prod
             });
         });
-    })
+    });
 
+    // TRAER LISTA DE PRODUCTO
     app.get("/get-producto", function (req, res) {
-        Producto.find({}).exec((err, producto) => {
+        Producto.find({}).sort( { name: 1 } ).exec((err, producto) => {
             if (err) {
                 return res.status(400).json({
                     ok: false,
@@ -44,5 +43,33 @@ module.exports = (app) => {
                 producto
             });
         });
+    });
+
+    // ACTUALIZAR STOCK
+    app.post("/update-producto", function (req, res) {
+        var body = req.body;
+        var name = body.name;
+        var stock = body.stock;
+        Producto.findOneAndUpdate(
+            { name: name },
+            {
+                $set: {
+                    stock: stock
+                }
+            },
+            function (err, doc) {
+                if (err) {
+                    return res.json({
+                        ok: false,
+                        message: err
+                    });
+                }
+                res.json({
+                    ok: true,
+                    message: false,
+                    update: doc
+                });
+            }
+        )
     });
 };

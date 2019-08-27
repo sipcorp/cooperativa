@@ -20,16 +20,24 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
         type: '',
         count: []
     }]
+    var facturas = []
+    var currentInvoice = []
     $scope.billete = [];
     $scope.monedas = [];
     $scope.cheque = [];
     $scope.Cashier = cajaModal;
     $scope.cajero = "";
     $scope.date = "";
-    $scope.cajaID = ""
-    $scope.chequeArray = [
-
-    ]
+    $scope.cajaID = "";
+    $scope.chequeArray = [];
+    $scope.facturaDelDia = facturas;
+    $scope.currentInvoice = currentInvoice;
+    $scope.total = 0;
+    $scope.currentCustomer = ""
+    $scope.currentAddress = ""
+    $scope.currentPhone = ""
+    $scope.currentInvoiceNum = 0
+    $scope.currentDateInvoice = 0
     /********************************************************************************
     //------------------------------  GET  CAJA INICIAL ----------------------------
     *******************************************************************************/
@@ -228,6 +236,119 @@ app.controller('cajaController', ['$scope', '$timeout', "$http", function ($scop
         }
         $scope.chequeArray.push(ong)
     }
+
+    /********************************************************************************
+    //------------------------------  LOAD INVOICE LIST -----------------------------
+    *******************************************************************************/
+    $scope.loadInvoice = function () {
+        $.ajax({
+            url: getInvoice,
+            headers: headerAjax,
+            method: 'GET',
+            success: function (data) {
+                $scope.facturaDelDia = data.data
+                $scope.$digest();
+                //console.log($scope.facturaDelDia)
+                $('#DTA')
+                    .dataTable({
+                        oLanguage: {
+                            sSearch: 'Global search:',
+                            sZeroRecords: 'No record found <button class="btn btn-danger resetTable">Reset filter</button>',
+                            oPaginate: {
+                                sNext: '<i class="arrowicon-r-black"></i>',
+                                sPrevious: '<i class="arrowicon-l-black"></i>'
+                            }
+                        },
+                        iDisplayLength: 10,
+                        aaSorting: [
+                            [0, 'desc']
+                        ],
+                        aoColumnDefs: [{
+                            "aTargets": [0],
+                            'bSortable': false
+                        }, {
+                            "aTargets": [1],
+                            'sClass': 'bold',
+                        }, {
+                            "aTargets": [2],
+                            'sClass': 'hidden-phone hidden-tablet'
+                        }, {
+                            "aTargets": [3],
+                        }, {
+                            "aTargets": [4],
+                        }, {
+                            "aTargets": [5],
+                            'sClass': 'text-right'
+                        }],
+                        sDom: "<'row-fluid'<'widget-header'<'span6'l><'span6'f>>>rt<'row-fluid'<'widget-footer'<'span6'><'span6'p>>"
+
+                    });
+                $('#DTA_length select').select2({
+                    minimumResultsForSearch: 6,
+                    width: "off"
+                });
+            }
+        });
+    }
+    /********************************************************************************
+       //------------------------------  PRINT INVOICE ------------------------------
+       *******************************************************************************/
+
+    $scope.open = function (id) {
+        var odj = {id:id}
+        odj = JSON.stringify(odj)
+        console.log(odj)
+        $.ajax({
+            url: getInvoiceById,
+            headers: headerAjax,
+            method: 'POST',
+            dataType: 'json',
+            data: odj,
+            success: function (data) {
+                $scope.currentInvoice = data.data
+                $scope.total = $scope.currentInvoice[0].total;
+                $scope.currentCustomer = $scope.currentInvoice[0].name
+                $scope.currentAddress = $scope.currentInvoice[0].address
+                $scope.currentPhone = $scope.currentInvoice[0].phone
+                $scope.currentInvoiceNum = $scope.currentInvoice[0].invoiceNum
+                var date = new Date($scope.currentInvoice[0].date)
+                $scope.currentDateInvoice = dateFormat(date,1)
+                console.log($scope.currentInvoice)
+                $scope.$digest();
+            }
+        });
+
+        $("#invoiceCashier").modal('show');
+    };
+    $scope.print = function () {
+        var contents = document.getElementById("invoice").innerHTML;
+        var frame1 = document.createElement('iframe');
+        frame1.name = "frame3";
+       // frame1.style.position = "absolute";
+       // frame1.style.top = "-1000000px";
+        document.body.appendChild(frame1);
+        var frameDoc = frame1.contentWindow ? frame1.contentWindow : frame1.contentDocument.document ? frame1.contentDocument.document : frame1.contentDocument;
+        frameDoc.document.open();
+        frameDoc.document.write('<html><head><link href="css/caja/cajaprint.css" rel="stylesheet" media="print"><style type="text/css" media="print">@page {size: auto;margin: 0;}</style>');
+        frameDoc.document.write('</head><body>');
+        frameDoc.document.write(contents);
+        frameDoc.document.write('</body></html>');
+        frameDoc.document.close();
+        //console.log(window.frames["frame3"])
+        setTimeout(function () {
+            window.frames["frame3"].focus();
+            window.frames["frame3"].print();
+            //document.body.removeChild(frame1);
+        }, 500);
+        return false;
+        //window.print();
+    }
+    $scope.closeDialog = function () {
+        // Easily hides most recent dialog shown...
+        // no specific instance reference is needed.
+        $mdDialog.hide();
+    };
+
 }]).directive('format', ['$filter', function ($filter) {
     return {
         require: '?ngModel',

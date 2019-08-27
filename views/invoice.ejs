@@ -16,10 +16,10 @@
             <fieldset>
                <ul class="form-list list-bordered dotted">
                   <li class="control-group">
-                     <label for="custmerName" class="control-label">Nombre completo:</label>
+                     <label for="nombreCliente" class="control-label">Nombre completo:</label>
                      <div class="controls">
-                        <input id="custmerName" class="span3x clear-field" type="text" ng-model="customerName"
-                           ng-blur="createObjsCustomer('n',customerName)">
+                        <input id="nombreCliente" class="span3x clear-field" type="text" ng-model="nombreCliente"
+                           ng-blur="createObjsCustomer('n',nombreCliente)">
                      </div>
                   </li>
                   <!-- // control group -->
@@ -50,8 +50,8 @@
                   <li class="control-group">
                      <label for="phone" class="control-label">Telefono:</label>
                      <div class="controls">
-                        <input id="phone" class="span3x clear-field" type="text" ng-model="customerPhone"
-                           ng-blur="createObjsCustomer('p',customerPhone)">
+                        <input id="phone" class="span3x clear-field" type="text" ng-model="telefonoFijo"
+                           ng-blur="createObjsCustomer('p',telefonoFijo)">
                      </div>
                   </li>
                   <!-- // control group -->
@@ -90,7 +90,7 @@
                               <div class="customer form-inline top-name custom-select">
                                  <label for="customerInfo">Cliente:</label>
                                  <div class="customerSelec">
-                                    <select class="selectpicker" data-live-search="true"
+                                    <select id="clientes" class="selectpicker"  data-live-search="true"
                                        ng-model="blisterPackTemplateSelected"
                                        ng-change="infoCustomer(blisterPackTemplateSelected)">
                                        <option value="" disabled>Seleccione un cliente</option>
@@ -198,8 +198,12 @@
                                     <td class="price">
                                        <p>{{products.cost | currency}}</p>
                                     </td>
-                                    <td><input type="text" class="qtyNumber" ng-model="newQty"
-                                          ng-blur="qtyChange($index,newQty)" value="{{products.qty}}"> </td>
+                                    <td>
+                                       <input type="text" class="qtyNumber" 
+                                              ng-model="newQty"
+                                              ng-blur="qtyChange($index,newQty,products.name)" 
+                                              value="{{products.qty | number}}"> 
+                                    </td>
                                     <td> {{ products.price | currency }} </td>
                                  </tr>
                               </tbody>

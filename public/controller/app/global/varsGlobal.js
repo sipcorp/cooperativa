@@ -64,3 +64,21 @@ var getProducto = {
     "Cache-Control": "no-cache"
   }
 };
+
+const updateStock = "/update-producto"
+
+/*######################################################## */
+//                  GLOBAL VARS CLIENTE JS 
+/*######################################################## */
+
+const addCliente = "/add-cliente"
+const getCliente = "/get-cliente"
+
+
+/*######################################################## */
+//                  GLOBAL VARS INVOICE JS 
+/*######################################################## */
+
+const addInvoice = "/add-invoice"
+const getInvoice = "/get-invoice"
+const getInvoiceById = "/getInvoiceById"
